@@ -3,7 +3,7 @@
 FROM nginx:1.27-alpine
 ENV PORT=8080
 COPY deploy/default.conf.template /etc/nginx/templates/default.conf.template
-COPY index.html /usr/share/nginx/html/
+COPY index.html favicon.ico /usr/share/nginx/html/
 COPY shared /usr/share/nginx/html/shared
 COPY styles /usr/share/nginx/html/styles
 EXPOSE 8080
