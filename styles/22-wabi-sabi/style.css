@@ -1,0 +1,401 @@
+/* 22 · Wabi-Sabi
+   Washi paper, one sumi-e stroke, worn stones. Nothing is perfectly straight. */
+
+:root {
+  /* Desaturated tints of the logo hue (174°), for moss, stone and celadon */
+  --moss-50:  #E6EFEE;
+  --moss-100: #D6E0DF;
+  --moss-200: #BDD1CF;
+  --moss-400: #8FADAA;
+  --moss-500: #5C8480;
+  --moss-600: #42615E; /* 6.1:1 on paper */
+  --moss-800: #2A4643;
+
+  --gutter: clamp(22px, 6vw, 96px);
+  --slow: cubic-bezier(.33, .02, .2, 1);   /* ink settling */
+  --soak: cubic-bezier(.45, .05, .25, 1);
+
+  /* Washi: fine grain, plus long faint fibres */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='260'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .2 0 0 0 0 .24 0 0 0 0 .23 .9 0 0 0 -.38'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='480'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.0125 .1' numOctaves='3' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .38 0 0 0 0 .36 .7 0 0 0 -.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+  --mottle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='600'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.005' numOctaves='4' seed='9' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .36 0 0 0 0 .44 0 0 0 0 .42 .6 0 0 0 -.22'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  --stonegrain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='s'%3E%3CfeTurbulence type='turbulence' baseFrequency='.012 .02' numOctaves='5' seed='21' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .3 0 0 0 0 .38 0 0 0 0 .36 0 0 0 0 0' /%3E%3CfeComponentTransfer%3E%3CfeFuncA type='table' tableValues='0 .07 .02 .1'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='100%25' height='100%25' fill='%23000' filter='url(%23s)'/%3E%3C/svg%3E");
+}
+
+html { scroll-behavior: smooth; }
+body {
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: var(--grain), var(--fibre),
+    radial-gradient(60% 40% at 80% 120%, rgba(214, 224, 223, .5), transparent 70%),
+    radial-gradient(50% 30% at 10% 40%, rgba(231, 230, 225, .7), transparent 70%);
+  background-size: 260px 260px, 480px 480px, 100% 100%, 100% 100%;
+  font-size: clamp(16px, 1.05vw + 12px, 18px);
+  font-weight: 400;
+  line-height: 2;
+}
+
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ------------------------------------------------------------ header */
+.top {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(20px, 3.4vw, 44px) var(--gutter) 0;
+}
+.top__logo { display: block; padding: 6px 0; }
+.top__logo img { width: clamp(78px, 7vw, 104px); height: auto; opacity: .88; }
+.top__link {
+  position: relative;
+  padding: 6px 2px 10px;
+  font-size: 15px;
+  color: var(--ink-muted);
+  text-decoration: none;
+  transition: color 1.2s var(--slow);
+}
+.top__link::after { /* a faint, uneven brush underline */
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 2px;
+  height: 3px;
+  border-radius: 40% 60% 50% 50%;
+  background: var(--moss-400);
+  opacity: 0;
+  filter: url(#wsRoughFine);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 1.6s var(--slow), opacity 1.6s var(--slow);
+}
+.top__link:hover, .top__link:focus-visible { color: var(--ink); }
+.top__link:hover::after, .top__link:focus-visible::after { transform: scaleX(1); opacity: .9; }
+
+/* ------------------------------------------------------------ hero */
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(96px, 13vh, 150px) 0 clamp(72px, 10vh, 120px);
+  overflow: clip;
+  isolation: isolate;
+}
+.hero__wash { /* a slow moving damp patch in the paper */
+  position: absolute;
+  inset: -10% -20%;
+  z-index: -1;
+  background:
+    radial-gradient(38% 30% at 30% 42%, rgba(189, 209, 207, .32), transparent 70%),
+    radial-gradient(28% 24% at 72% 70%, rgba(214, 224, 223, .45), transparent 72%);
+  filter: url(#wsRough) blur(6px);
+}
+.js .hero__wash { animation: drift 46s ease-in-out infinite alternate; }
+.is-paused .hero__wash { animation-play-state: paused; }
+@keyframes drift {
+  from { transform: translate3d(2%, -1%, 0) scale(1); }
+  to   { transform: translate3d(-3%, 2%, 0) scale(1.06); }
+}
+
+.ink {
+  position: relative;
+  /* bleeds off the right edge, where the brush first touched */
+  width: 230%;
+  margin-inline-start: -5%;
+  margin-block-end: clamp(8px, 2vh, 24px);
+}
+.ink__svg { width: 100%; height: auto; overflow: visible; }
+.ink__bleed { fill: #0D544D; opacity: .16; }
+.ink__dry   { fill: url(#wsInk); }
+.ink__solid { fill: url(#wsInk); opacity: .92; }
+.ink__hairs { fill: url(#wsInk); opacity: .86; }
+.ink__wet   { fill: #5C8480; opacity: .2; filter: blur(1.5px); }
+.ink__drops { fill: #0C1715; opacity: .72; }
+.js .ink__bleed { opacity: 0; transition: opacity 5s var(--soak) 1.4s; }
+.js .is-painted .ink__bleed { opacity: .16; }
+
+.hero__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 40px 24px;
+  padding-inline: var(--gutter) calc(var(--gutter) * .8);
+}
+.hero__text { max-width: 46rem; margin-inline-start: clamp(0px, 5vw, 80px); }
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 4.6vw, 66px);
+  line-height: 1.45;
+  color: var(--ink);
+}
+.hero__line {
+  margin-block: clamp(14px, 2vh, 22px) clamp(26px, 4vh, 40px);
+  max-width: 30rem;
+  color: var(--ink-muted);
+  line-height: 2.05;
+}
+
+/* hanko: a worn moss seal, carved not printed */
+.seal {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 92px;
+  height: 58px;
+  margin-inline-end: clamp(0px, 8vw, 140px);
+  transform: rotate(-4deg);
+}
+.seal__stone {
+  position: absolute;
+  inset: 0;
+  background: var(--moss-600);
+  border-radius: 6px 9px 5px 11px;
+  filter: url(#wsRough);
+  opacity: .94;
+}
+.seal__word {
+  position: relative;
+  font-size: 26px;
+  line-height: 1;
+  color: var(--paper);
+  padding-block-end: 4px;
+}
+
+/* ------------------------------------------------------------ brush button */
+.brush-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  min-height: 52px;
+  padding: 10px 34px 14px;
+  font-size: 17px;
+  color: var(--paper);
+  text-decoration: none;
+  isolation: isolate;
+}
+.brush-btn::before, .brush-btn::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  border-radius: 46% 54% 42% 58% / 58% 44% 56% 42%;
+  filter: url(#wsRough);
+}
+.brush-btn::before { inset: 0; background: var(--moss-800); }
+.brush-btn::after { /* a second load of ink, spreading on hover */
+  inset: 6px -6px 4px 8px;
+  background: var(--ink);
+  transform: scaleX(.12);
+  transform-origin: right;
+  opacity: 0;
+  transition: transform 1.8s var(--slow), opacity 1.4s var(--slow);
+}
+.brush-btn:hover::after, .brush-btn:focus-visible::after { transform: scaleX(1); opacity: 1; }
+.brush-btn:focus-visible { outline: 2px solid var(--moss-600); outline-offset: 8px; border-radius: 30px; }
+.brush-btn:active span { transform: translateY(1px); }
+.brush-btn span { display: inline-block; transition: transform .4s var(--slow); }
+.brush-btn--deep::before { background: var(--green-800); }
+
+/* ------------------------------------------------------------ about */
+.about {
+  display: grid;
+  gap: 28px;
+  padding: clamp(80px, 14vh, 170px) var(--gutter) clamp(60px, 10vh, 120px);
+}
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(28px, 3vw, 42px);
+  line-height: 1.6;
+  max-width: 12em;
+}
+.about__sheet {
+  position: relative;
+  max-width: 36rem;
+  padding: clamp(28px, 4vw, 52px) clamp(24px, 4vw, 56px);
+  isolation: isolate;
+}
+.about__sheet::before { /* a torn piece of darker paper, laid slightly askew */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-color: var(--gray);
+  background-image: var(--fibre), var(--stonegrain);
+  background-size: 480px 480px, 300px 300px;
+  border-radius: 3px 14px 6px 22px;
+  transform: rotate(-.8deg);
+  filter: url(#wsRough);
+}
+.about__text { line-height: 2.15; color: var(--ink); }
+
+@media (min-width: 900px) {
+  .about { grid-template-columns: 5fr 7fr; align-items: start; }
+  .about__title { margin-inline-start: 4vw; }
+  .about__sheet { margin-block-start: 140px; justify-self: start; }
+}
+
+/* ------------------------------------------------------------ stones */
+.stones {
+  display: grid;
+  gap: 34px;
+  padding: clamp(40px, 8vh, 100px) var(--gutter) clamp(80px, 14vh, 160px);
+}
+.stone {
+  position: relative;
+  padding: 44px 32px 40px;
+  isolation: isolate;
+  outline: none;
+}
+.stone::before { /* ceramic body: mottled, never glossy */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-color: var(--moss-50);
+  background-image: var(--stonegrain), var(--mottle);
+  background-size: 300px 300px, 900px 900px;
+  filter: url(#wsRough);
+  box-shadow: 0 18px 30px -24px rgba(12, 23, 21, .35);
+  transition: box-shadow 1.6s var(--slow), transform 1.6s var(--slow);
+}
+.stone--a::before { border-radius: 42% 58% 46% 54% / 18% 22% 16% 24%; }
+.stone--b::before { border-radius: 30% 70% 52% 48% / 14% 12% 26% 20%; background-color: var(--gray); }
+.stone--c::before { border-radius: 56% 44% 38% 62% / 22% 16% 20% 14%; }
+.stone__glaze { /* celadon pooling at the foot, as glaze does */
+  position: absolute;
+  inset: 45% 6% 3% 10%;
+  z-index: -1;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(189, 209, 207, .55), transparent);
+  filter: blur(8px);
+}
+.stone__dab { /* one pale wash, a clear gap above the title */
+  display: block;
+  width: 46px;
+  height: 22px;
+  margin-block-end: 26px;
+  border-radius: 60% 40% 55% 45%;
+  background: var(--moss-200);
+  opacity: .9;
+  filter: url(#wsRough) blur(1px);
+  transform-origin: right center;
+  transition: transform 2.2s var(--slow), filter 2.2s var(--slow), opacity 2.2s var(--slow);
+}
+.stone__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(22px, 1.6vw, 27px);
+  line-height: 1.6;
+  margin-block-end: 10px;
+}
+.stone__text { color: var(--ink-muted); line-height: 2; }
+.stone:hover::before, .stone:focus-visible::before { box-shadow: 0 26px 40px -26px rgba(12, 23, 21, .42); transform: translateY(-3px); }
+.stone:hover .stone__dab, .stone:focus-visible .stone__dab { transform: scale(2.6, 1.15); opacity: .7; filter: url(#wsRough) blur(0); }
+.stone:focus-visible::after {
+  content: ""; position: absolute; inset: -8px; border: 1.5px solid var(--moss-600);
+  border-radius: 40% 60% 46% 54% / 18% 20% 18% 22%; filter: url(#wsRoughFine);
+}
+
+@media (min-width: 760px) {
+  .stones { grid-template-columns: repeat(12, 1fr); gap: 28px; align-items: start; }
+  .stone--a { grid-column: 1 / span 5; }
+  .stone--b { grid-column: 7 / span 5; margin-block-start: 120px; }
+  .stone--c { grid-column: 2 / span 6; margin-block-start: -10px; }
+}
+@media (min-width: 1100px) {
+  .stone--a { grid-column: 1 / span 4; margin-block-start: 40px; }
+  .stone--b { grid-column: 6 / span 3; margin-block-start: 170px; padding-inline: 28px; }
+  .stone--c { grid-column: 9 / span 4; margin-block-start: 0; }
+}
+
+/* ------------------------------------------------------------ closing */
+.closing {
+  position: relative;
+  padding: clamp(80px, 14vh, 160px) var(--gutter) clamp(110px, 18vh, 200px);
+  display: grid;
+  justify-items: start;
+  gap: 40px;
+}
+.closing__rule, .foot__rule {
+  display: block;
+  height: 3px;
+  background: var(--moss-400);
+  opacity: .55;
+  border-radius: 50% 40% 60% 50%;
+  filter: url(#wsRoughFine);
+}
+.closing__rule { width: min(38vw, 340px); margin-block-end: 20px; }
+.closing__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 5vw, 72px);
+  line-height: 1.5;
+  max-width: 12em;
+}
+@media (min-width: 900px) {
+  .closing { padding-inline-start: 34vw; }
+}
+
+/* ------------------------------------------------------------ footer */
+.foot { padding: 0 var(--gutter) 110px; }
+.foot__rule { width: 100%; opacity: .35; margin-block-end: 44px; }
+.foot__in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 14px 40px;
+  color: var(--ink-muted);
+  font-size: 15px;
+}
+.foot__logo { width: 78px; height: auto; opacity: .8; align-self: center; }
+.foot__line { flex: 1 1 14rem; }
+.foot__mail { color: var(--moss-600); text-decoration-thickness: 1px; text-underline-offset: 6px; transition: color 1s var(--slow); }
+.foot__mail:hover { color: var(--ink); }
+.foot__copy { font-size: 14px; }
+
+/* ------------------------------------------------------------ desktop hero */
+@media (min-width: 900px) {
+  .ink { width: 100%; margin-inline-start: -2%; }
+  .hero__foot { margin-block-start: -3vh; }
+}
+@media (min-width: 600px) and (max-width: 899px) {
+  .ink { width: 150%; margin-inline-start: -4%; }
+}
+
+/* ------------------------------------------------------------ reveals: ink soaking in */
+.js [data-bleed] {
+  opacity: 0;
+  filter: blur(9px);
+  transform: scale(1.012);
+  transition:
+    opacity 2.2s var(--soak) var(--d, 0s),
+    filter 2.6s var(--slow) var(--d, 0s),
+    transform 2.8s var(--slow) var(--d, 0s);
+}
+.js [data-bleed].is-in { opacity: 1; filter: none; transform: none; }
+.js .stone[data-bleed].is-in { transition-delay: 0s; transition-duration: 1.4s; }
+.js .ink__svg { filter: blur(7px); opacity: .0; }
+.js .is-painted .ink__svg { filter: none; opacity: 1; transition: filter 3.4s var(--slow), opacity 1.6s var(--soak); }
+
+@media print {
+  .js [data-bleed], .js .ink__svg { opacity: 1 !important; filter: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .hero__wash { animation: none; }
+  .js [data-bleed] { filter: none; transform: none; transition: opacity 1s ease var(--d, 0s); }
+  .js .ink__svg { filter: none; }
+  .js .is-painted .ink__svg { transition: opacity 1.4s ease; }
+  .js .ink__bleed { transition: opacity 1.4s ease; }
+  .top__link::after, .brush-btn::after, .stone::before, .stone__dab { transition-duration: .01s; }
+  .stone:hover::before, .stone:focus-visible::before { transform: none; }
+  .stone:hover .stone__dab, .stone:focus-visible .stone__dab { transform: none; }
+}

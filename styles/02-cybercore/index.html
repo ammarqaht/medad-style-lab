@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- CRT layers: grid, scanlines, vignette (decorative) -->
+<div class="crt" aria-hidden="true"><i class="crt__grid"></i><i class="crt__scan"></i><i class="crt__glow"></i></div>
+
+<!-- Menu bar -------------------------------------------------------- -->
+<header class="menubar">
+  <a class="menubar__logo" href="#top" aria-label="مداد">
+    <img src="../../shared/logo/medad-mark-neon.png" alt="" width="808" height="267">
+  </a>
+  <div class="menubar__sys" aria-hidden="true">
+    <span class="sig"><i></i><i></i><i></i><i></i></span>
+    <span class="mono" id="clock" dir="ltr">00:00:00</span>
+  </div>
+  <a class="key key--sm" href="#contact"><span data-copy="nav.cta"></span></a>
+</header>
+
+<main id="top">
+
+  <!-- HERO: boot sequence --------------------------------------------- -->
+  <section class="hero" id="hero">
+    <!-- HUD frame -->
+    <div class="hud" aria-hidden="true">
+      <i class="hud__c hud__c--ts"></i><i class="hud__c hud__c--te"></i>
+      <i class="hud__c hud__c--bs"></i><i class="hud__c hud__c--be"></i>
+      <span class="hud__t hud__t--ts mono" dir="ltr" id="coordA">24.71360° · 46.67530°</span>
+      <span class="hud__t hud__t--te mono" dir="ltr" id="timecode">00:00:00:00</span>
+      <span class="hud__t hud__t--bs mono" dir="ltr" id="coordB">+000.00 / +000.00</span>
+      <span class="hud__t hud__t--be mono" dir="ltr">173.6°</span>
+      <i class="hud__ruler hud__ruler--s"></i><i class="hud__ruler hud__ruler--e"></i>
+    </div>
+
+    <div class="hero__grid">
+      <!-- Terminal window -->
+      <div class="win win--term" id="term" data-win>
+        <div class="win__bar">
+          <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+          <span class="win__title" aria-hidden="true"><span class="mono" dir="ltr">~/</span><span class="brand-word">مـــــداد</span><span class="mono" dir="ltr">:$</span></span>
+          <span class="win__meta mono" dir="ltr" aria-hidden="true">◉ 00</span>
+        </div>
+        <div class="win__body term">
+          <ol class="log" aria-hidden="true" id="log">
+            <li class="log__l" data-t="0.0021"><span class="log__tx" data-copy="footer.line"></span></li>
+            <li class="log__l log__l--task" data-t="0.1834"><span class="log__tx" data-copy="pillars.0.title"></span><span class="log__lead"></span><span class="log__bar mono" dir="ltr"></span></li>
+            <li class="log__l log__l--task" data-t="0.3361"><span class="log__tx" data-copy="pillars.1.title"></span><span class="log__lead"></span><span class="log__bar mono" dir="ltr"></span></li>
+            <li class="log__l log__l--task" data-t="0.5127"><span class="log__tx" data-copy="pillars.2.title"></span><span class="log__lead"></span><span class="log__bar mono" dir="ltr"></span></li>
+            <li class="log__l" data-t="0.7740"><span class="log__tx" data-copy="about.title"></span></li>
+            <li class="log__l log__l--load" data-t="0.9012"><span class="load mono" dir="ltr"><span class="load__track" id="loadTrack">[░░░░░░░░░░░░░░░░░░░░░░]</span> <span id="loadPct">000%</span></span></li>
+          </ol>
+
+          <div class="boot-logo" id="bootLogo">
+            <img class="boot-logo__ghost boot-logo__ghost--a" src="../../shared/logo/medad-mark-paper.png" alt="" aria-hidden="true">
+            <img class="boot-logo__ghost boot-logo__ghost--b" src="../../shared/logo/medad-mark-green.png" alt="" aria-hidden="true">
+            <img class="boot-logo__img" src="../../shared/logo/medad-mark-neon.png" alt="مداد" width="808" height="267">
+            <i class="boot-logo__scan" aria-hidden="true"></i>
+          </div>
+
+          <div class="hero__copy">
+            <h1 class="glitch hero__title" data-copy="hero.headline" data-reveal></h1>
+            <p class="hero__line" data-copy="hero.line" data-reveal></p>
+            <div class="hero__act" data-reveal>
+              <a class="key key--lg" href="#contact"><span data-copy="hero.cta"></span></a>
+              <span class="prompt mono" aria-hidden="true" dir="ltr">&gt;<i class="caret"></i></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Wireframe sphere + reticle -->
+      <div class="stage" id="stage" aria-hidden="true">
+        <canvas class="stage__sphere" id="sphere"></canvas>
+        <svg class="reticle" viewBox="0 0 400 400">
+          <g class="reticle__spin">
+            <circle cx="200" cy="200" r="188" class="r-dash"/>
+          </g>
+          <g class="reticle__spin reticle__spin--rev">
+            <circle cx="200" cy="200" r="172" class="r-tick"/>
+          </g>
+          <path class="r-cross" d="M200 6v28M200 366v28M6 200h28M366 200h28"/>
+          <path class="r-corner" d="M90 60h-30v30M310 60h30v30M90 340h-30v-30M310 340h30v-30"/>
+        </svg>
+        <i class="stage__ping" id="ping"></i>
+        <div class="stage__read mono" dir="ltr">
+          <span id="readRot">↻ 000.0°</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DATA TICKER ------------------------------------------------------ -->
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker__track" id="tickerTrack"></div>
+  </div>
+
+  <!-- DESKTOP: overlapping windows ------------------------------------- -->
+  <section class="desk" id="desk">
+    <article class="win win--about" data-win data-drag data-pop>
+      <div class="win__bar">
+        <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win__title mono" dir="ltr" aria-hidden="true">~/00</span>
+        <span class="win__meta mono" dir="ltr" aria-hidden="true">▤ 640×400</span>
+      </div>
+      <div class="win__body about">
+        <div class="about__copy">
+          <h2 class="glitch about__title" data-copy="about.title"></h2>
+          <p class="about__text" data-copy="about.text"></p>
+        </div>
+        <pre class="ascii" id="ascii" aria-hidden="true"></pre>
+      </div>
+    </article>
+
+    <article class="win win--p win--p1" data-win data-drag data-pop style="--d:.08s">
+      <div class="win__bar">
+        <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win__title mono" dir="ltr" aria-hidden="true">~/01</span>
+      </div>
+      <div class="win__body pillar">
+        <svg class="wire" viewBox="0 0 120 80" aria-hidden="true">
+          <rect x="4" y="4" width="112" height="72" rx="2"/>
+          <path d="M4 16h112"/><circle cx="12" cy="10" r="2"/><circle cx="19" cy="10" r="2"/>
+          <rect class="wire__a" x="14" y="26" width="56" height="8"/>
+          <path class="wire__a" d="M14 42h40M14 50h48M14 58h30"/>
+          <rect class="wire__b" x="78" y="26" width="28" height="38"/>
+          <path class="wire__b" d="M78 26l28 38M106 26l-28 38"/>
+        </svg>
+        <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+        <p class="pillar__text" data-copy="pillars.0.text"></p>
+      </div>
+    </article>
+
+    <article class="win win--p win--p2" data-win data-drag data-pop style="--d:.16s">
+      <div class="win__bar">
+        <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win__title mono" dir="ltr" aria-hidden="true">~/02</span>
+      </div>
+      <div class="win__body pillar">
+        <svg class="wire" viewBox="0 0 120 80" aria-hidden="true">
+          <path class="wire__a" d="M30 22L60 40L90 22M60 40v24"/>
+          <circle cx="30" cy="22" r="8"/><circle cx="90" cy="22" r="8"/><circle cx="60" cy="40" r="9"/><circle cx="60" cy="68" r="7"/>
+          <path class="wire__b" d="M8 74h104"/>
+          <path class="wire__b" d="M10 60v14M18 52v22M100 56v18M108 48v26"/>
+        </svg>
+        <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+        <p class="pillar__text" data-copy="pillars.1.text"></p>
+      </div>
+    </article>
+
+    <article class="win win--p win--p3" data-win data-drag data-pop style="--d:.24s">
+      <div class="win__bar">
+        <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win__title mono" dir="ltr" aria-hidden="true">~/03</span>
+      </div>
+      <div class="win__body pillar">
+        <svg class="wire" viewBox="0 0 120 80" aria-hidden="true">
+          <circle cx="60" cy="40" r="30"/>
+          <ellipse class="wire__a" cx="60" cy="40" rx="30" ry="10"/>
+          <ellipse class="wire__a" cx="60" cy="40" rx="10" ry="30"/>
+          <circle class="wire__b" cx="16" cy="18" r="5"/><circle class="wire__b" cx="104" cy="18" r="5"/>
+          <circle class="wire__b" cx="16" cy="62" r="5"/><circle class="wire__b" cx="104" cy="62" r="5"/>
+          <path class="wire__b" d="M21 20l12 8M99 20l-12 8M21 60l12-8M99 60l-12-8"/>
+        </svg>
+        <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+        <p class="pillar__text" data-copy="pillars.2.text"></p>
+      </div>
+    </article>
+  </section>
+
+  <!-- CLOSING: system dialog ------------------------------------------- -->
+  <section class="closing" id="contact">
+    <div class="win win--dialog" data-win data-pop>
+      <div class="win__bar">
+        <span class="win__ctl" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win__title mono" dir="ltr" aria-hidden="true">~/04</span>
+        <span class="win__meta mono" dir="ltr" aria-hidden="true">◉ 1</span>
+      </div>
+      <div class="win__body dialog">
+        <div class="dialog__icon" aria-hidden="true"><i></i></div>
+        <h2 class="glitch closing__title" data-copy="closing.headlineKashida"></h2>
+        <a class="key key--lg" id="mailBtn" href="#"><span data-copy="closing.cta"></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <img class="footer__logo" src="../../shared/logo/medad-mark-neon.png" alt="مداد" width="808" height="267">
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail mono" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+    <span class="footer__up mono" dir="ltr" aria-hidden="true" id="uptime">▮ 000000</span>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__plate raised">
+    <a class="topbar__logo" href="#top" data-copy="meta.title"></a>
+    <a class="key key--sm" href="#contact"><span data-copy="nav.cta"></span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO ------------------------------------------------------------ -->
+  <section class="hero">
+    <div class="hero__text">
+      <h1 class="hero__title" data-copy="hero.headline" data-rise></h1>
+      <p class="hero__line" data-copy="hero.line" data-rise style="--d:.08s"></p>
+      <div data-rise style="--d:.16s">
+        <a class="key key--lg" href="#contact"><span data-copy="hero.cta"></span></a>
+      </div>
+    </div>
+
+    <!-- Signature: the tactile control panel -->
+    <div class="panel raised" data-rise data-extrude style="--d:.1s">
+      <div class="dial" id="dial">
+        <svg class="dial__ticks" viewBox="0 0 100 100" aria-hidden="true" focusable="false" id="ticks"></svg>
+        <div class="dial__groove" aria-hidden="true">
+          <svg class="dial__ring" viewBox="0 0 100 100" focusable="false">
+            <circle class="ring__fill" cx="50" cy="50" r="45.2" pathLength="100"/>
+          </svg>
+        </div>
+        <button class="knob" id="knob" type="button" aria-pressed="false">
+          <span class="knob__face" aria-hidden="true"></span>
+          <span class="knob__word" data-copy="meta.title"></span>
+        </button>
+      </div>
+      <div class="meter" aria-hidden="true"><span class="meter__fill"></span></div>
+    </div>
+  </section>
+
+  <!-- ABOUT ----------------------------------------------------------- -->
+  <section class="about">
+    <div class="about__groove" aria-hidden="true" data-rise></div>
+    <h2 class="about__title" data-copy="about.title" data-rise></h2>
+    <p class="about__text" data-copy="about.text" data-rise style="--d:.08s"></p>
+  </section>
+
+  <!-- PILLARS --------------------------------------------------------- -->
+  <section class="pillars">
+    <article class="tile raised" data-rise data-extrude style="--d:0s">
+      <div class="tile__well" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><rect x="7" y="10" width="34" height="26" rx="5"/><path d="M7 17h34M18 42h12M24 36v6"/></svg>
+      </div>
+      <h3 class="tile__title" data-copy="pillars.0.title"></h3>
+      <p class="tile__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="tile raised" data-rise data-extrude style="--d:.1s">
+      <div class="tile__well" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><rect x="7" y="7" width="14" height="14" rx="4"/><rect x="27" y="7" width="14" height="14" rx="4"/><rect x="7" y="27" width="14" height="14" rx="4"/><path d="M34 27v14M27 34h14"/></svg>
+      </div>
+      <h3 class="tile__title" data-copy="pillars.1.title"></h3>
+      <p class="tile__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="tile raised" data-rise data-extrude style="--d:.2s">
+      <div class="tile__well" aria-hidden="true">
+        <svg viewBox="0 0 48 48" focusable="false"><path d="M15 8h18v9a9 9 0 0 1-18 0z"/><path d="M15 12H9a6 6 0 0 0 6 7M33 12h6a6 6 0 0 1-6 7M24 26v8M17 41h14l-2-7H19z"/></svg>
+      </div>
+      <h3 class="tile__title" data-copy="pillars.2.title"></h3>
+      <p class="tile__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING: an inset well ------------------------------------------ -->
+  <section class="closing" id="contact">
+    <div class="well" data-rise>
+      <h2 class="closing__title" data-copy="closing.headlineKashida"></h2>
+      <a class="key key--lg" id="mailBtn" href="#"><span data-copy="closing.cta"></span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__groove" aria-hidden="true"></div>
+  <div class="footer__row">
+    <p class="footer__logo" data-copy="meta.title"></p>
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

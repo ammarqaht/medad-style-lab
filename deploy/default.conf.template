@@ -1,0 +1,30 @@
+server {
+  listen ${PORT};
+  listen [::]:${PORT};
+  server_name _;
+  root /usr/share/nginx/html;
+  index index.html;
+  charset utf-8;
+
+  gzip on;
+  gzip_comp_level 6;
+  gzip_min_length 512;
+  gzip_types text/css application/javascript image/svg+xml text/plain;
+
+  # Fonts and logos never change between deploys: cache hard.
+  location ~* \.(woff2|png)$ {
+    add_header Cache-Control "public, max-age=2592000, immutable";
+    access_log off;
+  }
+  # Thumbnails may be regenerated under the same name: cache for a day.
+  location ~* \.webp$ {
+    add_header Cache-Control "public, max-age=86400";
+    access_log off;
+  }
+  # Pages, CSS and JS: always revalidate so a new deploy shows up at once.
+  location ~* \.(html|css|js)$ {
+    add_header Cache-Control "no-cache";
+  }
+
+  location / { try_files $uri $uri/ =404; }
+}

@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <symbol id="star" viewBox="0 0 200 200"><polygon points="100.0,4.0 116.0,40.1 148.0,16.9 143.8,56.2 183.1,52.0 159.9,84.0 196.0,100.0 159.9,116.0 183.1,148.0 143.8,143.8 148.0,183.1 116.0,159.9 100.0,196.0 84.0,159.9 52.0,183.1 56.2,143.8 16.9,148.0 40.1,116.0 4.0,100.0 40.1,84.0 16.9,52.0 56.2,56.2 52.0,16.9 84.0,40.1"/></symbol>
+    <symbol id="blob" viewBox="0 0 200 220"><path d="M104 14 C146 10 184 40 188 86 C192 126 172 152 146 164 C132 171 128 182 130 200 C131 214 116 216 113 202 C110 186 106 176 92 176 C56 176 16 152 12 106 C8 58 54 18 104 14 Z"/></symbol>
+    <symbol id="blob2" viewBox="0 0 200 200"><path d="M96 10 C130 6 150 30 170 44 C194 62 196 98 184 126 C172 156 146 190 104 190 C62 190 30 172 16 138 C4 108 14 76 30 54 C46 30 66 12 96 10 Z"/></symbol>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="top__brand" href="#top" data-copy="meta.title"></a>
+  <a class="top__cta" href="#contact" data-copy="nav.cta"></a>
+</header>
+
+<main id="top">
+
+  <!-- HERO: the kinetic wall of type, with a calm arch plate above it -->
+  <section class="hero">
+    <div class="wall wall--dark" data-field aria-hidden="true">
+      <div class="wall__shapes">
+        <div class="sh sh--arch" data-repel><div class="sh__in"></div></div>
+        <div class="sh sh--blob" data-repel><svg class="sh__in spin spin--slow"><use href="#blob"/></svg></div>
+        <div class="sh sh--check" data-repel><div class="sh__in spin"></div></div>
+        <div class="sh sh--ink" data-repel><svg class="sh__in spin spin--rev"><use href="#blob2"/></svg></div>
+        <div class="sh sh--stripe" data-repel><div class="sh__in spin spin--rev"></div></div>
+        <div class="sh sh--burst" data-repel><div class="sh__in spin spin--slow"></div></div>
+        <div class="sh sh--star" data-repel><svg class="sh__in spin"><use href="#star"/></svg></div>
+        <div class="sh sh--ring" data-repel><div class="sh__in"></div></div>
+      </div>
+      <div class="wall__rows">
+        <div class="row" data-s=".9"  data-dir="1"  data-v="38" data-tone="dark" data-seed="1"></div>
+        <div class="strip strip--dots"></div>
+        <div class="row" data-s="1.7" data-dir="-1" data-v="24" data-tone="dark" data-seed="2"></div>
+        <div class="row row--mint" data-s=".55" data-dir="1" data-v="62" data-tone="mint" data-seed="3"></div>
+        <div class="row" data-s="1.2" data-dir="-1" data-v="34" data-tone="dark" data-seed="4"></div>
+        <div class="strip strip--stripes"></div>
+        <div class="row" data-s="2.1" data-dir="1"  data-v="20" data-tone="dark" data-seed="5" data-brand=".45"></div>
+        <div class="row row--paper" data-s=".7" data-dir="-1" data-v="48" data-tone="paper" data-seed="6"></div>
+        <div class="row" data-s="1.3" data-dir="1"  data-v="30" data-tone="dark" data-seed="7"></div>
+        <div class="strip strip--dots"></div>
+        <div class="row row--deep" data-s=".5" data-dir="-1" data-v="70" data-tone="deep" data-seed="8"></div>
+        <div class="row" data-s="1"   data-dir="1"  data-v="36" data-tone="dark" data-seed="9"></div>
+        <div class="row" data-s="1.6" data-dir="-1" data-v="24" data-tone="dark" data-seed="10"></div>
+        <div class="strip strip--checks"></div>
+        <div class="row row--mint" data-s=".6" data-dir="1" data-v="56" data-tone="mint" data-seed="11"></div>
+        <div class="row" data-s="1.4" data-dir="-1" data-v="28" data-tone="dark" data-seed="12"></div>
+        <div class="row" data-s=".9"  data-dir="1"  data-v="40" data-tone="dark" data-seed="13"></div>
+        <div class="strip strip--dots"></div>
+        <div class="row" data-s="1.8" data-dir="-1" data-v="22" data-tone="dark" data-seed="14" data-brand=".4"></div>
+      </div>
+    </div>
+
+    <div class="plate-wrap" data-reveal>
+      <div class="plate">
+        <div class="plate__brand" data-copy="meta.title"></div>
+        <h1 class="plate__title" id="heroTitle" data-copy="hero.headline"></h1>
+        <p class="plate__line" data-copy="hero.line"></p>
+        <a class="btn" href="#contact"><span data-copy="hero.cta"></span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT: layered collage beside a solid card -->
+  <section class="about">
+    <div class="about__collage" data-field aria-hidden="true">
+      <div class="sh col--arch" data-repel><div class="sh__in"></div></div>
+      <div class="sh col--burst" data-repel><div class="sh__in spin spin--slow"></div></div>
+      <div class="sh col--check" data-repel><div class="sh__in spin"></div></div>
+      <div class="sh col--ink"><svg class="sh__in spin spin--rev"><use href="#blob"/></svg></div>
+      <div class="sh col--star" data-repel><svg class="sh__in spin"><use href="#star"/></svg></div>
+      <div class="sh col--word"><div class="sh__in" data-copy="meta.title"></div></div>
+    </div>
+    <div class="about__card" data-reveal>
+      <h2 class="about__title" id="aboutTitle" data-copy="about.title"></h2>
+      <p class="about__text" data-copy="about.text"></p>
+    </div>
+  </section>
+
+  <!-- PILLARS: three patterned tiles with calm inner plates -->
+  <section class="pillars">
+    <div class="pillars__bg" aria-hidden="true">
+      <div class="pb pb--arch"></div>
+      <div class="pb pb--burst spin spin--slow"></div>
+      <div class="pb pb--blob"><svg><use href="#blob2"/></svg></div>
+    </div>
+    <div class="pillars__grid">
+      <article class="tile tile--a" data-reveal>
+        <div class="tile__pat" aria-hidden="true"></div>
+        <div class="tile__plate">
+          <div class="ico ico--arch" aria-hidden="true"></div>
+          <h3 class="tile__title" data-copy="pillars.0.title"></h3>
+          <p class="tile__text" data-copy="pillars.0.text"></p>
+        </div>
+      </article>
+      <article class="tile tile--b" data-reveal>
+        <div class="tile__pat" aria-hidden="true"></div>
+        <div class="tile__plate">
+          <div class="ico ico--check" aria-hidden="true"><i></i></div>
+          <h3 class="tile__title" data-copy="pillars.1.title"></h3>
+          <p class="tile__text" data-copy="pillars.1.text"></p>
+        </div>
+      </article>
+      <article class="tile tile--c" data-reveal>
+        <div class="tile__pat" aria-hidden="true"></div>
+        <div class="tile__plate">
+          <div class="ico ico--star" aria-hidden="true"><svg><use href="#star"/></svg></div>
+          <h3 class="tile__title" data-copy="pillars.2.title"></h3>
+          <p class="tile__text" data-copy="pillars.2.text"></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- RIBBONS: two crossing marquee bands -->
+  <section class="ribbons" data-field aria-hidden="true">
+    <div class="ribbon ribbon--a"><div class="row" data-s="1" data-dir="1" data-v="46" data-tone="ink" data-seed="21" data-brand=".3"></div></div>
+    <div class="ribbon ribbon--b"><div class="row" data-s="1" data-dir="-1" data-v="40" data-tone="mint" data-seed="22" data-brand=".3"></div></div>
+  </section>
+
+  <!-- CLOSING: a lighter wall with a calm ink plate -->
+  <section class="closing" id="contact">
+    <div class="wall wall--light" data-field aria-hidden="true">
+      <div class="wall__shapes">
+        <div class="sh sh--arch2" data-repel><div class="sh__in"></div></div>
+        <div class="sh sh--ink2" data-repel><svg class="sh__in spin spin--slow"><use href="#blob"/></svg></div>
+        <div class="sh sh--stripe2" data-repel><div class="sh__in spin"></div></div>
+        <div class="sh sh--star2" data-repel><svg class="sh__in spin spin--rev"><use href="#star"/></svg></div>
+      </div>
+      <div class="wall__rows">
+        <div class="row" data-s="1.3" data-dir="-1" data-v="30" data-tone="mint" data-seed="31"></div>
+        <div class="row row--ink" data-s=".55" data-dir="1" data-v="60" data-tone="ink" data-seed="32"></div>
+        <div class="row" data-s="1.9" data-dir="-1" data-v="22" data-tone="mint" data-seed="33" data-brand=".45"></div>
+        <div class="strip strip--stripes2"></div>
+        <div class="row" data-s="1" data-dir="1" data-v="38" data-tone="mint" data-seed="34"></div>
+        <div class="row row--paper" data-s=".65" data-dir="-1" data-v="52" data-tone="paper" data-seed="35"></div>
+        <div class="row" data-s="1.5" data-dir="1" data-v="26" data-tone="mint" data-seed="36"></div>
+        <div class="row row--deep" data-s=".55" data-dir="-1" data-v="64" data-tone="deep" data-seed="37"></div>
+        <div class="row" data-s="1.2" data-dir="1" data-v="32" data-tone="mint" data-seed="38"></div>
+        <div class="row" data-s="1.7" data-dir="-1" data-v="24" data-tone="mint" data-seed="39"></div>
+      </div>
+    </div>
+    <div class="cplate" data-reveal>
+      <h2 class="cplate__title" data-copy="closing.headlineKashida"></h2>
+      <a class="btn btn--neon" id="mailBtn" href="#"><span data-copy="closing.cta"></span><svg class="btn__arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M19 12H5m6-6l-6 6 6 6" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__edge" aria-hidden="true"></div>
+  <div class="footer__in">
+    <div class="footer__brand" data-copy="meta.title"></div>
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

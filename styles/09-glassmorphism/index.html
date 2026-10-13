@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- Signature: ink diffusing in water. A low-resolution canvas, upscaled by CSS,
+     so the clouds arrive pre-blurred and the GPU never runs a large blur filter. -->
+<div class="water" aria-hidden="true">
+  <canvas class="water__ink" id="ink"></canvas>
+  <div class="water__wisps" id="wisps">
+    <svg viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" focusable="false">
+      <defs>
+        <radialGradient id="plume">
+          <stop offset="0" class="plume-a"/>
+          <stop offset=".55" class="plume-b"/>
+          <stop offset="1" class="plume-c"/>
+        </radialGradient>
+        <filter id="smoke" x="-30%" y="-30%" width="160%" height="160%" color-interpolation-filters="sRGB">
+          <feTurbulence type="fractalNoise" baseFrequency=".007 .012" numOctaves="3" seed="23" result="n"/>
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="190" xChannelSelector="R" yChannelSelector="B"/>
+          <feGaussianBlur stdDeviation="5"/>
+        </filter>
+      </defs>
+      <g class="wisp" filter="url(#smoke)" fill="url(#plume)">
+        <ellipse cx="300" cy="230" rx="300" ry="170" transform="rotate(-18 300 230)"/>
+        <ellipse cx="900" cy="560" rx="320" ry="190" transform="rotate(22 900 560)"/>
+        <ellipse cx="420" cy="780" rx="240" ry="130" transform="rotate(-8 420 780)"/>
+      </g>
+    </svg>
+  </div>
+  <div class="water__grain"></div>
+</div>
+
+<header class="topbar">
+  <div class="topbar__pill glass">
+    <a class="topbar__logo" href="#top" aria-label="مداد">
+      <img src="../../shared/logo/medad-mark-white.png" alt="" width="808" height="267">
+    </a>
+    <a class="btn btn--glass btn--sm" href="#contact" data-copy="nav.cta"></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO ------------------------------------------------------------ -->
+  <section class="hero" data-cloud="hero">
+    <div class="hero__stage">
+      <div class="lens glass" data-tilt="1.6" data-depth="0.12" data-rise style="--d:.18s">
+        <span class="lens__word" data-copy="meta.title"></span>
+      </div>
+      <div class="hero__panel glass" data-tilt="1" data-rise>
+        <h1 class="hero__title" data-copy="hero.headline"></h1>
+        <p class="hero__line" data-copy="hero.line"></p>
+        <a class="btn btn--ink btn--lg" href="#contact" data-copy="hero.cta"></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ----------------------------------------------------------- -->
+  <section class="about" data-cloud="about">
+    <div class="about__panel glass" data-tilt="1" data-rise>
+      <h2 class="about__title" data-copy="about.title"></h2>
+      <p class="about__text" data-copy="about.text"></p>
+    </div>
+  </section>
+
+  <!-- PILLARS --------------------------------------------------------- -->
+  <section class="pillars" data-cloud="pillars">
+    <article class="pillar glass" data-tilt="1.4" data-rise style="--d:0s">
+      <svg class="pillar__ico" viewBox="0 0 48 48" aria-hidden="true">
+        <rect x="6" y="9" width="36" height="28" rx="6"/>
+        <path d="M6 17h36M19 43h10M24 37v6"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="pillar glass" data-tilt="1.4" data-rise style="--d:.12s">
+      <svg class="pillar__ico" viewBox="0 0 48 48" aria-hidden="true">
+        <path d="M24 6 42 15 24 24 6 15Z"/>
+        <path d="M6 24l18 9 18-9M6 33l18 9 18-9"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="pillar glass" data-tilt="1.4" data-rise style="--d:.24s">
+      <svg class="pillar__ico" viewBox="0 0 48 48" aria-hidden="true">
+        <circle cx="24" cy="17" r="10"/>
+        <circle cx="16" cy="30" r="10"/>
+        <circle cx="32" cy="30" r="10"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING --------------------------------------------------------- -->
+  <section class="closing" id="contact" data-cloud="closing">
+    <div class="closing__panel glass" data-tilt="0.8" data-rise>
+      <h2 class="closing__title" data-copy="closing.headlineKashida"></h2>
+      <a class="btn btn--ink btn--lg" id="mailBtn" href="#" data-copy="closing.cta"></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer" data-cloud="footer">
+  <div class="footer__bar glass">
+    <img class="footer__logo" src="../../shared/logo/medad-mark-white.png" alt="مداد" width="808" height="267">
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

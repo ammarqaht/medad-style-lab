@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- Shared SVG defs: sparkle star, chrome gradients -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="gSpark" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".55" stop-color="#DEF2F0"/>
+      <stop offset="1" stop-color="#85D6CD"/>
+    </linearGradient>
+    <linearGradient id="gSparkDeep" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#36C9BA"/>
+      <stop offset="1" stop-color="#0D544D"/>
+    </linearGradient>
+    <symbol id="spark" viewBox="0 0 24 24">
+      <path d="M12 0 C12.9 7.6 16.4 11.1 24 12 C16.4 12.9 12.9 16.4 12 24 C11.1 16.4 7.6 12.9 0 12 C7.6 11.1 11.1 7.6 12 0 Z"/>
+    </symbol>
+
+    <!-- Liquid chrome: bright sky, hard dark horizon, green ground reflection -->
+    <linearGradient id="gChrome" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".22" stop-color="#E9EDEC"/>
+      <stop offset=".42" stop-color="#9AA4A2"/>
+      <stop offset=".49" stop-color="#3B4644"/>
+      <stop offset=".5" stop-color="#083A35"/>
+      <stop offset=".58" stop-color="#126E64"/>
+      <stop offset=".78" stop-color="#85D6CD"/>
+      <stop offset="1" stop-color="#F1F9F8"/>
+    </linearGradient>
+    <radialGradient id="gOrb" cx=".36" cy=".3" r=".75">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset=".28" stop-color="#DCE2E1"/>
+      <stop offset=".6" stop-color="#7E8987"/>
+      <stop offset=".82" stop-color="#0D544D"/>
+      <stop offset="1" stop-color="#36C9BA"/>
+    </radialGradient>
+    <radialGradient id="gOrbGreen" cx=".35" cy=".3" r=".8">
+      <stop offset="0" stop-color="#F1F9F8"/>
+      <stop offset=".3" stop-color="#85D6CD"/>
+      <stop offset=".7" stop-color="#126E64"/>
+      <stop offset="1" stop-color="#042421"/>
+    </radialGradient>
+    <linearGradient id="gRim" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0" stop-color="#85D6CD" stop-opacity=".9"/>
+      <stop offset=".5" stop-color="#85D6CD" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="fSoft" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="fSoft2" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="2.4"/>
+    </filter>
+  </defs>
+</svg>
+
+<header class="topbar">
+  <div class="topbar__pill gloss">
+    <a class="topbar__logo" href="#top" aria-label="مداد">
+      <span class="chrome-mini" data-copy="meta.title"></span>
+    </a>
+    <a class="pill pill--silver pill--sm" href="#contact"><span class="pill__label" data-copy="nav.cta"></span></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO ------------------------------------------------------------ -->
+  <section class="hero" id="hero">
+    <div class="hero__floor" aria-hidden="true"></div>
+
+    <!-- Floating chrome ink: a morphing liquid blob, a falling drop, small spheres -->
+    <div class="float float--blob" aria-hidden="true">
+      <svg viewBox="0 0 400 400" class="blob-svg">
+        <path class="blob-shadow" d="M200 52 C282 46 352 112 346 198 C340 286 270 352 190 344 C108 336 50 270 58 188 C66 110 120 58 200 52 Z" fill="#083A35" opacity=".18" filter="url(#fSoft)" transform="translate(10 22)"/>
+        <path class="blob-body" fill="url(#gChrome)" d="M200 52 C282 46 352 112 346 198 C340 286 270 352 190 344 C108 336 50 270 58 188 C66 110 120 58 200 52 Z">
+          <animate attributeName="d" dur="9s" repeatCount="indefinite" calcMode="spline"
+            keySplines=".45 0 .55 1;.45 0 .55 1;.45 0 .55 1"
+            values="M200 52 C282 46 352 112 346 198 C340 286 270 352 190 344 C108 336 50 270 58 188 C66 110 120 58 200 52 Z;
+                    M206 62 C296 66 338 128 340 206 C342 292 262 340 184 336 C96 332 44 262 62 178 C78 104 128 58 206 62 Z;
+                    M194 48 C272 40 362 98 350 190 C338 274 282 358 198 350 C116 342 60 288 54 196 C48 120 116 56 194 48 Z;
+                    M200 52 C282 46 352 112 346 198 C340 286 270 352 190 344 C108 336 50 270 58 188 C66 110 120 58 200 52 Z"/>
+        </path>
+        <path d="M200 52 C282 46 352 112 346 198 C340 286 270 352 190 344 C108 336 50 270 58 188 C66 110 120 58 200 52 Z" fill="url(#gRim)" opacity=".55"/>
+        <ellipse cx="146" cy="118" rx="58" ry="26" fill="#FFFFFF" opacity=".95" transform="rotate(-28 146 118)" filter="url(#fSoft2)"/>
+        <ellipse cx="282" cy="250" rx="16" ry="34" fill="#FFFFFF" opacity=".55" transform="rotate(32 282 250)" filter="url(#fSoft2)"/>
+        <circle cx="120" cy="150" r="6" fill="#FFFFFF"/>
+      </svg>
+    </div>
+
+    <div class="float float--drop" aria-hidden="true">
+      <svg viewBox="0 0 120 170">
+        <path d="M60 4 C76 44 108 72 108 110 C108 140 86 164 60 164 C34 164 12 140 12 110 C12 72 44 44 60 4 Z" fill="url(#gChrome)"/>
+        <path d="M60 4 C76 44 108 72 108 110 C108 140 86 164 60 164 C34 164 12 140 12 110 C12 72 44 44 60 4 Z" fill="url(#gRim)" opacity=".6"/>
+        <ellipse cx="38" cy="98" rx="9" ry="22" fill="#FFFFFF" opacity=".9" transform="rotate(18 38 98)" filter="url(#fSoft2)"/>
+        <circle cx="42" cy="132" r="3.5" fill="#FFFFFF"/>
+      </svg>
+    </div>
+
+    <div class="float float--orb1" aria-hidden="true"><i class="orb"></i></div>
+    <div class="float float--orb2" aria-hidden="true"><i class="orb orb--green"></i></div>
+    <div class="float float--orb3" aria-hidden="true"><i class="orb"></i></div>
+
+    <!-- Twinkling four point sparkles (static set; JS adds a pointer trail) -->
+    <div class="sparks" id="sparks" aria-hidden="true">
+      <svg class="spark" style="--x:14%;--y:22%;--s:34px;--t:0s"><use href="#spark"/></svg>
+      <svg class="spark" style="--x:82%;--y:16%;--s:22px;--t:.7s"><use href="#spark"/></svg>
+      <svg class="spark spark--deep" style="--x:90%;--y:58%;--s:18px;--t:1.3s"><use href="#spark"/></svg>
+      <svg class="spark" style="--x:8%;--y:64%;--s:20px;--t:1.9s"><use href="#spark"/></svg>
+      <svg class="spark spark--deep" style="--x:30%;--y:10%;--s:14px;--t:2.4s"><use href="#spark"/></svg>
+      <svg class="spark" style="--x:66%;--y:44%;--s:26px;--t:.4s"><use href="#spark"/></svg>
+      <svg class="spark" style="--x:46%;--y:78%;--s:16px;--t:1.1s"><use href="#spark"/></svg>
+    </div>
+
+    <div class="hero__stack">
+      <!-- Signature: the brand word as liquid chrome -->
+      <div class="chrome" id="chrome" role="img" aria-label="مداد">
+        <span class="chrome__layer chrome__extrude" data-copy="meta.title" aria-hidden="true"></span>
+        <span class="chrome__layer chrome__bevel" data-copy="meta.title" aria-hidden="true"></span>
+        <span class="chrome__layer chrome__face" data-copy="meta.title" aria-hidden="true"></span>
+        <span class="chrome__layer chrome__sheen" data-copy="meta.title" aria-hidden="true"></span>
+        <svg class="spark spark--on" style="--x:6%;--y:30%;--s:clamp(18px,3.4vw,44px);--t:.2s" aria-hidden="true"><use href="#spark"/></svg>
+        <svg class="spark spark--on" style="--x:88%;--y:70%;--s:clamp(12px,2vw,28px);--t:1.5s" aria-hidden="true"><use href="#spark"/></svg>
+      </div>
+
+      <h1 class="hero__title chrome-text" data-copy="hero.headline" data-pop style="--d:.1s"></h1>
+      <p class="hero__line" data-copy="hero.line" data-pop style="--d:.2s"></p>
+      <div class="hero__cta" data-pop style="--d:.3s">
+        <a class="pill pill--gel pill--lg" href="#contact"><span class="pill__label" data-copy="hero.cta"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ----------------------------------------------------------- -->
+  <section class="about">
+    <div class="bubble about__bubble gloss" data-pop>
+      <div class="about__bar" aria-hidden="true"><i></i><i></i><i></i><b></b></div>
+      <div class="about__body">
+        <h2 class="about__title chrome-text" data-copy="about.title"></h2>
+        <p class="about__text" data-copy="about.text"></p>
+      </div>
+      <svg class="spark about__spark" style="--s:30px;--t:.8s" aria-hidden="true"><use href="#spark"/></svg>
+    </div>
+  </section>
+
+  <!-- PILLARS --------------------------------------------------------- -->
+  <section class="pillars">
+    <article class="pillar bubble gloss" data-pop style="--d:0s">
+      <div class="pillar__icon" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <circle cx="60" cy="60" r="50" fill="url(#gOrb)"/>
+          <g fill="none" stroke="#042421" stroke-opacity=".5" stroke-width="2.4">
+            <ellipse cx="60" cy="60" rx="22" ry="50"/>
+            <path d="M12 46 H108 M12 74 H108"/>
+          </g>
+          <ellipse cx="42" cy="34" rx="20" ry="10" fill="#FFFFFF" opacity=".9" transform="rotate(-30 42 34)" filter="url(#fSoft2)"/>
+        </svg>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="pillar bubble gloss" data-pop style="--d:.1s">
+      <div class="pillar__icon" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <rect x="14" y="70" width="92" height="30" rx="15" fill="url(#gOrbGreen)"/>
+          <rect x="20" y="44" width="80" height="30" rx="15" fill="url(#gOrb)"/>
+          <rect x="26" y="18" width="68" height="30" rx="15" fill="url(#gOrbGreen)"/>
+          <ellipse cx="44" cy="26" rx="14" ry="4" fill="#FFFFFF" opacity=".9" filter="url(#fSoft2)"/>
+          <ellipse cx="40" cy="52" rx="14" ry="4" fill="#FFFFFF" opacity=".9" filter="url(#fSoft2)"/>
+          <ellipse cx="36" cy="78" rx="16" ry="4" fill="#FFFFFF" opacity=".8" filter="url(#fSoft2)"/>
+        </svg>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="pillar bubble gloss" data-pop style="--d:.2s">
+      <div class="pillar__icon" aria-hidden="true">
+        <svg viewBox="0 0 120 120">
+          <path d="M60 6 C64 40 80 56 114 60 C80 64 64 80 60 114 C56 80 40 64 6 60 C40 56 56 40 60 6 Z" fill="url(#gChrome)"/>
+          <path d="M60 6 C64 40 80 56 114 60 C80 64 64 80 60 114 C56 80 40 64 6 60 C40 56 56 40 60 6 Z" fill="none" stroke="#0D544D" stroke-opacity=".35" stroke-width="1.5"/>
+          <circle cx="96" cy="24" r="10" fill="url(#gOrbGreen)"/>
+          <circle cx="24" cy="98" r="7" fill="url(#gOrb)"/>
+          <ellipse cx="54" cy="40" rx="3" ry="10" fill="#FFFFFF" opacity=".9" filter="url(#fSoft2)"/>
+        </svg>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING --------------------------------------------------------- -->
+  <section class="closing" id="contact">
+    <div class="capsule" data-pop>
+      <div class="capsule__shine" aria-hidden="true"></div>
+      <svg class="spark spark--on" style="--x:8%;--y:24%;--s:28px;--t:.3s" aria-hidden="true"><use href="#spark"/></svg>
+      <svg class="spark spark--on" style="--x:90%;--y:76%;--s:20px;--t:1.4s" aria-hidden="true"><use href="#spark"/></svg>
+      <h2 class="closing__title" data-copy="closing.headlineKashida"></h2>
+      <a class="pill pill--silver pill--lg" id="mailBtn" href="#"><span class="pill__label" data-copy="closing.cta"></span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__pill gloss">
+    <span class="chrome-mini footer__logo" data-copy="meta.title"></span>
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

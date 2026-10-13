@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- Ornament library: each group is ONE quadrant or half, mirrored where used. -->
+<svg class="lib" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <!-- Corner filigree: fan rosette, diagonal acanthus leaf, two scroll arms mirrored across the diagonal -->
+    <g id="o-arm">
+      <path d="M40 7 C 60 3, 76 14, 74 30 C 72 42, 58 45, 55 35 C 53 28, 59 23, 64 27"/>
+      <path d="M74 27 C 82 11, 102 7, 126 9 C 137 10, 141 18, 135 22 C 131 25, 126 21, 129 18"/>
+      <path d="M90 10 C 96 18, 107 20, 114 15 C 106 13, 98 11, 90 10 Z"/>
+      <path d="M58 16 C 54 22, 50 26, 44 28"/>
+    </g>
+    <g id="o-corner">
+      <path d="M0 42 A 42 42 0 0 0 42 0"/>
+      <path d="M0 30 A 30 30 0 0 0 30 0"/>
+      <path d="M8 3.3 L 25 10.4 M5.7 5.7 L 19 19 M3.3 8 L 10.4 25"/>
+      <path d="M32 32 C 44 36, 54 46, 62 62 C 46 54, 36 44, 32 32 Z"/>
+      <path d="M33 33 L 58 58"/>
+      <path d="M44 38 C 50 34, 56 34, 60 38 M38 44 C 34 50, 34 56, 38 60"/>
+      <use href="#o-arm"/>
+      <use href="#o-arm" transform="matrix(0 1 1 0 0 0)"/>
+    </g>
+
+    <!-- Cartouche quadrant (origin = centre of the brand word), mirrored four ways -->
+    <g id="o-cart">
+      <path d="M0 -68 H 150 C 176 -68, 194 -60, 199 -46 C 203 -34, 192 -26, 184 -31 C 178 -35, 181 -43, 188 -42"/>
+      <path d="M199 -46 C 210 -32, 224 -15, 238 0"/>
+      <path d="M0 -58 H 144 C 160 -58, 170 -54, 176 -48"/>
+      <path d="M170 -40 C 182 -26, 196 -12, 212 0"/>
+      <path d="M0 -68 C 7 -76, 19 -80, 27 -94 C 15 -92, 7 -88, 0 -101"/>
+      <path d="M2 -73 C 16 -75, 34 -71, 46 -81 C 54 -88, 50 -99, 42 -98 C 36 -97, 36 -91, 40 -89"/>
+      <path d="M118 -68 C 132 -82, 154 -86, 172 -80 C 160 -76, 144 -72, 118 -68 Z"/>
+      <path d="M238 0 C 260 -2, 274 -18, 268 -36 C 264 -48, 248 -50, 244 -40 C 241 -32, 248 -26, 254 -30"/>
+      <path d="M244 -2 C 270 2, 294 -8, 306 -28 C 311 -38, 306 -48, 297 -46 C 291 -45, 291 -38, 296 -37"/>
+      <path d="M214 -26 C 222 -40, 236 -52, 254 -56 C 248 -46, 236 -34, 214 -26 Z"/>
+    </g>
+
+    <!-- Divider quadrant: rule, scroll, leaf; centre lozenge drawn once -->
+    <g id="o-div">
+      <path d="M44 0 H 196"/>
+      <path d="M8 0 C 12 -10, 24 -13, 29 -7 C 32 -2, 27 3, 23 0"/>
+      <path d="M30 0 C 36 -5, 46 -6, 54 -3"/>
+      <path d="M60 -3 C 70 -9, 84 -9, 94 -3 C 84 -4, 72 -3, 60 -3 Z"/>
+    </g>
+
+    <!-- Numeral medallion quadrant -->
+    <g id="o-med">
+      <path d="M0 -24 C 9 -32, 22 -31, 26 -22 C 29 -15, 23 -9, 18 -13 C 15 -16, 18 -20, 21 -18"/>
+      <path d="M26 0 H 44 C 50 0, 52 -6, 48 -8 C 45 -9, 43 -6, 45 -4"/>
+    </g>
+
+    <!-- Damask motif: half palmette mirrored, placed on an ogee lattice -->
+    <g id="o-dhalf">
+      <path stroke="none" d="M0 -44 C 8 -36, 16 -22, 12 -6 C 9 4, 4 8, 0 10 Z"/>
+      <path stroke="none" d="M5 -4 C 16 -14, 30 -6, 26 8 C 24 16, 14 16, 14 9 C 18 12, 22 8, 20 3 C 17 -4, 11 -4, 5 -4 Z"/>
+      <path stroke="none" d="M0 14 C 10 16, 22 26, 24 40 C 16 34, 8 30, 0 34 Z"/>
+      <path stroke="none" d="M0 -48 C 5 -52, 9 -58, 7 -66 C 4 -60, 1 -57, 0 -59 Z"/>
+      <path stroke="none" d="M14 -30 C 22 -38, 30 -36, 34 -28 C 28 -32, 22 -30, 16 -24 Z"/>
+    </g>
+    <g id="o-dmotif"><use href="#o-dhalf"/><use href="#o-dhalf" transform="scale(-1 1)"/></g>
+    <g id="o-damask">
+      <path fill="none" stroke-width="1.4" d="M50 0 C 50 30, 6 40, 0 70 C 6 100, 50 110, 50 140 M50 0 C 50 30, 94 40, 100 70 C 94 100, 50 110, 50 140"/>
+      <use href="#o-dmotif" transform="translate(50 70)"/>
+      <use href="#o-dmotif" transform="translate(0 0) scale(.62)"/>
+      <use href="#o-dmotif" transform="translate(100 0) scale(.62)"/>
+      <use href="#o-dmotif" transform="translate(0 140) scale(.62)"/>
+      <use href="#o-dmotif" transform="translate(100 140) scale(.62)"/>
+    </g>
+    <pattern id="p-damask" width="100" height="140" patternUnits="userSpaceOnUse" patternTransform="scale(1.35)">
+      <use href="#o-damask" class="dm dm--ink"/>
+    </pattern>
+    <pattern id="p-damask-lt" width="100" height="140" patternUnits="userSpaceOnUse" patternTransform="scale(1.35)">
+      <use href="#o-damask" class="dm dm--lt"/>
+    </pattern>
+    <pattern id="p-hatch" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(-38)">
+      <path class="hatch-line" d="M0 0 V 2.6"/>
+    </pattern>
+    <pattern id="p-cross" width="2.6" height="2.6" patternUnits="userSpaceOnUse" patternTransform="rotate(42)">
+      <path class="hatch-line" d="M0 0 V 2.6"/>
+    </pattern>
+  </defs>
+</svg>
+
+<svg class="damask" aria-hidden="true" focusable="false"><rect width="100%" height="100%" fill="url(#p-damask)"/></svg>
+
+<main id="top">
+
+  <!-- HERO: the antique certificate -------------------------------------- -->
+  <section class="hero">
+    <div class="cert" data-frame="hero">
+      <div class="frame" aria-hidden="true">
+        <svg class="rule rule--1 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="rule rule--2 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="rule rule--3 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="corner corner--tl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--tr orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--bl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--br orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+      </div>
+
+      <div class="cart">
+        <svg class="cart__orn orn draw" viewBox="-320 -110 640 220" aria-hidden="true" focusable="false">
+          <use data-inline href="#o-cart"/>
+          <use data-inline href="#o-cart" transform="scale(-1 1)"/>
+          <use data-inline href="#o-cart" transform="scale(1 -1)"/>
+          <use data-inline href="#o-cart" transform="scale(-1 -1)"/>
+        </svg>
+        <p class="cart__word" data-copy="meta.title" data-fade style="--d:1.1s"></p>
+      </div>
+
+      <h1 class="cert__title" data-copy="hero.headlineKashida" data-fade style="--d:1.5s"></h1>
+
+      <svg class="divider divider--sm orn draw" viewBox="-200 -16 400 32" aria-hidden="true" focusable="false">
+        <use data-inline href="#o-div"/><use data-inline href="#o-div" transform="scale(-1 1)"/>
+        <use data-inline href="#o-div" transform="scale(1 -1)"/><use data-inline href="#o-div" transform="scale(-1 -1)"/>
+        <path d="M0 -6 L 5 0 L 0 6 L -5 0 Z"/>
+      </svg>
+
+      <p class="cert__line" data-copy="hero.line" data-fade style="--d:1.8s"></p>
+
+      <div class="cta-row" data-fade style="--d:2.05s">
+        <svg class="flank orn" viewBox="0 -12 120 24" aria-hidden="true" focusable="false"><path d="M4 0 H 92 C 104 0, 112 -6, 110 -10 C 108 -13, 103 -11, 104 -8"/><path d="M60 0 C 70 6, 82 7, 92 3"/></svg>
+        <span class="plate-wrap"><a class="plate" href="#contact" data-copy="hero.cta"></a></span>
+        <svg class="flank flank--end orn" viewBox="0 -12 120 24" aria-hidden="true" focusable="false"><path d="M4 0 H 92 C 104 0, 112 -6, 110 -10 C 108 -13, 103 -11, 104 -8"/><path d="M60 0 C 70 6, 82 7, 92 3"/></svg>
+      </div>
+
+      <!-- Engraving: quill and inkwell, fine hatching -->
+      <svg class="engr draw" id="engr" viewBox="-50 0 300 200" aria-hidden="true" focusable="false">
+        <g class="eg-spray">
+          <path d="M178 191 C 204 193, 226 180, 238 158 C 241 151, 237 145, 231 147 C 226 149, 228 156, 233 155"/>
+          <path d="M196 189 C 200 177, 211 170, 224 169 C 217 178, 208 186, 196 189 Z"/>
+          <path d="M214 182 C 222 186, 232 186, 240 180 C 232 178, 222 179, 214 182 Z"/>
+        </g>
+        <g class="eg-spray" transform="translate(200 0) scale(-1 1)">
+          <path d="M178 191 C 204 193, 226 180, 238 158 C 241 151, 237 145, 231 147 C 226 149, 228 156, 233 155"/>
+          <path d="M196 189 C 200 177, 211 170, 224 169 C 217 178, 208 186, 196 189 Z"/>
+          <path d="M214 182 C 222 186, 232 186, 240 180 C 232 178, 222 179, 214 182 Z"/>
+        </g>
+        <path class="eg-solid" d="M44 170 H 156 C 160 170, 160 178, 156 178 H 44 C 40 178, 40 170, 44 170 Z"/>
+        <path class="eg-solid" d="M52 170 C 48 150, 56 128, 76 122 L 124 122 C 144 128, 152 150, 148 170 Z"/>
+        <path class="eg-fill eg-fill--hatch" d="M117 123 C 135 132, 139 152, 135 170 L 147 170 C 151 150, 143 128, 124 122 Z"/>
+        <path class="eg-fill eg-fill--cross" d="M128 126 C 140 136, 143 154, 141 170 L 147 170 C 151 150, 143 130, 128 126 Z"/>
+        <path class="eg-fill eg-fill--hatch" d="M44 174 H 156 C 158 174, 158 177, 156 177 H 120 Z"/>
+        <path class="eg-solid" d="M80 122 L 82 105 L 118 105 L 120 122 Z"/>
+        <path d="M84 136 H 116 V 154 H 84 Z M87 139 H 113 V 151 H 87 Z"/>
+        <ellipse class="eg-solid" cx="100" cy="104" rx="23" ry="5"/>
+        <ellipse class="eg-ink" cx="100" cy="104" rx="16" ry="3"/>
+        <ellipse class="eg-ripple" cx="100" cy="104" rx="9" ry="1.8"/>
+        <g class="eg-quill">
+<path class="eg-vane" d="M136.5 75.8 L140 75.3 L143.1 74.7 L146 73.9 L148.7 72.9 L151.2 71.8 L153.6 70.6 L155.7 69.2 L157.7 67.7 L159.5 66.1 L161.1 64.4 L162.6 62.5 L163.9 60.6 L165 58.5 L166 56.3 L166.8 54 L167.5 51.6 L168.1 49 L168.5 46.4 L168.7 43.7 L168.8 40.8 L168.7 37.9 L168.5 34.8 L168.1 31.7 L167.6 28.3 L166.8 24.8 L165.6 21.1 L163.3 16.5 L163.2 13.6 L164.3 11.4 L165.4 9.3 L166 8 L166 8 L166 8 L166 8"/>
+<path class="eg-vane" d="M122.6 65.8 L122.8 63 L123.1 60.3 L123.6 57.7 L124.2 55.2 L124.9 52.8 L125.6 50.5 L126.5 48.2 L127.4 45.9 L128.4 43.8 L129.5 41.6 L130.7 39.6 L132 37.6 L133.3 35.6 L134.7 33.7 L136.2 31.9 L137.8 30.1 L139.4 28.4 L141.1 26.7 L142.9 25.1 L144.7 23.5 L146.7 22 L148.7 20.5 L150.8 19.1 L153 17.8 L155.4 16.7 L158 15.6 L161.4 15.1 L163.2 13.6 L164.3 11.4 L165.4 9.3 L166 8 L166 8 L166 8 L166 8"/>
+<path class="eg-barb" d="M124.6 74.1 Q132.4 75.6 140 75.3"/>
+<path class="eg-barb eg-barb--dk" d="M124.6 74.1 Q123 68.8 122.8 63"/>
+<path class="eg-barb" d="M126.1 72.4 Q134.9 74.4 143.1 74.7"/>
+<path class="eg-barb eg-barb--dk" d="M126.1 72.4 Q123.9 66.5 123.1 60.3"/>
+<path class="eg-barb" d="M127.7 70.5 Q137.2 73.2 146 73.9"/>
+<path class="eg-barb eg-barb--dk" d="M127.7 70.5 Q124.8 64.3 123.6 57.7"/>
+<path class="eg-barb" d="M129.2 68.7 Q139.4 71.8 148.7 72.9"/>
+<path class="eg-barb eg-barb--dk" d="M129.2 68.7 Q125.8 62.1 124.2 55.2"/>
+<path class="eg-barb" d="M130.6 66.9 Q141.4 70.4 151.2 71.8"/>
+<path class="eg-barb eg-barb--dk" d="M130.6 66.9 Q126.9 59.9 124.9 52.8"/>
+<path class="eg-barb" d="M132.1 65 Q143.3 68.9 153.6 70.6"/>
+<path class="eg-barb eg-barb--dk" d="M132.1 65 Q128 57.8 125.6 50.5"/>
+<path class="eg-barb" d="M133.5 63.2 Q145.2 67.3 155.7 69.2"/>
+<path class="eg-barb eg-barb--dk" d="M133.5 63.2 Q129.1 55.7 126.5 48.2"/>
+<path class="eg-barb" d="M135 61.3 Q146.9 65.6 157.7 67.7"/>
+<path class="eg-barb eg-barb--dk" d="M135 61.3 Q130.3 53.6 127.4 45.9"/>
+<path class="eg-barb" d="M136.4 59.4 Q148.5 63.9 159.5 66.1"/>
+<path class="eg-barb eg-barb--dk" d="M136.4 59.4 Q131.5 51.6 128.4 43.8"/>
+<path class="eg-barb" d="M137.8 57.5 Q150.1 62.1 161.1 64.4"/>
+<path class="eg-barb eg-barb--dk" d="M137.8 57.5 Q132.7 49.6 129.5 41.6"/>
+<path class="eg-barb" d="M139.1 55.5 Q151.5 60.2 162.6 62.5"/>
+<path class="eg-barb eg-barb--dk" d="M139.1 55.5 Q134 47.6 130.7 39.6"/>
+<path class="eg-barb" d="M140.5 53.6 Q152.8 58.3 163.9 60.6"/>
+<path class="eg-barb eg-barb--dk" d="M140.5 53.6 Q135.3 45.6 132 37.6"/>
+<path class="eg-barb" d="M141.8 51.6 Q154.1 56.2 165 58.5"/>
+<path class="eg-barb eg-barb--dk" d="M141.8 51.6 Q136.6 43.7 133.3 35.6"/>
+<path class="eg-barb" d="M143.1 49.7 Q155.2 54.2 166 56.3"/>
+<path class="eg-barb eg-barb--dk" d="M143.1 49.7 Q138 41.8 134.7 33.7"/>
+<path class="eg-barb" d="M144.4 47.7 Q156.2 52 166.8 54"/>
+<path class="eg-barb eg-barb--dk" d="M144.4 47.7 Q139.4 39.9 136.2 31.9"/>
+<path class="eg-barb" d="M145.6 45.7 Q157.2 49.8 167.5 51.6"/>
+<path class="eg-barb eg-barb--dk" d="M145.6 45.7 Q140.8 38 137.8 30.1"/>
+<path class="eg-barb" d="M146.9 43.7 Q158.1 47.5 168.1 49"/>
+<path class="eg-barb eg-barb--dk" d="M146.9 43.7 Q142.3 36.1 139.4 28.4"/>
+<path class="eg-barb" d="M148.1 41.7 Q158.8 45.1 168.5 46.4"/>
+<path class="eg-barb eg-barb--dk" d="M148.1 41.7 Q143.8 34.3 141.1 26.7"/>
+<path class="eg-barb" d="M149.3 39.6 Q159.5 42.7 168.7 43.7"/>
+<path class="eg-barb eg-barb--dk" d="M149.3 39.6 Q145.3 32.5 142.9 25.1"/>
+<path class="eg-barb" d="M150.5 37.6 Q160.1 40.2 168.8 40.8"/>
+<path class="eg-barb eg-barb--dk" d="M150.5 37.6 Q146.9 30.7 144.7 23.5"/>
+<path class="eg-barb" d="M151.7 35.5 Q160.6 37.7 168.7 37.9"/>
+<path class="eg-barb eg-barb--dk" d="M151.7 35.5 Q148.5 28.9 146.7 22"/>
+<path class="eg-barb" d="M152.9 33.4 Q161 35.1 168.5 34.8"/>
+<path class="eg-barb eg-barb--dk" d="M152.9 33.4 Q150.1 27.2 148.7 20.5"/>
+<path class="eg-barb" d="M154 31.4 Q161.3 32.4 168.1 31.7"/>
+<path class="eg-barb eg-barb--dk" d="M154 31.4 Q151.8 25.5 150.8 19.1"/>
+<path class="eg-barb" d="M155.1 29.3 Q161.5 29.6 167.6 28.3"/>
+<path class="eg-barb eg-barb--dk" d="M155.1 29.3 Q153.5 23.9 153 17.8"/>
+<path class="eg-barb" d="M156.3 27.2 Q161.6 26.8 166.8 24.8"/>
+<path class="eg-barb eg-barb--dk" d="M156.3 27.2 Q155.3 22.3 155.4 16.7"/>
+<path class="eg-barb" d="M157.4 25.1 Q161.4 23.7 165.6 21.1"/>
+<path class="eg-barb eg-barb--dk" d="M157.4 25.1 Q157.3 20.8 158 15.6"/>
+<path class="eg-barb" d="M158.5 22.9 Q160.7 20.3 163.3 16.5"/>
+<path class="eg-barb eg-barb--dk" d="M158.5 22.9 Q159.6 19.5 161.4 15.1"/>
+<path class="eg-barb" d="M159.6 20.8 Q161.1 17.7 163.2 13.6"/>
+<path class="eg-barb eg-barb--dk" d="M159.6 20.8 Q161.1 17.7 163.2 13.6"/>
+<path class="eg-barb" d="M160.7 18.7 Q162.2 15.6 164.3 11.4"/>
+<path class="eg-barb eg-barb--dk" d="M160.7 18.7 Q162.2 15.6 164.3 11.4"/>
+<path class="eg-barb" d="M161.7 16.6 Q163.3 13.4 165.4 9.3"/>
+<path class="eg-barb eg-barb--dk" d="M161.7 16.6 Q163.3 13.4 165.4 9.3"/>
+<path class="eg-barb" d="M162.8 14.4 Q164.4 11.3 166 8"/>
+<path class="eg-barb eg-barb--dk" d="M162.8 14.4 Q164.4 11.3 166 8"/>
+<path class="eg-barb" d="M163.9 12.3 Q165.4 9.2 166 8"/>
+<path class="eg-barb eg-barb--dk" d="M163.9 12.3 Q165.4 9.2 166 8"/>
+<path class="eg-barb" d="M164.9 10.1 Q166 8 166 8"/>
+<path class="eg-barb eg-barb--dk" d="M164.9 10.1 Q166 8 166 8"/>
+<path class="eg-shaft" d="M99 101 L101.1 99 L103.1 96.9 L105.2 94.8 L107.2 92.8 L109.2 90.7 L111.3 88.6 L113.3 86.6 L115.3 84.5 L117.2 82.4 L119.2 80.2 L121.1 78.1 L123 75.9 L124.9 73.8 L126.8 71.6 L128.6 69.4 L130.4 67.1 L132.2 64.9 L134 62.6 L135.7 60.3 L137.4 58 L139 55.7 L140.7 53.3 L142.3 50.9 L143.8 48.5 L145.4 46.1 L146.9 43.7 L148.4 41.2 L149.8 38.7 L151.3 36.2 L152.7 33.7 L154.1 31.2 L155.5 28.7 L156.8 26.1 L158.2 23.5 L159.5 21 L160.8 18.4 L162.1 15.8 L163.4 13.2 L164.7 10.6 L166 8"/>
+</g>
+<g class="eg-contour"><path d="M107.7 127 Q119.9 129.4 130.6 127.6"/><path d="M107.1 130.2 Q121 132.6 133.3 130.8"/><path d="M106.3 133.4 Q121.7 135.8 135.6 134"/><path d="M105.2 136.6 Q122.2 139 137.6 137.2"/><path d="M104 139.8 Q122.4 142.2 139.3 140.4"/><path d="M102.7 143 Q122.5 145.4 140.8 143.6"/><path d="M101.3 146.2 Q122.4 148.6 142.1 146.8"/><path d="M99.7 149.4 Q122.2 151.8 143.2 150"/><path d="M98.1 152.6 Q121.9 155 144.2 153.2"/><path d="M96.4 155.8 Q121.4 158.2 144.9 156.4"/><path d="M94.7 159 Q120.9 161.4 145.6 159.6"/><path d="M93 162.2 Q120.3 164.6 146 162.8"/><path d="M91.3 165.4 Q119.6 167.8 146.3 166"/></g>
+<g class="eg-contour"><path d="M108 106 L108.3 121"/><path d="M110.2 106 L110.5 121"/><path d="M112.4 106 L112.7 121"/><path d="M114.6 106 L114.9 121"/><path d="M116.8 106 L117.1 121"/></g>
+<g class="eg-ground"><path d="M150 182 H184"/><path d="M144 185.2 H177"/><path d="M138 188.4 H170"/><path d="M132 191.6 H163"/><path d="M126 194.8 H156"/><path d="M30 182 H46"/><path d="M36 185.2 H44"/><path d="M42 188.4 H42"/></g>
+
+        <path d="M77 104 A 23 5 0 0 0 123 104"/>
+      </svg>
+    </div>
+  </section>
+
+  <svg class="divider divider--lg orn draw" viewBox="-200 -16 400 32" aria-hidden="true" focusable="false">
+    <use data-inline href="#o-div"/><use data-inline href="#o-div" transform="scale(-1 1)"/>
+    <use data-inline href="#o-div" transform="scale(1 -1)"/><use data-inline href="#o-div" transform="scale(-1 -1)"/>
+    <path d="M0 -6 L 5 0 L 0 6 L -5 0 Z"/>
+  </svg>
+
+  <!-- ABOUT ------------------------------------------------------------ -->
+  <section class="about">
+    <div class="panel">
+      <div class="frame frame--panel" aria-hidden="true">
+        <svg class="rule rule--1 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="rule rule--2 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="corner corner--tl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--tr orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--bl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--br orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+      </div>
+      <h2 class="panel__title" data-copy="about.title" data-fade></h2>
+      <svg class="divider divider--sm orn draw" viewBox="-200 -16 400 32" aria-hidden="true" focusable="false">
+        <use data-inline href="#o-div"/><use data-inline href="#o-div" transform="scale(-1 1)"/>
+        <use data-inline href="#o-div" transform="scale(1 -1)"/><use data-inline href="#o-div" transform="scale(-1 -1)"/>
+        <path d="M0 -6 L 5 0 L 0 6 L -5 0 Z"/>
+      </svg>
+      <p class="panel__text" data-copy="about.text" data-fade style="--d:.25s"></p>
+    </div>
+  </section>
+
+  <!-- PILLARS: three apothecary labels --------------------------------- -->
+  <section class="labels">
+    <article class="label" data-fade style="--d:0s">
+      <div class="label__med" aria-hidden="true">
+        <svg class="orn draw" viewBox="-56 -36 112 72" focusable="false">
+          <circle r="19"/><circle r="15.5"/>
+          <use data-inline href="#o-med"/><use data-inline href="#o-med" transform="scale(-1 1)"/>
+          <use data-inline href="#o-med" transform="scale(1 -1)"/><use data-inline href="#o-med" transform="scale(-1 -1)"/>
+          <path class="label__gem" d="M0 -7 L 5 0 L 0 7 L -5 0 Z M0 -3.4 L 2.4 0 L 0 3.4 L -2.4 0 Z"/>
+        </svg>
+      </div>
+      <h3 class="label__title" data-copy="pillars.0.title"></h3>
+      <span class="label__rule" aria-hidden="true"></span>
+      <p class="label__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="label" data-fade style="--d:.18s">
+      <div class="label__med" aria-hidden="true">
+        <svg class="orn draw" viewBox="-56 -36 112 72" focusable="false">
+          <circle r="19"/><circle r="15.5"/>
+          <use data-inline href="#o-med"/><use data-inline href="#o-med" transform="scale(-1 1)"/>
+          <use data-inline href="#o-med" transform="scale(1 -1)"/><use data-inline href="#o-med" transform="scale(-1 -1)"/>
+          <path class="label__gem" d="M0 -7 L 5 0 L 0 7 L -5 0 Z M0 -3.4 L 2.4 0 L 0 3.4 L -2.4 0 Z"/>
+        </svg>
+      </div>
+      <h3 class="label__title" data-copy="pillars.1.title"></h3>
+      <span class="label__rule" aria-hidden="true"></span>
+      <p class="label__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="label" data-fade style="--d:.36s">
+      <div class="label__med" aria-hidden="true">
+        <svg class="orn draw" viewBox="-56 -36 112 72" focusable="false">
+          <circle r="19"/><circle r="15.5"/>
+          <use data-inline href="#o-med"/><use data-inline href="#o-med" transform="scale(-1 1)"/>
+          <use data-inline href="#o-med" transform="scale(1 -1)"/><use data-inline href="#o-med" transform="scale(-1 -1)"/>
+          <path class="label__gem" d="M0 -7 L 5 0 L 0 7 L -5 0 Z M0 -3.4 L 2.4 0 L 0 3.4 L -2.4 0 Z"/>
+        </svg>
+      </div>
+      <h3 class="label__title" data-copy="pillars.2.title"></h3>
+      <span class="label__rule" aria-hidden="true"></span>
+      <p class="label__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING ------------------------------------------------------------ -->
+  <section class="closing" id="contact">
+    <svg class="damask damask--band" aria-hidden="true" focusable="false"><rect width="100%" height="100%" fill="url(#p-damask-lt)"/></svg>
+    <div class="closing__inner">
+      <div class="frame frame--dark" aria-hidden="true">
+        <svg class="rule rule--1 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="rule rule--2 draw"><rect width="100%" height="100%"/></svg>
+        <svg class="corner corner--tl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--tr orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--bl orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+        <svg class="corner corner--br orn draw" viewBox="0 0 140 140"><use data-inline href="#o-corner"/></svg>
+      </div>
+      <h2 class="closing__title" data-copy="closing.headline" data-fade></h2>
+      <div class="cta-row cta-row--dark" data-fade style="--d:.3s">
+        <svg class="flank orn" viewBox="0 -12 120 24" aria-hidden="true" focusable="false"><path d="M4 0 H 92 C 104 0, 112 -6, 110 -10 C 108 -13, 103 -11, 104 -8"/><path d="M60 0 C 70 6, 82 7, 92 3"/></svg>
+        <span class="plate-wrap"><a class="plate plate--light" id="mailBtn" href="#" data-copy="closing.cta"></a></span>
+        <svg class="flank flank--end orn" viewBox="0 -12 120 24" aria-hidden="true" focusable="false"><path d="M4 0 H 92 C 104 0, 112 -6, 110 -10 C 108 -13, 103 -11, 104 -8"/><path d="M60 0 C 70 6, 82 7, 92 3"/></svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <svg class="divider divider--sm orn draw" viewBox="-200 -16 400 32" aria-hidden="true" focusable="false">
+    <use data-inline href="#o-div"/><use data-inline href="#o-div" transform="scale(-1 1)"/>
+    <use data-inline href="#o-div" transform="scale(1 -1)"/><use data-inline href="#o-div" transform="scale(-1 -1)"/>
+    <path d="M0 -6 L 5 0 L 0 6 L -5 0 Z"/>
+  </svg>
+  <img class="footer__logo" src="../../shared/logo/medad-mark-deep.png" alt="مداد" width="808" height="267">
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

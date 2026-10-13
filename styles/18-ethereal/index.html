@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- Ambient layers: drifting fog, a pointer light, and the ink motes canvas -->
+<div class="mist" aria-hidden="true">
+  <i class="fog fog--a"></i>
+  <i class="fog fog--b"></i>
+  <i class="fog fog--c"></i>
+  <i class="fog fog--d"></i>
+  <i class="fog fog--e"></i>
+  <i class="lumen" id="lumen"></i>
+</div>
+<canvas class="motes" id="motes" aria-hidden="true"></canvas>
+
+<header class="top">
+  <a class="top__logo" href="#top" aria-label="مداد">
+    <img src="../../shared/logo/medad-mark-green.png" alt="" width="808" height="267">
+  </a>
+  <a class="top__cta" href="#contact" data-copy="nav.cta"></a>
+</header>
+
+<main id="top">
+
+  <!-- HERO: the headline emerges from the mist -->
+  <section class="hero">
+    <div class="hero__light" aria-hidden="true">
+      <i class="shaft shaft--1"></i>
+      <i class="shaft shaft--2"></i>
+      <i class="shaft shaft--3"></i>
+      <i class="fabric"></i>
+    </div>
+    <div class="hero__halo" aria-hidden="true"></div>
+
+    <div class="hero__inner">
+      <p class="hero__brand emerge" style="--d:.2s"><span class="brand-word" role="img" aria-label="مداد">مـــــداد</span></p>
+      <h1 class="hero__title" id="heroTitle" data-copy="hero.headline"></h1>
+      <p class="hero__line emerge" data-copy="hero.line" style="--d:2.1s"></p>
+      <div class="emerge" style="--d:2.6s">
+        <a class="btn" href="#contact" data-copy="hero.cta"></a>
+      </div>
+    </div>
+    <div class="hero__veil" aria-hidden="true"></div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="about__inner">
+      <h2 class="about__title" data-mist data-copy="about.title"></h2>
+      <p class="about__text" data-mist style="--d:.35s" data-copy="about.text"></p>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <article class="pillar" data-mist style="--d:0s">
+      <div class="orb" aria-hidden="true"><i></i></div>
+      <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="pillar" data-mist style="--d:.3s">
+      <div class="orb orb--2" aria-hidden="true"><i></i></div>
+      <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="pillar" data-mist style="--d:.6s">
+      <div class="orb orb--3" aria-hidden="true"><i></i></div>
+      <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing" id="contact">
+    <div class="closing__glow" aria-hidden="true"></div>
+    <h2 class="closing__title" data-mist data-copy="closing.headlineKashida"></h2>
+    <div data-mist style="--d:.4s">
+      <a class="btn" id="mailBtn" href="#" data-copy="closing.cta"></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img class="footer__logo" src="../../shared/logo/medad-mark-green.png" alt="مداد" width="808" height="267">
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

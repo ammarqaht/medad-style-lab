@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<main id="top">
+
+  <!-- HERO: the poster on a visible 12 column grid ------------------- -->
+  <section class="hero g" id="hero">
+    <div class="lines lines--ruler" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i><i></i>
+    </div>
+
+    <div class="circle" id="circle" aria-hidden="true"></div>
+
+    <a class="hero__brand" href="#top" aria-label="مداد" data-in="1"><span class="brand-word" aria-hidden="true">مـــــداد</span></a>
+    <a class="hero__nav link" href="#contact" data-copy="nav.cta" data-in="2"></a>
+
+    <h1 class="hero__title" id="heroTitle" data-copy="hero.headline"></h1>
+
+    <p class="hero__line" data-copy="hero.line" data-in="6"></p>
+    <div class="hero__act" data-in="7">
+      <a class="btn" href="#contact"><span data-copy="hero.cta"></span><span class="btn__arrow" aria-hidden="true">←</span></a>
+    </div>
+
+    <div class="hero__index">
+      <a href="#p1" data-in="8"><span>01</span></a>
+      <a href="#p2" data-in="9"><span>02</span></a>
+      <a href="#p3" data-in="10"><span>03</span></a>
+    </div>
+  </section>
+
+  <!-- ABOUT --------------------------------------------------------- -->
+  <section class="about g" data-lines>
+    <hr class="rule" data-rule>
+    <h2 class="about__title" data-copy="about.title" data-slide></h2>
+    <p class="about__text" data-copy="about.text" data-slide style="--d:.12s"></p>
+  </section>
+
+  <!-- PILLARS: numbered columns 01 02 03 ---------------------------- -->
+  <section class="pillars g" data-lines>
+    <article class="pillar" id="p1" data-slide style="--d:0s">
+      <span class="pillar__num" aria-hidden="true">01</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+        <p class="pillar__text" data-copy="pillars.0.text"></p>
+      </div>
+    </article>
+    <article class="pillar" id="p2" data-slide style="--d:.1s">
+      <span class="pillar__num" aria-hidden="true">02</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+        <p class="pillar__text" data-copy="pillars.1.text"></p>
+      </div>
+    </article>
+    <article class="pillar" id="p3" data-slide style="--d:.2s">
+      <span class="pillar__num" aria-hidden="true">03</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+        <p class="pillar__text" data-copy="pillars.2.text"></p>
+      </div>
+    </article>
+  </section>
+
+  <!-- CLOSING ------------------------------------------------------- -->
+  <section class="closing g" id="contact" data-lines>
+    <div class="closing__bar" aria-hidden="true" data-rule></div>
+    <h2 class="closing__title" data-copy="closing.headline" data-slide></h2>
+    <a class="closing__cta" id="mailBtn" href="#" data-slide style="--d:.12s">
+      <span data-copy="closing.cta"></span><span class="btn__arrow" aria-hidden="true">←</span>
+    </a>
+  </section>
+</main>
+
+<footer class="footer g" data-lines>
+  <hr class="rule" data-rule>
+  <p class="footer__brand"><span class="brand-word" role="img" aria-label="مداد">مـــــداد</span></p>
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail link" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

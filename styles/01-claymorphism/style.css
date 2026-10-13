@@ -1,0 +1,566 @@
+/* ============================================================
+   01 · Claymorphism
+   Soft matte clay. One light source at the top-start corner
+   (top-right in RTL): highlights sit top-right, shades and drop
+   shadows fall bottom-left.
+   ============================================================ */
+
+:root {
+  /* Clay shading recipe */
+  --clay-out:   -18px 26px 50px rgba(8, 58, 53, .16), -5px 8px 14px rgba(8, 58, 53, .08);
+  --clay-in:    inset -10px 12px 20px rgba(255, 255, 255, .8), inset 12px -16px 26px rgba(8, 58, 53, .1);
+  --clay-press: inset 8px -8px 16px rgba(8, 58, 53, .12), inset -6px 8px 14px rgba(255, 255, 255, .7);
+
+  --spring:      cubic-bezier(.3, 1.9, .5, 1);   /* strong overshoot for release */
+  --spring-soft: cubic-bezier(.34, 1.45, .64, 1);
+
+  /* Clay mid-tones: same hue as the logo (172° to 175°), between ramp steps */
+  --clay-teal-hi: #1B8276;
+  --clay-mint:    #9DDCD4;
+  --clay-mint-2:  #A6DFD8;
+  --clay-teal:    #3FA699;
+  --clay-teal-2:  #2FA597;
+  --clay-wash:    #EAF5F3;
+
+  --r-xl: 44px;
+  --r-lg: 34px;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 500;
+}
+
+/* Soft pastel clouds and a matte grain behind everything */
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+body::before {
+  background:
+    radial-gradient(46vmax 40vmax at 92% 6%, var(--green-100), transparent 70%),
+    radial-gradient(40vmax 36vmax at 4% 48%, rgba(188, 230, 225, .55), transparent 70%),
+    radial-gradient(44vmax 34vmax at 70% 104%, var(--green-50), transparent 70%);
+}
+body::after {
+  opacity: .18;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05 0 0 0 0 .09 0 0 0 0 .08 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.clay {
+  background: linear-gradient(200deg, #FFFFFF 0%, var(--green-50) 60%, var(--clay-wash) 100%);
+  box-shadow: var(--clay-out), var(--clay-in);
+}
+
+/* ---------- Puffy pillow buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border-radius: 999px;
+  background: radial-gradient(120% 140% at 75% 10%, var(--green-600) 0%, var(--green-600) 50%, var(--green-700) 100%);
+  color: var(--paper);
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow:
+    -10px 14px 26px rgba(8, 58, 53, .3),
+    inset -6px 8px 12px rgba(255, 255, 255, .3),
+    inset 8px -10px 16px rgba(4, 36, 33, .38);
+  transform-origin: 50% 100%;
+  /* Release: springs back with overshoot */
+  transition: transform .62s var(--spring), box-shadow .35s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.btn--lg { padding: 18px 36px 20px; font-size: 19px; }
+.btn--sm { padding: 10px 20px 12px; font-size: 16px; }
+.btn:hover { transform: translateY(-3px) scale(1.035); }
+.btn:active,
+.btn.is-pressed {
+  /* Press: squash fast */
+  transform: scale(1.06, .9);
+  transition-duration: .11s;
+  transition-timing-function: var(--ease-out);
+  box-shadow:
+    -4px 6px 12px rgba(8, 58, 53, .26),
+    inset -4px 6px 10px rgba(255, 255, 255, .22),
+    inset 10px -12px 18px rgba(4, 36, 33, .45);
+}
+.btn:focus-visible { outline: 3px solid var(--green-500); outline-offset: 4px; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: fixed;
+  inset-block-start: 14px;
+  inset-inline: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding-inline: 16px;
+  pointer-events: none;
+}
+.topbar__pill {
+  pointer-events: auto;
+  width: min(1180px, 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 12px 10px 12px;
+  padding-inline-start: 22px;
+  border-radius: 999px;
+}
+.topbar__logo { display: block; }
+.topbar__logo img { height: 30px; width: auto; }
+
+/* ---------- Layout ---------- */
+main { display: grid; gap: clamp(72px, 10vw, 140px); padding-block-end: 64px; }
+section { width: min(1180px, 100% - 32px); margin-inline: auto; scroll-margin-top: 110px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: 28px;
+  padding-block: 112px 24px;
+}
+.hero__text { display: grid; gap: 22px; justify-items: start; }
+.hero__title {
+  font-weight: 900;
+  font-size: clamp(42px, 6.2vw, 88px);
+  line-height: 1.12;
+  letter-spacing: -.005em;
+  color: var(--ink);
+  text-wrap: balance;
+  max-width: 12ch;
+}
+.hero__line {
+  font-size: clamp(17px, 1.5vw, 21px);
+  line-height: 1.75;
+  color: var(--ink-muted);
+  max-width: 34ch;
+}
+
+@media (min-width: 900px) {
+  .hero {
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    gap: 40px;
+  }
+}
+
+/* ---------- Signature: the clay inkwell ----------
+   The inkwell and icons are drawn objects lit from one fixed corner, so their
+   internal parts use physical left/top on purpose (they must not mirror). */
+.scene {
+  position: relative;
+  width: min(100%, 520px);
+  aspect-ratio: 1;
+  justify-self: center;
+  container-type: inline-size;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+.layer {
+  position: absolute;
+  inset: 0;
+  transform: translate3d(calc(var(--px, 0) * var(--depth, 1) * 1cqw), calc(var(--py, 0) * var(--depth, 1) * 1cqw), 0);
+  transition: transform .9s var(--ease-out);
+  pointer-events: none;
+}
+.bob, .squash { position: absolute; inset: 0; }
+.squash { transform-origin: 50% 92%; }
+
+.floor {
+  position: absolute;
+  inset-inline-start: 18%;
+  inset-block-start: 88%;
+  width: 64%;
+  height: 8%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(8, 58, 53, .28), rgba(8, 58, 53, .1) 60%, transparent);
+  transform-origin: 50% 50%;
+  animation: floor 5.2s var(--ease-in-out) infinite;
+}
+
+/* Jar body: squat, plump, matte */
+.jar {
+  position: absolute;
+  left: 18%; top: 47%;
+  width: 64%; height: 44%;
+  border-radius: 40% 40% 46% 46% / 32% 32% 64% 64%;
+  background: radial-gradient(120% 110% at 70% 22%, var(--green-100) 0%, var(--green-200) 46%, var(--clay-mint) 82%, var(--green-300) 100%);
+  box-shadow:
+    -3.4cqw 4.4cqw 8cqw rgba(8, 58, 53, .2),
+    inset -2.6cqw 3cqw 4cqw rgba(255, 255, 255, .75),
+    inset 3.2cqw -4cqw 6cqw rgba(13, 84, 77, .2);
+}
+.neck {
+  position: absolute;
+  left: 33%; top: 38%;
+  width: 34%; height: 13%;
+  border-radius: 30% 30% 22% 22% / 40% 40% 30% 30%;
+  background: linear-gradient(240deg, var(--green-100), var(--green-200) 55%, var(--clay-mint-2));
+  box-shadow:
+    -1cqw 1.6cqw 2.4cqw rgba(8, 58, 53, .14),
+    inset -1.4cqw 1.6cqw 2cqw rgba(255, 255, 255, .7),
+    inset 1.6cqw -1.4cqw 2cqw rgba(13, 84, 77, .14);
+}
+.rim {
+  position: absolute;
+  left: 30%; top: 34.5%;
+  width: 40%; height: 9%;
+  border-radius: 50%;
+  background: radial-gradient(70% 70% at 62% 30%, #FFFFFF, var(--green-100) 60%, var(--green-200));
+  box-shadow:
+    -1cqw 1.6cqw 2.2cqw rgba(8, 58, 53, .16),
+    inset -.8cqw 1cqw 1.4cqw rgba(255, 255, 255, .9),
+    inset .8cqw -1cqw 1.6cqw rgba(13, 84, 77, .18);
+}
+/* The ink pool inside the rim */
+.rim::after {
+  content: "";
+  position: absolute;
+  inset: 22% 14%;
+  border-radius: 50%;
+  background: radial-gradient(60% 70% at 64% 30%, var(--green-700), var(--green-900) 55%, var(--ink));
+  box-shadow: inset 1cqw 1.2cqw 1.4cqw rgba(0, 0, 0, .4);
+}
+.rim::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  right: 28%; top: 30%;
+  width: 12%; height: 18%;
+  border-radius: 50%;
+  background: rgba(133, 214, 205, .7);
+  filter: blur(.3cqw);
+}
+.label {
+  position: absolute;
+  left: 31%; top: 63%;
+  width: 38%; height: 14%;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(200deg, #FFFFFF, var(--paper));
+  box-shadow:
+    inset 1cqw -1.2cqw 1.8cqw rgba(13, 84, 77, .14),
+    inset -1cqw 1.2cqw 1.6cqw rgba(255, 255, 255, .9),
+    -.6cqw .8cqw 1.4cqw rgba(8, 58, 53, .1);
+}
+.label img { width: 66%; height: auto; }
+
+.quill {
+  position: absolute;
+  left: 40%; top: -3.5%;
+  width: 20%; height: 42.5%;
+  overflow: visible;
+  transform-origin: 50% 100%;
+  transform: rotate(16deg);
+  filter: drop-shadow(-1.2cqw 1.6cqw 1.2cqw rgba(8, 58, 53, .2));
+  animation: quill 5.2s var(--ease-in-out) infinite;
+}
+.ripple {
+  position: absolute;
+  left: 43.5%; top: 37.6%;
+  width: 13%; height: 3%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--green-900), var(--green-900) 60%, rgba(4, 36, 33, 0));
+  box-shadow: 0 0 0 .25cqw rgba(54, 201, 186, .25);
+}
+
+/* The plump ink drop */
+.drop {
+  position: absolute;
+  left: 8%; top: 11%;
+  width: 17%;
+  aspect-ratio: 1;
+  border-radius: 0 50% 50% 50%;
+  transform: rotate(45deg);
+  background: radial-gradient(90% 90% at 50% 30%, var(--clay-teal-hi), var(--green-600) 45%, var(--green-800) 100%);
+  /* Local axes are rotated 45°: local +y maps to screen bottom-left. */
+  box-shadow:
+    0 2.6cqw 4cqw rgba(8, 58, 53, .3),
+    inset 0 1.6cqw 1.8cqw rgba(133, 214, 205, .55),
+    inset 0 -2cqw 2.6cqw rgba(4, 36, 33, .45);
+}
+.drop::after {
+  content: "";
+  position: absolute;
+  left: 30%; top: 22%;
+  width: 22%; height: 14%;
+  border-radius: 50%;
+  background: rgba(241, 249, 248, .85);
+  filter: blur(.25cqw);
+  transform: rotate(-45deg);
+}
+
+/* Small clay pebbles */
+.ball {
+  position: absolute;
+  border-radius: 50%;
+  box-shadow:
+    -1cqw 1.4cqw 2.2cqw rgba(8, 58, 53, .16),
+    inset -.8cqw 1cqw 1.4cqw rgba(255, 255, 255, .85),
+    inset 1cqw -1.2cqw 1.8cqw rgba(13, 84, 77, .16);
+}
+.ball--a { left: 80%; top: 22%; width: 8%; aspect-ratio: 1; background: var(--green-200); }
+.ball--b { left: 4%;  top: 64%; width: 11%; aspect-ratio: 1; background: radial-gradient(circle at 70% 30%, #FFFFFF, var(--paper)); }
+.ball--c { left: 84%; top: 66%; width: 5.5%; aspect-ratio: 1; background: var(--green-300); }
+
+/* Idle bobbing */
+.bob--well { animation: bob 5.2s var(--ease-in-out) infinite; }
+.bob--drop { animation: bob-big 4.1s var(--ease-in-out) -.8s infinite; }
+.bob--a    { animation: bob 3.6s var(--ease-in-out) -1.2s infinite; }
+.bob--b    { animation: bob 4.6s var(--ease-in-out) -2.4s infinite; }
+.bob--c    { animation: bob-big 3.2s var(--ease-in-out) -.4s infinite; }
+
+@keyframes bob     { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-1.6cqw); } }
+@keyframes bob-big { 0%, 100% { transform: translateY(0) rotate(0); } 50% { transform: translateY(-3.4cqw) rotate(-3deg); } }
+@keyframes floor   { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(.93); opacity: .8; } }
+@keyframes quill   { 0%, 100% { transform: rotate(16deg); } 50% { transform: rotate(12.5deg); } }
+
+/* ---------- About ---------- */
+.about__card {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--r-xl);
+  padding: clamp(32px, 6vw, 72px);
+  display: grid;
+  gap: 18px;
+  max-width: 920px;
+  margin-inline: auto;
+}
+.about__blob {
+  position: absolute;
+  inset-inline-end: -60px;
+  inset-block-end: -70px;
+  width: 220px; height: 220px;
+  border-radius: 46% 54% 50% 50% / 56% 44% 56% 44%;
+  background: var(--green-100);
+  box-shadow: inset -14px 16px 26px rgba(255, 255, 255, .8), inset 16px -18px 30px rgba(13, 84, 77, .12);
+}
+.about__title {
+  position: relative;
+  font-weight: 900;
+  font-size: clamp(30px, 3.8vw, 52px);
+  line-height: 1.25;
+  text-wrap: balance;
+}
+.about__text {
+  position: relative;
+  font-size: clamp(18px, 1.6vw, 22px);
+  line-height: 1.9;
+  color: var(--ink-muted);
+  max-width: 46ch;
+}
+.about__text .brand-word { color: var(--green-500); font-size: 1.12em; }
+
+/* ---------- Pillars: three chubby cards at different heights ---------- */
+.pillars {
+  display: grid;
+  gap: 24px;
+}
+.pillar {
+  border-radius: var(--r-lg);
+  padding: 30px 30px 34px;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+  transform-origin: 50% 100%;
+  transition: transform .7s var(--spring-soft), box-shadow .4s var(--ease-out);
+  -webkit-tap-highlight-color: transparent;
+}
+.pillar__title {
+  font-weight: 900;
+  font-size: clamp(22px, 2vw, 27px);
+  line-height: 1.3;
+  margin-block-start: 8px;
+}
+.pillar__text {
+  font-size: 17px;
+  line-height: 1.8;
+  color: var(--ink-muted);
+}
+.pillar:hover { transform: translateY(-8px) scale(1.02); }
+.pillar:active { transform: scale(1.03, .96); transition-duration: .12s; transition-timing-function: var(--ease-out); }
+
+@media (min-width: 820px) {
+  .pillars { grid-template-columns: repeat(3, 1fr); align-items: start; gap: 28px; }
+  .pillar:nth-child(2) { margin-block-start: 56px; }
+  .pillar:nth-child(3) { margin-block-start: 22px; }
+}
+
+/* Clay icons */
+.ico {
+  position: relative;
+  width: 104px;
+  height: 92px;
+  transition: transform .7s var(--spring);
+}
+.pillar:hover .ico { transform: rotate(-6deg) scale(1.06); }
+
+.ico-web__win {
+  position: absolute;
+  inset: 8px 0 6px 6px;
+  border-radius: 22px;
+  background: radial-gradient(120% 120% at 75% 15%, var(--green-100), var(--green-200));
+  box-shadow: -8px 12px 18px rgba(8, 58, 53, .16), inset -5px 6px 9px rgba(255, 255, 255, .85), inset 6px -7px 12px rgba(13, 84, 77, .14);
+}
+.ico-web__win i {
+  position: absolute;
+  inset-block-start: 12px;
+  width: 11px; height: 11px;
+  border-radius: 50%;
+  background: var(--paper);
+  box-shadow: inset -2px 2px 3px #FFFFFF, inset 2px -2px 4px rgba(13, 84, 77, .2);
+}
+.ico-web__win i:nth-child(1) { inset-inline-start: 14px; }
+.ico-web__win i:nth-child(2) { inset-inline-start: 30px; }
+.ico-web__win i:nth-child(3) { inset-inline-start: 46px; background: var(--green-500); }
+.ico-web__win b {
+  position: absolute;
+  inset-inline: 14px 26px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--green-50);
+  box-shadow: var(--clay-press);
+}
+.ico-web__win b:nth-of-type(1) { inset-block-start: 38px; }
+.ico-web__win b:nth-of-type(2) { inset-block-start: 58px; inset-inline-end: 44px; }
+
+.ico-sys__base {
+  position: absolute;
+  inset: auto 0 6px 6px;
+  height: 22px;
+  border-radius: 14px;
+  background: var(--green-200);
+  box-shadow: -8px 10px 16px rgba(8, 58, 53, .16), inset -4px 5px 8px rgba(255, 255, 255, .8), inset 5px -6px 10px rgba(13, 84, 77, .14);
+}
+.ico-sys__base i {
+  position: absolute;
+  inset-block-end: 14px;
+  width: 22px;
+  border-radius: 12px 12px 8px 8px;
+  box-shadow: -5px 6px 10px rgba(8, 58, 53, .18), inset -4px 5px 7px rgba(255, 255, 255, .45), inset 4px -5px 8px rgba(4, 36, 33, .2);
+  transform-origin: 50% 100%;
+  transition: transform .8s var(--spring);
+}
+.ico-sys__base i:nth-child(1) { inset-inline-start: 12px; height: 34px; background: var(--green-300); }
+.ico-sys__base i:nth-child(2) { inset-inline-start: 40px; height: 52px; background: var(--clay-teal); }
+.ico-sys__base i:nth-child(3) { inset-inline-start: 68px; height: 70px; background: var(--green-500); }
+.pillar:hover .ico-sys__base i:nth-child(1) { transform: scaleY(1.3); }
+.pillar:hover .ico-sys__base i:nth-child(2) { transform: scaleY(.8); transition-delay: .05s; }
+.pillar:hover .ico-sys__base i:nth-child(3) { transform: scaleY(1.1); transition-delay: .1s; }
+
+.ico-live__base {
+  position: absolute;
+  inset: auto 4px 8px 10px;
+  height: 34px;
+  border-radius: 50% / 46%;
+  background: var(--green-200);
+  box-shadow: -8px 12px 18px rgba(8, 58, 53, .16), inset -5px 5px 8px rgba(255, 255, 255, .8), inset 6px -7px 12px rgba(13, 84, 77, .16);
+}
+.ico-live__dome {
+  position: absolute;
+  inset-inline: 24px 18px;
+  inset-block-end: 22px;
+  height: 46px;
+  border-radius: 50% 50% 40% 40% / 70% 70% 30% 30%;
+  background: radial-gradient(90% 90% at 68% 26%, var(--clay-teal-2), var(--green-500) 50%, var(--green-700));
+  box-shadow: -4px 6px 10px rgba(8, 58, 53, .25), inset -4px 6px 8px rgba(133, 214, 205, .6), inset 5px -6px 10px rgba(4, 36, 33, .35);
+  transform-origin: 50% 100%;
+  transition: transform .6s var(--spring);
+}
+.pillar:hover .ico-live__dome { transform: scaleY(.62) scaleX(1.05); transition-duration: .18s; transition-timing-function: var(--ease-out); }
+
+/* ---------- Closing slab ---------- */
+.closing__slab {
+  border-radius: 56px;
+  padding: clamp(40px, 7vw, 88px) clamp(24px, 6vw, 72px);
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  gap: 30px;
+  background: radial-gradient(120% 140% at 80% 0%, var(--green-100), var(--green-200) 70%);
+  box-shadow:
+    -22px 30px 60px rgba(8, 58, 53, .18),
+    inset -14px 16px 28px rgba(255, 255, 255, .7),
+    inset 16px -20px 34px rgba(13, 84, 77, .14);
+}
+.closing__title {
+  font-weight: 900;
+  font-size: clamp(36px, 5.4vw, 76px);
+  line-height: 1.25;
+  color: var(--ink);
+  text-wrap: balance;
+}
+
+/* ---------- Footer ---------- */
+.footer { width: min(1180px, 100% - 32px); margin: 0 auto 96px; }
+.footer__pill {
+  border-radius: var(--r-lg);
+  padding: 28px clamp(24px, 4vw, 40px);
+  display: grid;
+  gap: 10px;
+  justify-items: start;
+}
+.footer__logo { height: 34px; width: auto; }
+.footer__line { color: var(--ink-muted); font-size: 16px; }
+.footer__mail {
+  font-weight: 700;
+  color: var(--green-600);
+  text-decoration: none;
+  border-radius: 999px;
+  padding: 6px 14px;
+  margin-inline-start: -14px;
+  transition: background-color .25s ease;
+}
+.footer__mail:hover { background: var(--green-100); }
+.footer__copy { font-size: 14px; color: var(--ink-muted); }
+.footer__copy .brand-word { color: var(--ink); }
+
+@media (min-width: 820px) {
+  .footer__pill {
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 28px;
+  }
+}
+
+/* ---------- Spring pop-in on scroll ---------- */
+.js [data-pop] {
+  opacity: 0;
+  transform: translateY(28px) scale(.9);
+  transition:
+    opacity .5s var(--ease-out) var(--d, 0s),
+    transform .95s var(--spring-soft) var(--d, 0s),
+    box-shadow .4s var(--ease-out);
+}
+.js [data-pop].is-in { opacity: 1; transform: none; }
+.js .pillar[data-pop].is-in { transition: transform .7s var(--spring-soft) var(--d, 0s), box-shadow .4s var(--ease-out), opacity .5s var(--ease-out) var(--d, 0s); }
+.js .pillar[data-pop].is-in:hover { transform: translateY(-8px) scale(1.02); }
+.js .pillar[data-pop].is-in:active { transform: scale(1.03, .96); transition-duration: .12s; transition-timing-function: var(--ease-out); }
+@media print { .js [data-pop] { opacity: 1 !important; transform: none !important; } }
+
+/* ---------- Reduced motion: no springs, no bobbing; simple fades ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .bob, .floor, .quill { animation: none !important; }
+  .layer { transform: none !important; transition: none; }
+  .js [data-pop], .js .pillar[data-pop].is-in { transform: none; transition: opacity .6s ease var(--d, 0s); }
+  .btn, .pillar, .ico, .ico * { transition: opacity .2s ease, background-color .2s ease !important; }
+  .btn:hover, .btn:active, .btn.is-pressed,
+  .pillar:hover, .pillar:active, .js .pillar[data-pop].is-in:hover, .js .pillar[data-pop].is-in:active,
+  .pillar:hover .ico, .pillar:hover .ico * { transform: none !important; }
+}

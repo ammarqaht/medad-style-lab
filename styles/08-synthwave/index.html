@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<div class="vhs" aria-hidden="true"><i class="vhs__noise"></i><i class="vhs__band"></i></div>
+
+<main id="top">
+
+  <!-- HERO: the neon horizon ------------------------------------------- -->
+  <section class="hero" id="hero">
+    <header class="bar">
+      <a class="bar__logo" href="#top" aria-label="مداد"><span class="brand-word neon-word">مـــــداد</span></a>
+      <a class="tube tube--sm" href="#contact"><span data-copy="nav.cta"></span></a>
+    </header>
+
+    <div class="hero__copy">
+      <h1 class="hero__title chrome-block" data-in><span class="chrome" data-copy="hero.headline"></span></h1>
+      <p class="hero__line" data-copy="hero.line" data-in style="--d:.25s"></p>
+      <div class="hero__cta" data-in style="--d:.4s">
+        <a class="tube tube--lg" id="heroCta" href="#contact"><span data-copy="hero.cta"></span></a>
+      </div>
+    </div>
+
+    <!-- Signature: the sun over the rushing grid -->
+    <div class="hero__space" id="space" aria-hidden="true"></div>
+    <div class="stage" id="stage" aria-hidden="true">
+      <canvas id="horizon"></canvas>
+    </div>
+  </section>
+
+  <!-- ABOUT -------------------------------------------------------------- -->
+  <section class="about">
+    <div class="panel panel--about" data-reveal>
+      <div class="about__drop" aria-hidden="true">
+        <svg viewBox="0 0 120 160" class="drop">
+          <defs>
+            <linearGradient id="dropFill" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0" style="stop-color:var(--green-100)"/>
+              <stop offset=".45" style="stop-color:var(--green-300)"/>
+              <stop offset=".75" style="stop-color:var(--green-400)"/>
+              <stop offset="1" style="stop-color:var(--green-600)"/>
+            </linearGradient>
+            <clipPath id="dropClip"><path d="M60 6 C 74 40, 108 70, 108 104 A 48 48 0 0 1 12 104 C 12 70, 46 40, 60 6 Z"/></clipPath>
+            <mask id="dropStripes" maskUnits="userSpaceOnUse" x="0" y="0" width="120" height="160">
+              <rect width="120" height="160" fill="#FFFFFF"/>
+              <g class="drop__gaps" fill="#000000">
+                <rect y="84" width="120" height="2"/>
+                <rect y="96" width="120" height="3"/>
+                <rect y="109" width="120" height="4"/>
+                <rect y="123" width="120" height="5"/>
+                <rect y="138" width="120" height="6"/>
+              </g>
+            </mask>
+          </defs>
+          <g clip-path="url(#dropClip)">
+            <rect width="120" height="160" fill="url(#dropFill)" mask="url(#dropStripes)"/>
+          </g>
+          <path class="drop__edge" d="M60 6 C 74 40, 108 70, 108 104 A 48 48 0 0 1 12 104 C 12 70, 46 40, 60 6 Z"/>
+        </svg>
+      </div>
+      <div class="about__body">
+        <h2 class="sec-title chrome-block"><span class="chrome" data-copy="about.title"></span></h2>
+        <p class="about__text" data-copy="about.text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS ------------------------------------------------------------ -->
+  <section class="pillars">
+    <article class="panel pillar" data-reveal style="--d:0s">
+      <svg class="pillar__ico" viewBox="0 0 64 64" aria-hidden="true">
+        <rect x="6" y="12" width="52" height="38" rx="3"/>
+        <path d="M6 21 H58"/>
+        <path d="M14 30 H40 M14 37 H32 M14 44 H44"/>
+        <path d="M24 58 H40 M32 50 V58"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="panel pillar" data-reveal style="--d:.12s">
+      <svg class="pillar__ico" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M8 56 H58"/>
+        <path d="M14 56 V40 M26 56 V30 M38 56 V36 M50 56 V18"/>
+        <path d="M10 34 L24 22 L36 28 L54 10"/>
+        <path d="M46 10 H54 V18"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="panel pillar" data-reveal style="--d:.24s">
+      <svg class="pillar__ico" viewBox="0 0 64 64" aria-hidden="true">
+        <path d="M32 8 L38 24 L55 24 L41 34 L46 51 L32 41 L18 51 L23 34 L9 24 L26 24 Z"/>
+        <path d="M6 58 Q32 48 58 58"/>
+      </svg>
+      <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING ------------------------------------------------------------ -->
+  <section class="closing" id="contact">
+    <div class="closing__sky">
+      <h2 class="closing__title chrome-block" data-reveal><span class="chrome" data-copy="closing.headlineKashida"></span></h2>
+      <div data-reveal style="--d:.15s">
+        <a class="tube tube--lg" id="mailBtn" href="#"><span data-copy="closing.cta"></span></a>
+      </div>
+    </div>
+    <div class="floor" aria-hidden="true"><div class="floor__plane" id="floor"></div></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <span class="brand-word neon-word footer__logo" role="img" aria-label="مداد">مـــــداد</span>
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,272 @@
+/* ============================================================
+   14 · Minimalism
+   Paper, ink, and one stroke. Green appears in two places only:
+   the hero logo and the call to action.
+   Arabic is never letter-spaced; air comes from word-spacing,
+   line-height and whitespace.
+   ============================================================ */
+
+:root {
+  /* Type scale: a perfect fourth (1.333) at desktop, compressed on phones */
+  --t-0: clamp(17px, .25vw + 16px, 19px);
+  --t-1: clamp(19px, .6vw + 16.5px, 24px);
+  --t-2: clamp(22px, 1.1vw + 17.5px, 32px);
+  --t-3: clamp(27px, 1.9vw + 19.5px, 43px);
+  --t-4: clamp(33px, 3.1vw + 21px, 57px);
+  --t-5: clamp(41px, 5.2vw + 21px, 101px);
+
+  /* Whitespace rhythm: one unit, used in whole multiples */
+  --u: clamp(12px, 1.2vw + 6px, 24px);
+  --gutter: clamp(28px, 8vw, 136px);
+  --measure: 1180px;
+
+  --slow: cubic-bezier(.25, .1, .25, 1);
+  --pen:  cubic-bezier(.55, .05, .25, 1);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 300;
+  font-size: var(--t-0);
+  line-height: 1.9;
+}
+
+::selection { background: var(--green-100); color: var(--ink); }
+
+:focus-visible { outline: 1px solid var(--ink); outline-offset: 8px; }
+
+/* ---------- Plates: full height, one statement each ---------- */
+.hero,
+.plate {
+  min-height: 100vh;
+  min-height: 100svh;
+  padding-inline: var(--gutter);
+}
+
+.plate {
+  display: grid;
+  align-content: center;
+  padding-block: calc(var(--u) * 8);
+}
+.plate > * {
+  inline-size: 100%;
+  max-inline-size: var(--measure);
+  margin-inline: auto;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  grid-template-rows: auto minmax(calc(var(--u) * 3), 1fr) auto minmax(calc(var(--u) * 4), 1.15fr) auto calc(var(--u) * 6);
+  padding-block-start: calc(var(--u) * 3);
+  position: relative;
+}
+.hero > * { inline-size: 100%; max-inline-size: var(--measure); margin-inline: auto; }
+
+.hero__brand { grid-row: 1; }
+.hero__logo { display: inline-block; text-decoration: none; }
+.hero__logo img { inline-size: clamp(76px, 5vw + 56px, 124px); block-size: auto; }
+
+.hero__body { grid-row: 3; }
+
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--t-5);
+  line-height: 1.22;
+  word-spacing: .06em;
+  max-inline-size: 11ch;
+  text-wrap: balance;
+  color: var(--ink);
+  /* Serif Arabic sits slightly inside its box; nudge it to the gutter */
+  margin-inline-start: -.03em;
+}
+
+.hero__cta { margin-block-start: calc(var(--u) * 3); }
+
+/* ---------- The call to action: text and one hairline ---------- */
+.cta {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: var(--t-1);
+  line-height: 1.6;
+  color: var(--green-600);
+  text-decoration: none;
+  padding-block-end: 10px;
+  white-space: nowrap;
+}
+.cta::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  block-size: 1px;
+  background: currentColor;
+  transform-origin: 100% 50%; /* RTL: grows from the start (right) */
+  transform: scaleX(.32);
+  transition: transform 1.1s var(--ease-out);
+}
+.cta:hover::after,
+.cta:focus-visible::after { transform: scaleX(1); }
+.cta:focus-visible { outline: 1px solid currentColor; outline-offset: 8px; }
+.cta:active { opacity: .7; transition: opacity .2s; }
+
+/* ---------- The stroke ---------- */
+.stroke {
+  grid-row: 5;
+  max-inline-size: none;
+  inline-size: auto;
+  margin-inline: calc(var(--gutter) * -1);
+  block-size: clamp(84px, 13vh, 150px);
+  pointer-events: none;
+}
+.stroke__svg { inline-size: 100%; block-size: 100%; overflow: visible; }
+.stroke__ink { fill: var(--ink); }
+.stroke__pen {
+  stroke-dasharray: 1 1;
+  stroke-dashoffset: 0;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+/* ---------- Line ---------- */
+.line {
+  font-weight: 300;
+  font-size: var(--t-3);
+  line-height: 1.7;
+  word-spacing: .08em;
+  max-inline-size: 22ch;
+  text-wrap: balance;
+}
+
+/* ---------- About ---------- */
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-4);
+  line-height: 1.3;
+  word-spacing: .05em;
+  max-inline-size: 14ch;
+  text-wrap: balance;
+}
+.about__text {
+  margin-block-start: calc(var(--u) * 3);
+  font-size: var(--t-1);
+  line-height: 2;
+  color: var(--ink-muted);
+  max-inline-size: 32ch;
+  word-spacing: .04em;
+}
+.about__text .brand-word { color: var(--ink); }
+
+/* ---------- Pillars: three lines of text ---------- */
+.pillars { display: grid; gap: calc(var(--u) * 5); }
+.pillar { display: grid; gap: calc(var(--u) * .5); }
+.pillar__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--t-3);
+  line-height: 1.35;
+  word-spacing: .05em;
+}
+.pillar__text {
+  font-size: var(--t-1);
+  line-height: 1.85;
+  color: var(--ink-muted);
+  max-inline-size: 34ch;
+}
+
+@media (min-width: 900px) {
+  .pillars { gap: calc(var(--u) * 4.5); }
+  .pillar {
+    grid-template-columns: minmax(0, 4fr) minmax(0, 8fr);
+    align-items: baseline;
+    column-gap: calc(var(--u) * 3);
+  }
+  .pillar__text { max-inline-size: 40ch; }
+}
+
+/* ---------- Closing ---------- */
+.closing__title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--t-5);
+  line-height: 1.25;
+  word-spacing: .06em;
+  max-inline-size: 10ch;
+  text-wrap: balance;
+  margin-inline-start: -.03em;
+}
+.closing .cta { margin-block-start: calc(var(--u) * 3); color: var(--ink); } /* green stays in two places only */
+
+/* ---------- Footer ---------- */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: calc(var(--u) * 1) calc(var(--u) * 2.5);
+  max-inline-size: calc(var(--measure) + var(--gutter) * 2);
+  margin-inline: auto;
+  padding: calc(var(--u) * 4) var(--gutter) calc(var(--u) * 4 + 72px);
+  font-size: var(--t-0);
+  line-height: 1.7;
+  color: var(--ink-muted);
+}
+.footer__logo { inline-size: 64px; block-size: auto; align-self: center; }
+.footer__line { margin-inline-end: auto; }
+.footer__mail { text-decoration: none; color: var(--ink-muted); transition: color .6s var(--slow); }
+.footer__mail:hover, .footer__mail:focus-visible { color: var(--ink); }
+.footer__copy .brand-word { color: var(--ink-muted); }
+
+@media (max-width: 640px) {
+  .footer { flex-direction: column; align-items: flex-start; }
+  .footer__line { margin-inline-end: 0; }
+}
+
+/* ---------- Motion: slow fades, and the pen ---------- */
+.js .hero__logo,
+.js .hero__title,
+.js .hero__cta {
+  opacity: 0;
+  animation: s14-fade 1.8s var(--slow) forwards;
+}
+.js .hero__logo  { animation-delay: .2s; }
+.js .hero__title { animation-delay: .6s; animation-duration: 2.2s; }
+.js .hero__cta   { animation-delay: 2.4s; }
+
+.js .stroke__pen { stroke-dashoffset: 1; }
+.js.is-drawn .stroke__pen { animation: s14-draw 5.2s var(--pen) 1.3s forwards; }
+
+@keyframes s14-fade {
+  from { opacity: 0; transform: translateY(6px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes s14-draw { to { stroke-dashoffset: 0; } }
+
+.js [data-fade] {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 1.8s var(--slow) var(--d, 0s), transform 2.2s var(--ease-out) var(--d, 0s);
+}
+.js [data-fade].is-in { opacity: 1; transform: none; }
+
+@media print {
+  .js [data-fade], .js .hero__logo, .js .hero__title, .js .hero__cta { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .js .stroke__pen { stroke-dashoffset: 0 !important; animation: none !important; }
+}
+
+/* Reduced motion: the stroke is shown fully drawn; everything else fades. */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .stroke__pen, .js.is-drawn .stroke__pen { stroke-dashoffset: 0; animation: none; }
+  .js .stroke { opacity: 0; animation: s14-fade-only 1.6s var(--slow) .4s forwards; }
+  .js .hero__logo, .js .hero__title, .js .hero__cta { animation-name: s14-fade-only; }
+  .js [data-fade] { transform: none; transition: opacity 1.2s var(--slow) var(--d, 0s); }
+  .cta::after { transition: none; }
+}
+@keyframes s14-fade-only { from { opacity: 0; } to { opacity: 1; } }

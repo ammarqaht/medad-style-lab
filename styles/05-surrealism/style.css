@@ -1,0 +1,648 @@
+/* ============================================================
+   05 · Surrealism
+   Four quiet scenes. Each one is a pale sky over a still plane,
+   cut by a single horizon. Things drift upward, shadows are long,
+   and the headline sleeps in the water beneath itself.
+   Light comes from a low sun behind the horizon, so every shadow
+   falls toward the viewer.
+   ============================================================ */
+
+:root {
+  --gutter: clamp(20px, 6vw, 96px);
+  --slow: cubic-bezier(.25, .1, .25, 1);
+  --drift: cubic-bezier(.45, .05, .35, 1);
+
+  --sky: linear-gradient(to bottom,
+    var(--paper) 0%,
+    color-mix(in srgb, var(--paper) 55%, var(--green-50)) 45%,
+    var(--green-100) 100%);
+  --plane: linear-gradient(to bottom,
+    var(--green-200) 0%,
+    color-mix(in srgb, var(--green-200) 55%, var(--green-300)) 34%,
+    var(--green-300) 62%,
+    color-mix(in srgb, var(--green-300) 50%, var(--green-100)) 86%,
+    var(--paper) 100%);
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-weight: 400;
+}
+
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- Header: barely there ---------- */
+.top {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(18px, 3.2vw, 40px) var(--gutter);
+}
+.top__brand {
+  font-size: clamp(30px, 3.4vw, 44px);
+  line-height: 1;
+  color: var(--green-800);
+  text-decoration: none;
+}
+.top__link {
+  position: relative;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--ink);
+  text-decoration: none;
+  padding-block: 6px;
+}
+.top__link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 0;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(.3);
+  transform-origin: 100% 50%;
+  transition: transform 1.2s var(--slow);
+}
+.top__link:hover::after, .top__link:focus-visible::after { transform: scaleX(1); }
+
+/* ---------- Scene scaffolding ---------- */
+.scene { position: relative; isolation: isolate; }
+.sky {
+  position: relative;
+  background: var(--sky);
+  overflow: hidden;
+}
+.plane {
+  position: relative;
+  background: var(--plane);
+  overflow: hidden;
+}
+/* The horizon: one hair of light, drawn when the scene arrives */
+.plane::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: 0;
+  height: 1px;
+  z-index: 3;
+  background: linear-gradient(to left, transparent, var(--white) 18%, var(--white) 82%, transparent);
+  opacity: .95;
+  transform-origin: 50% 50%;
+}
+.js .plane::before { transform: scaleX(0); transition: transform 3.2s var(--drift); }
+.js .scene.is-in .plane::before { transform: scaleX(1); }
+
+/* Words rise into place, slowly, against gravity */
+.js [data-rise] {
+  opacity: 0;
+  transform: translateY(34px);
+  filter: blur(6px);
+  transition:
+    opacity 1.6s var(--slow) var(--d, 0s),
+    transform 2.4s var(--drift) var(--d, 0s),
+    filter 1.4s var(--slow) var(--d, 0s);
+}
+.js [data-rise].is-in { opacity: 1; transform: none; filter: none; }
+
+/* ---------- Clouds (soft, stacked ellipses) ---------- */
+.cloud {
+  position: absolute;
+  width: clamp(160px, 22vw, 340px);
+  aspect-ratio: 3 / 1;
+  pointer-events: none;
+}
+.cloud i {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--white), color-mix(in srgb, var(--white) 0%, transparent));
+}
+.cloud i:nth-child(1) { inset: 22% 0 0 34%; }
+.cloud i:nth-child(2) { inset: 0 28% 18% 18%; }
+.cloud i:nth-child(3) { inset: 30% 50% 4% 0; }
+.cloud--hero  { inset-block-start: 20%; inset-inline-start: 6%; opacity: .9; }
+.cloud--about { inset-block-start: 10%; inset-inline-start: 52%; opacity: .85; width: clamp(140px, 18vw, 280px); }
+.cloud--close { inset-block-start: 18%; inset-inline-end: 8%; }
+.cloud--close2 { inset-block-start: 46%; inset-inline-start: 4%; width: clamp(110px, 13vw, 210px); opacity: .75; }
+
+/* ============================================================
+   SCENE I · HERO
+   ============================================================ */
+.hero__sky {
+  min-height: 56svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-inline: var(--gutter);
+}
+.hero__plane {
+  min-height: 44svh;
+  padding-inline: var(--gutter);
+  padding-block-end: clamp(96px, 12vh, 140px);
+}
+
+/* A low pale sun, half sunk into the horizon, behind the headline */
+.sun {
+  position: absolute;
+  inset-block-end: calc(clamp(220px, 44vw, 620px) / -2);
+  inset-inline-start: 50%;
+  width: clamp(220px, 44vw, 620px);
+  aspect-ratio: 1;
+  margin-inline-start: calc(clamp(220px, 44vw, 620px) / -2);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, var(--white) 0%, color-mix(in srgb, var(--white) 70%, var(--green-50)) 62%, color-mix(in srgb, var(--green-50) 0%, transparent) 100%);
+  pointer-events: none;
+}
+/* ...and its light lying on the water */
+.glowpath {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 50%;
+  width: clamp(160px, 30vw, 420px);
+  height: 82%;
+  transform: translateX(50%);
+  background: radial-gradient(50% 100% at 50% 0%, color-mix(in srgb, var(--white) 60%, transparent), transparent 100%);
+  pointer-events: none;
+}
+
+.hero__head {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+.t-hero {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.6rem, 1.2rem + 6vw, 7.4rem);
+  line-height: 1.18;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.hero .t-hero { padding-block-end: .06em; }
+
+/* The reflection: the same words, flipped, rippling in the plane */
+.mirror {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
+  height: 1em;
+  margin-inline: auto;
+  overflow: hidden;
+  text-align: center;
+  pointer-events: none;
+  user-select: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 92%);
+}
+.hero .mirror { font-size: clamp(2.6rem, 1.2rem + 6vw, 7.4rem); }
+.closing .mirror { font-size: clamp(2.3rem, 1.1rem + 5vw, 6.2rem); }
+/* The flip lives on the text, so the box clips to the line nearest the water */
+.mirror__text {
+  position: absolute;
+  inset-inline: 0;
+  inset-block-end: 100%;
+  transform: scaleY(-1);
+  transform-origin: 50% 100%;
+  color: var(--green-700);
+  opacity: .32;
+  filter: url(#ripple);
+}
+
+.hero__below {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+  margin: clamp(4px, 1vh, 16px) auto 0;
+  text-align: center;
+}
+.hero__line {
+  font-size: clamp(1.06rem, .98rem + .4vw, 1.3rem);
+  line-height: 1.85;
+  color: var(--ink);
+}
+
+/* ---------- The drop that falls upward ---------- */
+.drop {
+  position: absolute;
+  z-index: 1;
+  inset-block-start: 14%;
+  inset-inline-end: 21%;
+  width: clamp(54px, 7vw, 108px);
+  pointer-events: none;
+}
+.drop__float { animation: rise 14s var(--drift) infinite alternate; }
+.drop__svg { width: 100%; height: auto; overflow: visible; }
+.drop__body { fill: url(#dropFill); }
+.drop__glint { fill: var(--white); opacity: .5; }
+.drop__rim { fill: none; stroke: var(--green-300); stroke-width: 2.4; stroke-linecap: round; opacity: .5; }
+.drop__bead { fill: var(--green-800); animation: bead 9s var(--drift) infinite alternate; }
+.drop__bead--2 { animation-duration: 11s; opacity: .8; }
+@keyframes rise {
+  from { transform: translateY(14px) rotate(-1.4deg); }
+  to   { transform: translateY(-22px) rotate(1.2deg); }
+}
+@keyframes bead {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-8px); }
+}
+
+/* Tiny drops drifting up through the sky */
+.motes i {
+  position: absolute;
+  inset-block-end: -20px;
+  inset-inline-start: var(--x);
+  width: calc(26px * var(--s));
+  aspect-ratio: 100 / 150;
+  /* Pale on purpose: dark dots near Arabic text read as letter dots. */
+  background: var(--green-300);
+  border-radius: 50% 50% 50% 50% / 38% 38% 62% 62%;
+  opacity: 0;
+  animation: ascend var(--t) linear infinite;
+  animation-delay: var(--o);
+}
+@keyframes ascend {
+  0%   { transform: translateY(0) scale(var(--s)); opacity: 0; }
+  12%  { opacity: .45; }
+  80%  { opacity: .3; }
+  100% { transform: translateY(-62svh) scale(var(--s)); opacity: 0; }
+}
+
+/* Where the drop left the water: rings still widening */
+.rings {
+  position: absolute;
+  inset-block-start: clamp(8px, 2vh, 20px);
+  inset-inline-end: calc(21% + clamp(54px, 7vw, 108px) / 2);
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+.rings i, .tap {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  width: clamp(120px, 16vw, 260px);
+  aspect-ratio: 5 / 1;
+  border-radius: 50%;
+  border: 1px solid color-mix(in srgb, var(--green-800) 45%, transparent);
+  translate: 50% -50%;
+  transform: scale(.08);
+  opacity: 0;
+  animation: ring 12s var(--slow) infinite;
+}
+.rings i:nth-child(2) { animation-delay: -4s; }
+.rings i:nth-child(3) { animation-delay: -8s; }
+@keyframes ring {
+  0%   { transform: scale(.08); opacity: 0; }
+  10%  { opacity: .9; }
+  100% { transform: scale(1.4); opacity: 0; }
+}
+.tap { z-index: 1; inset-inline-start: auto; animation: ring 6s var(--slow) 1 forwards; translate: -50% -50%; pointer-events: none; }
+
+/* The drop's long shadow, lying across the plane toward us */
+.plane__fx {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.castshadow { fill: url(#shadowFade); filter: url(#soft); opacity: .32; }
+
+/* ---------- Buttons: they float, and their shadow stays on the ground ---------- */
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-block-start: clamp(22px, 3.4vh, 36px);
+  min-height: 54px;
+  padding: 0 34px;
+  border-radius: 999px;
+  background: var(--green-800);
+  color: var(--paper);
+  font-size: 17px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: transform 1.1s var(--drift), background-color .8s var(--slow);
+}
+.btn::after {
+  content: "";
+  position: absolute;
+  inset-inline: 14%;
+  inset-block-end: -18px;
+  height: 10px;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--green-900) 38%, transparent), transparent);
+  transition: transform 1.1s var(--drift), opacity 1.1s var(--drift);
+  pointer-events: none;
+}
+.btn span { position: relative; }
+.btn:hover, .btn:focus-visible { transform: translateY(-7px); background: var(--green-700); }
+.btn:hover::after, .btn:focus-visible::after { transform: translateY(7px) scale(.72); opacity: .55; }
+.btn:active { transform: translateY(-3px); transition-duration: .4s; }
+.btn:focus-visible { outline: 2px solid var(--green-900); outline-offset: 4px; }
+
+/* ============================================================
+   SCENE II · ABOUT (the quill)
+   ============================================================ */
+.about__sky {
+  min-height: 78svh;
+  display: grid;
+  align-items: center;
+  padding: clamp(96px, 16vh, 180px) var(--gutter) clamp(48px, 10vh, 120px);
+}
+.about__plane { height: clamp(150px, 26svh, 280px); }
+
+.about__text-wrap {
+  position: relative;
+  z-index: 2;
+  max-width: 34rem;
+}
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2rem, 1.2rem + 3.4vw, 4.3rem);
+  line-height: 1.25;
+  color: var(--ink);
+  text-wrap: balance;
+}
+.about__text {
+  margin-block-start: clamp(18px, 3vh, 30px);
+  font-size: clamp(1.06rem, .98rem + .4vw, 1.3rem);
+  line-height: 1.95;
+  color: var(--ink-muted);
+}
+.about__text .brand-word { color: var(--green-800); font-size: 1.12em; }
+
+.quill {
+  position: relative;
+  z-index: 1;
+  justify-self: center;
+  width: clamp(70px, 18vw, 110px);
+  margin-block-end: 28px;
+  pointer-events: none;
+}
+.quill__float { animation: hover 18s var(--drift) infinite alternate; transform-origin: 50% 80%; }
+.quill__svg { width: 100%; height: auto; overflow: visible; transform: rotate(-58deg); }
+.quill__vane { fill: url(#vaneFill); stroke: color-mix(in srgb, var(--green-500) 35%, transparent); stroke-width: 1; }
+.quill__barbs path { fill: none; stroke: var(--green-300); stroke-width: .9; stroke-linecap: round; opacity: .55; }
+.quill__shaft { fill: none; stroke: var(--green-700); stroke-width: 3.2; stroke-linecap: round; }
+.quill__nib { fill: var(--green-900); }
+.quill__notch { fill: none; stroke: var(--green-50); stroke-width: 3; stroke-linecap: round; }
+.quill__slit { stroke: var(--green-300); stroke-width: 1; opacity: .6; }
+@keyframes hover {
+  from { transform: translateY(12px) rotate(-2deg); }
+  to   { transform: translateY(-18px) rotate(2.5deg); }
+}
+
+.quill-shadow {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+.quill-shadow__path { fill: var(--green-900); opacity: .3; filter: url(#soft); }
+
+/* ============================================================
+   SCENE III · PILLARS
+   ============================================================ */
+.pillars {
+  --stage: clamp(220px, 30vw, 300px);
+  background: var(--sky);
+}
+.pillar {
+  position: relative;
+  padding: clamp(56px, 10vh, 88px) var(--gutter) clamp(64px, 10vh, 96px);
+  background:
+    linear-gradient(to bottom,
+      transparent 0,
+      transparent calc(clamp(56px, 10vh, 88px) + var(--stage)),
+      var(--green-200) calc(clamp(56px, 10vh, 88px) + var(--stage)),
+      var(--green-300) 80%,
+      var(--paper) 100%);
+  text-align: center;
+}
+.pillar::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  inset-block-start: calc(clamp(56px, 10vh, 88px) + var(--stage));
+  height: 1px;
+  background: linear-gradient(to left, transparent, var(--white) 18%, var(--white) 82%, transparent);
+}
+.pillar__stage {
+  position: relative;
+  height: var(--stage);
+  display: grid;
+  place-items: center;
+}
+.obj {
+  width: clamp(110px, 13vw, 156px);
+  animation: bob var(--bob) var(--drift) infinite alternate;
+  animation-delay: var(--phase);
+  transition: translate 2.4s var(--drift);
+}
+.obj__svg { width: 100%; height: auto; overflow: visible; }
+.obj__shadow {
+  position: absolute;
+  inset-block-end: -26px;
+  inset-inline-start: 50%;
+  width: clamp(110px, 13vw, 160px);
+  height: 22px;
+  margin-inline-start: calc(clamp(110px, 13vw, 160px) / -2);
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--green-900) 42%, transparent), transparent);
+  animation: shade var(--bob) var(--drift) infinite alternate;
+  animation-delay: var(--phase);
+  transition: scale 2.4s var(--drift), opacity 2.4s var(--drift);
+}
+.pillar:hover .obj { translate: 0 -22px; }
+.pillar:hover .obj__shadow { scale: .7; opacity: .6; }
+@keyframes bob {
+  from { transform: translateY(10px); }
+  to   { transform: translateY(-20px); }
+}
+@keyframes shade {
+  from { transform: scaleX(1); opacity: 1; }
+  to   { transform: scaleX(.74); opacity: .6; }
+}
+
+/* object 1: a window that shows another sky */
+.win__glass { fill: url(#winSky); }
+.win__drop { fill: var(--green-800); }
+.win__frame { fill: none; stroke: var(--green-800); stroke-width: 7; }
+.win__bar { fill: none; stroke: var(--green-800); stroke-width: 3.5; }
+/* object 2: a floating stone */
+.stone { fill: url(#stoneFill); }
+.stone__strata { fill: none; stroke: var(--green-300); stroke-width: 1.4; opacity: .35; stroke-linecap: round; }
+.stone__lit { fill: var(--white); opacity: .14; }
+/* object 3: five orbs keeping a slow circle */
+.orbs { transform-origin: 100px 100px; animation: orbit 60s linear infinite; }
+.orbs circle { fill: url(#orbFill); }
+.orbs__core { fill: var(--green-800); }
+@keyframes orbit { to { transform: rotate(-360deg); } }
+
+.pillar__title {
+  margin-block-start: clamp(52px, 7vh, 72px);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 1.2rem + 1.2vw, 2.2rem);
+  line-height: 1.3;
+  color: var(--ink);
+}
+.pillar__text {
+  max-width: 22rem;
+  margin: 14px auto 0;
+  font-size: clamp(1rem, .96rem + .2vw, 1.12rem);
+  line-height: 1.9;
+  color: var(--ink);
+}
+
+/* ============================================================
+   SCENE IV · CLOSING (day above, night below)
+   ============================================================ */
+.closing__sky {
+  min-height: 62svh;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: clamp(110px, 18vh, 200px) var(--gutter) 0;
+  background: linear-gradient(to bottom, var(--paper) 0%, var(--green-50) 60%, var(--green-100) 100%);
+}
+.closing__head { position: relative; z-index: 2; text-align: center; max-width: 1100px; }
+.t-close {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.3rem, 1.1rem + 5vw, 6.2rem);
+  line-height: 1.22;
+  color: var(--ink);
+  text-wrap: balance;
+  padding-block-end: .06em;
+}
+.closing__plane {
+  padding: 0 var(--gutter) clamp(72px, 12vh, 120px);
+  background: linear-gradient(to bottom, var(--green-800) 0%, var(--green-900) 48%, var(--green-950) 100%);
+}
+.closing__plane::before { opacity: .55; }
+.mirror--night .mirror__text { color: var(--green-400); opacity: .26; }
+.lamp {
+  position: absolute;
+  inset-block-start: 38%;
+  inset-inline-end: 16%;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--green-100);
+  box-shadow: 0 0 18px 6px color-mix(in srgb, var(--green-400) 45%, transparent), 0 0 90px 30px color-mix(in srgb, var(--green-400) 12%, transparent);
+  animation: breathe 9s var(--drift) infinite alternate;
+}
+@keyframes breathe { from { opacity: .55; } to { opacity: 1; } }
+.closing__cta { position: relative; z-index: 2; text-align: center; }
+.btn--night { background: var(--paper); color: var(--green-900); }
+.btn--night::after { background: radial-gradient(closest-side, color-mix(in srgb, var(--green-400) 30%, transparent), transparent); }
+.btn--night:hover, .btn--night:focus-visible { background: var(--white); }
+.btn--night:focus-visible { outline-color: var(--green-300); }
+
+/* ---------- Footer: the night ground continues ---------- */
+.footer {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  padding: clamp(40px, 6vh, 64px) var(--gutter) 104px;
+  background: var(--green-950);
+  color: var(--green-100);
+  text-align: center;
+}
+.footer__logo { width: clamp(96px, 10vw, 128px); height: auto; opacity: .92; }
+.footer__line { margin-block-start: 8px; font-size: 15px; color: var(--green-100); }
+.footer__mail {
+  font-size: 15px;
+  color: var(--green-300);
+  text-decoration: none;
+  border-block-end: 1px solid color-mix(in srgb, var(--green-300) 40%, transparent);
+  transition: border-color .8s var(--slow), color .8s var(--slow);
+}
+.footer__mail:hover, .footer__mail:focus-visible { color: var(--green-100); border-color: var(--green-100); }
+.footer__mail:focus-visible { outline-color: var(--green-300); }
+.footer__copy { font-size: 13px; color: var(--green-200); opacity: .85; }
+.footer__copy .brand-word { font-size: 1.15em; }
+
+/* ============================================================
+   Wider screens: the scenes open up
+   ============================================================ */
+@media (min-width: 760px) {
+  .about__sky {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: clamp(32px, 6vw, 120px);
+    min-height: 92svh;
+  }
+  .about__text-wrap { grid-column: 1; grid-row: 1; }
+  .quill { grid-column: 2; grid-row: 1; width: clamp(90px, 8.5vw, 124px); margin: 0; }
+  .cloud--about { inset-inline-start: 6%; inset-block-start: 14%; }
+}
+
+@media (min-width: 900px) {
+  .pillars {
+    --pad: clamp(96px, 16vh, 160px);
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(24px, 4vw, 72px);
+    padding: var(--pad) var(--gutter) clamp(120px, 16vh, 180px);
+    background:
+      linear-gradient(to bottom,
+        var(--paper) 0,
+        var(--green-100) calc(var(--pad) + var(--stage)),
+        var(--green-200) calc(var(--pad) + var(--stage)),
+        var(--green-300) 70%,
+        var(--paper) 100%);
+    position: relative;
+  }
+  .pillars::before {
+    content: "";
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: calc(var(--pad) + var(--stage));
+    height: 1px;
+    background: linear-gradient(to left, transparent, var(--white) 18%, var(--white) 82%, transparent);
+  }
+  .pillar { padding: 0; background: none; }
+  .pillar::before { display: none; }
+  .pillar:nth-child(2) .obj { margin-block-end: 84px; }
+  .pillar:nth-child(2) .obj__shadow { scale: .8; }
+}
+
+@media (min-width: 1200px) {
+  .hero__sky { min-height: 54svh; }
+  .drop { inset-inline-end: 19%; inset-block-start: 12%; }
+}
+
+/* Very small phones: keep everything inside the frame */
+@media (max-width: 380px) {
+  .btn { padding: 0 26px; }
+}
+
+/* ---------- Reduced motion: stillness, and simple fades ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .drop__float, .drop__bead, .quill__float, .obj, .obj__shadow, .orbs, .lamp, .motes i, .rings i, .tap {
+    animation: none !important;
+  }
+  .motes, .rings, .tap { display: none; }
+  [data-speed] { transform: none !important; }
+  .js [data-rise] { transform: none; filter: none; transition: opacity 1.2s ease var(--d, 0s); }
+  .js .plane::before { transform: none; transition: none; }
+  .btn, .btn::after, .obj, .obj__shadow, .top__link::after { transition: opacity .4s ease, background-color .4s ease !important; }
+  .btn:hover, .btn:focus-visible, .btn:active, .btn:hover::after, .btn:focus-visible::after { transform: none; }
+  .pillar:hover .obj { translate: none; }
+  .pillar:hover .obj__shadow { scale: none; }
+}
+
+@media print {
+  .js [data-rise] { opacity: 1 !important; transform: none !important; filter: none !important; }
+}

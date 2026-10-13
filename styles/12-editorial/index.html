@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<main id="top">
+
+  <!-- COVER ------------------------------------------------------------ -->
+  <section class="page cover" aria-labelledby="coverTitle">
+    <div class="wrap cover__wrap">
+
+      <div class="strip">
+        <a class="strip__cta" href="#contact" data-copy="nav.cta"></a>
+        <span class="strip__rule" aria-hidden="true"></span>
+      </div>
+
+      <header class="masthead">
+        <p class="masthead__name"><span class="brand-word" role="img" aria-label="مداد">مـــــداد</span></p>
+        <div class="masthead__issue" aria-hidden="true"><span>١</span></div>
+      </header>
+
+      <div class="cover__body">
+        <div class="cover__copy">
+          <h1 class="cover__title" id="coverTitle" data-copy="hero.headlineKashida" data-lines></h1>
+          <div class="cover__foot">
+            <p class="cover__line" data-copy="hero.line" data-lines></p>
+            <a class="ed-link ed-link--lg" href="#contact" data-reveal><span data-copy="hero.cta"></span><i aria-hidden="true">&larr;</i></a>
+          </div>
+        </div>
+
+        <!-- Signature: abstract ink cover art -->
+        <figure class="art" aria-hidden="true">
+          <svg viewBox="0 0 600 760" preserveAspectRatio="xMidYMid meet" focusable="false">
+            <defs>
+              <filter id="fWash" x="-40%" y="-40%" width="180%" height="180%">
+                <feTurbulence type="fractalNoise" baseFrequency=".009" numOctaves="3" seed="7" result="n"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="16" result="b"/>
+                <feDisplacementMap in="b" in2="n" scale="120" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+              <filter id="fBloom" x="-40%" y="-40%" width="180%" height="180%">
+                <feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="4" seed="3" result="n"/>
+                <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="b"/>
+                <feDisplacementMap in="b" in2="n" scale="64" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+              <filter id="fTide" x="-40%" y="-40%" width="180%" height="180%">
+                <feTurbulence type="fractalNoise" baseFrequency=".022" numOctaves="3" seed="11" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="46" xChannelSelector="R" yChannelSelector="G" result="d"/>
+                <feGaussianBlur in="d" stdDeviation="1.1"/>
+              </filter>
+              <filter id="fBrush" x="-10%" y="-10%" width="120%" height="120%">
+                <feTurbulence type="fractalNoise" baseFrequency=".6 .03" numOctaves="2" seed="5" result="n"/>
+                <feDisplacementMap in="SourceGraphic" in2="n" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+              </filter>
+            </defs>
+
+            <g class="b b1"><circle cx="318" cy="372" r="250" filter="url(#fWash)" class="c-wash"/></g>
+            <g class="b b2"><circle cx="370" cy="300" r="168" filter="url(#fWash)" class="c-soft"/></g>
+            <g class="b b3"><circle cx="300" cy="430" r="116" filter="url(#fBloom)" class="c-mid"/></g>
+            <g class="b b4"><circle cx="300" cy="430" r="150" filter="url(#fTide)" class="c-tide"/></g>
+            <g class="b b5"><circle cx="352" cy="372" r="74" filter="url(#fBloom)" class="c-deep"/></g>
+            <g class="b b6"><circle cx="336" cy="392" r="36" filter="url(#fBloom)" class="c-ink"/></g>
+
+            <g filter="url(#fBrush)">
+              <path class="stroke s1" d="M548 96 C 420 132, 214 268, 156 486 C 124 612, 196 706, 318 694 C 220 676, 178 606, 200 500 C 246 318, 402 184, 548 96 Z"/>
+              <path class="stroke s2" d="M62 640 C 196 604, 404 616, 566 560 C 438 642, 236 662, 62 640 Z"/>
+            </g>
+            <path class="hair" pathLength="1" d="M584 196 C 470 210, 330 290, 270 400 C 220 492, 250 588, 342 612 C 430 634, 520 586, 560 520"/>
+          </svg>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- FEATURE ---------------------------------------------------------- -->
+  <section class="page feature" aria-labelledby="quote">
+    <div class="wrap">
+      <div class="running" aria-hidden="true">
+        <span class="brand-word">مـــــداد</span>
+        <span class="running__rule"></span>
+        <span class="running__folio">٢</span>
+      </div>
+
+      <div class="article">
+        <p class="article__text" data-copy="about.text" data-lines data-dropcap></p>
+      </div>
+
+      <blockquote class="pull" data-reveal>
+        <span class="pull__mark" aria-hidden="true">«</span>
+        <h2 class="pull__text" id="quote" data-copy="about.title" data-lines></h2>
+        <span class="pull__mark pull__mark--end" aria-hidden="true">»</span>
+      </blockquote>
+    </div>
+  </section>
+
+  <!-- PILLARS ---------------------------------------------------------- -->
+  <section class="page pillars">
+    <div class="wrap">
+      <div class="running" aria-hidden="true">
+        <span class="brand-word">مـــــداد</span>
+        <span class="running__rule"></span>
+        <span class="running__folio">٣</span>
+      </div>
+
+      <div class="cols">
+        <article class="col">
+          <span class="col__num" aria-hidden="true" data-reveal>١</span>
+          <h3 class="col__title" data-copy="pillars.0.title" data-lines></h3>
+          <p class="col__text" data-copy="pillars.0.text" data-lines></p>
+        </article>
+        <article class="col">
+          <span class="col__num" aria-hidden="true" data-reveal>٢</span>
+          <h3 class="col__title" data-copy="pillars.1.title" data-lines></h3>
+          <p class="col__text" data-copy="pillars.1.text" data-lines></p>
+        </article>
+        <article class="col">
+          <span class="col__num" aria-hidden="true" data-reveal>٣</span>
+          <h3 class="col__title" data-copy="pillars.2.title" data-lines></h3>
+          <p class="col__text" data-copy="pillars.2.text" data-lines></p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING / BACK PAGE ---------------------------------------------- -->
+  <section class="page closing" id="contact" aria-labelledby="closingTitle">
+    <div class="wrap">
+      <div class="running" aria-hidden="true">
+        <span class="brand-word">مـــــداد</span>
+        <span class="running__rule"></span>
+        <span class="running__folio">٤</span>
+      </div>
+      <h2 class="closing__title" id="closingTitle" data-copy="closing.headline" data-lines></h2>
+      <svg class="echo" viewBox="0 0 600 600" aria-hidden="true" focusable="false">
+        <g class="e e1"><circle cx="300" cy="300" r="190" filter="url(#fWash)" class="c-wash"/></g>
+        <g class="e e2"><circle cx="300" cy="300" r="120" filter="url(#fTide)" class="c-tide"/></g>
+        <g class="e e3"><circle cx="316" cy="290" r="62" filter="url(#fBloom)" class="c-mid"/></g>
+        <g class="e e4"><circle cx="306" cy="300" r="26" filter="url(#fBloom)" class="c-deep"/></g>
+        <path class="hair hair--echo" pathLength="1" d="M560 120 C 430 160, 330 250, 300 300 C 260 370, 180 430, 40 470"/>
+      </svg>
+      <a class="ed-link ed-link--xl" id="mailBtn" href="#" data-reveal><span data-copy="closing.cta"></span><i aria-hidden="true">&larr;</i></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer__wrap">
+    <p class="footer__brand"><span class="brand-word" role="img" aria-label="مداد">مـــــداد</span></p>
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

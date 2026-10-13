@@ -1,0 +1,671 @@
+/* ============================================================
+   21 · Cyberpunk
+   A wet street at night. One green neon tube sign buzzing on a
+   concrete wall, rain over a blurred city, hazard tape, steel
+   panels with cut corners, holograms flickering over projectors.
+   Green family and neutrals only.
+   ============================================================ */
+
+@property --la   { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --lb   { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --lf   { syntax: "<number>"; inherits: true; initial-value: 1; }
+@property --glow { syntax: "<number>"; inherits: true; initial-value: 1; }
+
+:root {
+  --bg: #070D0C;            /* wet asphalt, ink with the logo hue */
+  --wall: #0A1312;
+  --steel: #0F1B19;
+  --steel-2: #142321;
+  --line: var(--green-700);
+  --text: var(--gray);
+  --cut: 22px;              /* chamfer size */
+  --pad: clamp(20px, 5vw, 72px);
+  --ease-snap: cubic-bezier(.2, .9, .1, 1);
+}
+
+html { background: var(--bg); color-scheme: dark; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-size: 17px;
+  position: relative;
+}
+
+/* Film grit over the whole page (a generated noise tile, no images). */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  pointer-events: none;
+  opacity: .07;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 1.4 -.4'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  mix-blend-mode: overlay;
+}
+
+::selection { background: var(--green-400); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--green-400); outline-offset: 4px; }
+
+/* ---------- Chamfered shapes (RTL: the inline-start top corner is cut) ---------- */
+.panel, .btn, .holo, .bulkhead, .bulkhead__in, .topbar, .footer {
+  --c: var(--cut);
+}
+.panel, .holo, .bulkhead, .bulkhead__in {
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+}
+
+/* Steel panel: an outer layer is the border, ::before is the face. */
+.panel {
+  position: relative;
+  isolation: isolate;
+  background: linear-gradient(160deg, var(--green-600), var(--green-800) 45%, var(--green-700));
+  padding: clamp(24px, 4vw, 44px);
+}
+.panel::before {
+  content: "";
+  position: absolute;
+  inset: 1px;
+  z-index: -1;
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  background:
+    linear-gradient(180deg, rgba(133, 214, 205, .05), rgba(0, 0, 0, 0) 30%),
+    linear-gradient(180deg, var(--steel-2), var(--steel));
+}
+.panel::after {             /* a lit tab along the top edge */
+  content: "";
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 28px;
+  width: 64px;
+  height: 3px;
+  background: var(--green-400);
+  box-shadow: 0 0 12px rgba(54, 201, 186, .7);
+}
+
+/* ---------- Glitch slices on hover (green only, whole lines, no letter splits) ---------- */
+.glitch { position: relative; }
+.glitch::before, .glitch::after {
+  content: attr(data-glitch);
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  color: var(--green-400);
+}
+.glitch::after { color: var(--green-600); }
+.glitch.is-glitching::before { animation: slice-a .46s steps(1, end) 1; }
+.glitch.is-glitching::after  { animation: slice-b .46s steps(1, end) 1; }
+@keyframes slice-a {
+  0%   { opacity: 1; clip-path: inset(12% 0 70% 0); transform: translateX(-6px); }
+  20%  { opacity: 1; clip-path: inset(58% 0 22% 0); transform: translateX(5px); }
+  40%  { opacity: 1; clip-path: inset(30% 0 52% 0); transform: translateX(-3px); }
+  60%  { opacity: 1; clip-path: inset(76% 0 6% 0);  transform: translateX(7px); }
+  80%  { opacity: 1; clip-path: inset(44% 0 44% 0); transform: translateX(-2px); }
+  100% { opacity: 0; }
+}
+@keyframes slice-b {
+  0%   { opacity: 1; clip-path: inset(64% 0 18% 0); transform: translateX(5px); }
+  20%  { opacity: 1; clip-path: inset(8% 0 80% 0);  transform: translateX(-7px); }
+  40%  { opacity: 1; clip-path: inset(70% 0 12% 0); transform: translateX(4px); }
+  60%  { opacity: 1; clip-path: inset(20% 0 66% 0); transform: translateX(-5px); }
+  80%  { opacity: 1; clip-path: inset(50% 0 36% 0); transform: translateX(3px); }
+  100% { opacity: 0; }
+}
+.glitch.is-glitching { animation: jolt .46s steps(1, end) 1; }
+@keyframes jolt {
+  0% { transform: translateX(0); } 20% { transform: translateX(2px); } 40% { transform: translateX(-1px); }
+  60% { transform: translateX(1px); } 80% { transform: translateX(-2px); } 100% { transform: none; }
+}
+
+/* ---------- Buttons: cut-corner neon plates ---------- */
+.btn {
+  --c: 12px;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 52px;
+  padding: 0 30px;
+  font-family: var(--font-body);
+  font-weight: 900;
+  font-size: 18px;
+  line-height: 1;
+  color: var(--ink);
+  text-decoration: none;
+  background: var(--green-400);
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, var(--c) 100%, 0 calc(100% - var(--c)));
+  transition: background-color .18s var(--ease-out), transform .18s var(--ease-snap);
+}
+.btn span { position: relative; z-index: 1; }
+.btn::before {                 /* hazard stripes slide in from the start edge */
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-45deg, var(--green-300) 0 8px, var(--green-400) 8px 16px);
+  transform: scaleX(0);
+  transform-origin: right;     /* RTL: inline start */
+  transition: transform .32s var(--ease-snap);
+}
+.btn:hover::before, .btn:focus-visible::before { transform: scaleX(1); }
+.btn:hover, .btn:focus-visible { transform: translateY(-2px); }
+.btn:active { transform: translateY(1px); transition-duration: .06s; }
+.btn:focus-visible { outline: none; box-shadow: none; }
+.btn:focus-visible span { text-decoration: underline; text-underline-offset: 6px; text-decoration-thickness: 2px; }
+.btn--sm { min-height: 42px; padding: 0 20px; font-size: 16px; --c: 10px; }
+.btn--lg { min-height: 60px; padding: 0 40px; font-size: 20px; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px var(--pad);
+}
+.topbar__logo {
+  font-size: 30px;
+  line-height: 1;
+  text-decoration: none;
+  color: var(--green-400);
+  text-shadow: 0 0 6px rgba(54, 201, 186, .55), 0 0 18px rgba(26, 138, 125, .5);
+  padding: 6px 2px;
+}
+
+/* ============================================================
+   HERO: wall, city, rain, sign, puddle
+   ============================================================ */
+.hero {
+  --fs: clamp(84px, 24vw, 168px);
+  --horizon: 58%;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 120px 16px 40px;
+  gap: 28px;
+  transition: --la 50ms linear, --lb 50ms linear, --lf 140ms linear, --glow 60ms linear;
+}
+.hero__wall {
+  position: absolute;
+  inset: 0;
+  z-index: -5;
+  background:
+    radial-gradient(60% 40% at var(--sx, 50%) var(--sy, 30%), rgba(26, 138, 125, calc(var(--glow) * .22)), rgba(26, 138, 125, 0) 70%),
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, .012) 0 1px, rgba(0, 0, 0, 0) 1px 7px),
+    linear-gradient(180deg, #050A09 0%, var(--wall) 45%, #0B1615 var(--horizon), var(--bg) 100%);
+}
+.city {
+  position: absolute;
+  inset-inline: -2%;
+  width: 104%;
+  z-index: -4;
+  pointer-events: none;
+}
+.city--far  { top: calc(var(--horizon) - 46%); height: 46%; filter: blur(5px); opacity: .7; }
+.city--near { top: calc(var(--horizon) - 30%); height: 30%; filter: blur(2px); opacity: .9; }
+
+.hero__ground {
+  position: absolute;
+  inset-inline: 0;
+  top: var(--horizon);
+  bottom: 0;
+  z-index: -3;
+  background:
+    radial-gradient(40% 50% at var(--sx, 50%) 0%, rgba(54, 201, 186, calc(var(--glow) * .14)), rgba(54, 201, 186, 0) 70%),
+    repeating-linear-gradient(180deg, rgba(133, 214, 205, .025) 0 1px, rgba(0, 0, 0, 0) 1px 5px),
+    linear-gradient(180deg, #0A1716 0%, #060C0B 40%, var(--bg) 100%);
+  border-top: 1px solid rgba(133, 214, 205, .08);
+}
+.rain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+  pointer-events: none;
+}
+
+/* ---------- The stage: sign above, reflection below ---------- */
+.stage {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: var(--fs);
+  max-width: 100%;
+}
+.sign {
+  position: relative;
+  display: block;
+  padding: .2em .32em .26em;
+  line-height: 1;
+}
+.sign__spill {
+  position: absolute;
+  inset: -40% -30%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(54, 201, 186, calc(var(--glow) * .16)), rgba(26, 138, 125, calc(var(--glow) * .07)) 55%, rgba(26, 138, 125, 0));
+  pointer-events: none;
+}
+.sign__cable {
+  position: absolute;
+  bottom: 100%;
+  width: 2px;
+  height: 60vh;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0), #1D2725 40%, #26302E);
+}
+.sign__cable--a { inset-inline-start: 18%; }
+.sign__cable--b { inset-inline-end: 22%; }
+.sign__box {               /* the transformer bolted on the cable */
+  position: absolute;
+  bottom: calc(100% + .32em);
+  inset-inline-end: calc(22% - .14em);
+  width: .3em;
+  height: .2em;
+  background: linear-gradient(180deg, #2A3432, #141B1A);
+  border: 1px solid #333D3B;
+  clip-path: polygon(0 0, 85% 0, 100% 20%, 100% 100%, 0 100%);
+}
+.sign__frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+.sign__frame rect {
+  fill: none;
+  stroke: color-mix(in srgb, var(--green-300) calc(var(--lf) * 100%), var(--green-900));
+  stroke-width: 3px;
+  filter:
+    drop-shadow(0 0 2px rgba(54, 201, 186, calc(var(--lf) * .9)))
+    drop-shadow(0 0 10px rgba(26, 138, 125, calc(var(--lf) * .8)));
+}
+.sign__clip {              /* steel clamps that hold the frame tube */
+  position: absolute;
+  width: .1em;
+  height: .05em;
+  background: linear-gradient(180deg, #3A4442, #1A2120);
+  border: 1px solid #485250;
+}
+.sign__clip--tl { top: 0; left: 12%; }
+.sign__clip--tr { top: 0; right: 12%; }
+.sign__clip--bl { bottom: 0; left: 12%; }
+.sign__clip--br { bottom: 0; right: 12%; }
+
+.sign__word {
+  display: grid;
+  margin: -.5em;
+}
+.tube {
+  grid-area: 1 / 1;
+  padding: .5em;
+  line-height: 1;
+  white-space: nowrap;
+}
+.tube .brand-word { display: block; line-height: 1.05; }
+
+/* Unlit glass, always behind the lit tube. */
+.tube--glass {
+  color: rgba(4, 36, 33, .9);
+  -webkit-text-stroke: .036em #0D3A35;
+  paint-order: stroke fill;
+}
+/* Lit tube: a near-white core stroke, green glass fill, a layered bloom. */
+.tube--a, .tube--b {
+  --l: var(--la);
+  color: color-mix(in srgb, var(--green-400) calc(var(--l) * 100%), var(--green-900));
+  -webkit-text-stroke: .03em color-mix(in srgb, var(--green-50) calc(var(--l) * 100%), var(--green-800));
+  paint-order: stroke fill;
+  text-shadow:
+    0 0 .02em rgba(241, 249, 248, calc(var(--l) * .55)),
+    0 0 .05em rgba(133, 214, 205, calc(var(--l) * .8)),
+    0 0 .11em rgba(54, 201, 186, calc(var(--l) * .7)),
+    0 0 .22em rgba(54, 201, 186, calc(var(--l) * .5)),
+    0 0 .42em rgba(26, 138, 125, calc(var(--l) * .55));
+}
+/* The sign is two tube segments; the left one («داد») can fail on its own. */
+.tube--a { clip-path: inset(0 0 0 calc(.5em + (100% - 1em) * .36)); }
+.tube--b { --l: var(--lb); clip-path: inset(0 calc(100% - .5em - (100% - 1em) * .36) 0 0); }
+
+/* ---------- Reflection in the puddle ---------- */
+.reflect {
+  position: relative;
+  height: .68em;
+  margin-top: .02em;
+  line-height: 1;
+  pointer-events: none;
+  opacity: calc(.25 + var(--glow) * .45);
+}
+.reflect__word {
+  display: block;
+  padding: 0 .32em;
+  transform: scaleY(-.62) translateY(-100%) skewX(4deg);
+  transform-origin: 50% 0;
+  color: var(--green-500);
+  text-shadow: 0 0 .1em rgba(26, 138, 125, .9);
+  filter: blur(2.5px);
+  -webkit-mask-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 60%),
+    repeating-linear-gradient(180deg, #000 0 3px, rgba(0, 0, 0, .25) 3px 6px);
+  mask-image:
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 60%),
+    repeating-linear-gradient(180deg, #000 0 3px, rgba(0, 0, 0, .25) 3px 6px);
+  -webkit-mask-composite: source-in;
+  mask-composite: intersect;
+  -webkit-mask-size: 100% 100%, 100% 12px;
+  mask-size: 100% 100%, 100% 12px;
+}
+.reflect__word .brand-word { display: block; line-height: 1.05; }
+.reflect__smear {          /* vertical light smear typical of wet asphalt */
+  position: absolute;
+  inset-inline: 30%;
+  top: 0;
+  height: 1.1em;
+  background: linear-gradient(180deg, rgba(54, 201, 186, .2), rgba(54, 201, 186, 0));
+  filter: blur(14px);
+}
+.is-live .reflect__word { animation: ripple 2.4s linear infinite; }
+@keyframes ripple { to { -webkit-mask-position: 0 0, 0 12px; mask-position: 0 0, 0 12px; } }
+
+/* ---------- Hero text plate ---------- */
+.hero__panel {
+  width: min(100%, 560px);
+  margin-top: auto;
+  z-index: 2;
+}
+.hero__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(36px, 9.4vw, 64px);
+  line-height: 1.12;
+  color: var(--green-50);
+  text-wrap: balance;
+}
+.hero__line {
+  margin-top: 16px;
+  font-size: clamp(17px, 2.2vw, 19px);
+  line-height: 1.8;
+  color: var(--gray);
+  max-width: 34em;
+}
+.hero__panel .btn { margin-top: 28px; }
+
+/* ---------- Hazard tape ---------- */
+.tape {
+  position: relative;
+  overflow: hidden;
+  padding: 22px 0;
+  margin-top: -2px;
+}
+.tape__band {
+  height: 30px;
+  margin-inline: -4%;
+  transform: rotate(-1.4deg);
+  background:
+    linear-gradient(180deg, rgba(0, 0, 0, .35), rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0) 70%, rgba(0, 0, 0, .4)),
+    repeating-linear-gradient(-45deg, var(--green-500) 0 18px, var(--ink) 18px 36px);
+  background-size: 100% 100%, 51px 100%;
+  border-block: 2px solid var(--green-700);
+}
+.tape__band.is-live { animation: tape 3.2s linear infinite; }
+@keyframes tape { to { background-position: 0 0, -51px 0; } }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about {
+  display: grid;
+  gap: 28px;
+  padding: clamp(64px, 10vw, 128px) var(--pad);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.about__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(36px, 7vw, 76px);
+  line-height: 1.12;
+  color: var(--green-50);
+  text-wrap: balance;
+}
+.about__panel { padding-inline-start: clamp(36px, 5vw, 56px); }
+.about__tube {
+  position: absolute;
+  inset-block: 26px;
+  inset-inline-start: 16px;
+  width: 4px;
+  border-radius: 4px;
+  background: var(--green-200);
+  box-shadow: 0 0 6px rgba(54, 201, 186, .9), 0 0 18px rgba(54, 201, 186, .5), 0 0 40px rgba(26, 138, 125, .5);
+}
+.about__text {
+  font-size: clamp(18px, 2.2vw, 21px);
+  line-height: 1.9;
+  color: var(--green-50);
+}
+.about__text .brand-word { color: var(--green-400); text-shadow: 0 0 10px rgba(54, 201, 186, .45); }
+
+/* ============================================================
+   PILLARS: holograms
+   ============================================================ */
+.pillars {
+  display: grid;
+  gap: 40px;
+  padding: 0 var(--pad) clamp(72px, 10vw, 128px);
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.holo {
+  --c: 18px;
+  position: relative;
+  isolation: isolate;
+  padding: 34px 28px 54px;
+  min-height: 250px;
+  background:
+    linear-gradient(180deg, rgba(4, 36, 33, .94), rgba(5, 18, 17, .97)),
+    var(--bg);
+  box-shadow: inset 0 0 0 1px rgba(54, 201, 186, .35);
+}
+.holo::before {            /* bright edge lines that a projector would draw */
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, rgba(54, 201, 186, .7), rgba(54, 201, 186, 0) 40%) top / 100% 1px no-repeat,
+    linear-gradient(270deg, rgba(54, 201, 186, .5), rgba(54, 201, 186, 0) 50%) bottom / 100% 1px no-repeat;
+}
+.holo__fx {                /* scanlines and a slow shimmer sweep */
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(105deg, rgba(133, 214, 205, 0) 35%, rgba(133, 214, 205, .09) 48%, rgba(133, 214, 205, 0) 60%),
+    repeating-linear-gradient(180deg, rgba(133, 214, 205, .05) 0 1px, rgba(0, 0, 0, 0) 1px 4px);
+  background-size: 300% 100%, 100% 4px;
+  background-position: 120% 0, 0 0;
+}
+.is-live .holo__fx { animation: shimmer 7s var(--ease-in-out) infinite, scan 9s linear infinite; }
+.holo:nth-child(2) .holo__fx { animation-delay: -2.3s, -3s; }
+.holo:nth-child(3) .holo__fx { animation-delay: -4.6s, -6s; }
+@keyframes shimmer { 0%, 30% { background-position: 120% 0, 0 0; } 70%, 100% { background-position: -20% 0, 0 0; } }
+@keyframes scan { to { background-position-y: 0, 120px; } }
+.holo__num {              /* a ghost corner bracket, no text */
+  position: absolute;
+  inset-block-start: 16px;
+  inset-inline-end: 22px;
+  width: 54px;
+  height: 34px;
+  border-block-start: 1px solid rgba(54, 201, 186, .45);
+  border-inline-end: 1px solid rgba(54, 201, 186, .45);
+  background: repeating-linear-gradient(-45deg, rgba(54, 201, 186, .14) 0 4px, rgba(0, 0, 0, 0) 4px 8px);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 70% 100%, 70% 30%, 0 30%);
+}
+.holo__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(28px, 3.4vw, 36px);
+  line-height: 1.2;
+  color: var(--green-400);
+  text-shadow: 0 0 14px rgba(54, 201, 186, .35);
+  margin-top: 44px;
+}
+.holo__text {
+  margin-top: 14px;
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--green-50);
+}
+.holo__base {              /* projector bar with a light cone */
+  position: absolute;
+  inset-inline: 18%;
+  bottom: 14px;
+  height: 4px;
+  background: var(--green-300);
+  box-shadow: 0 0 10px rgba(54, 201, 186, .9), 0 0 26px rgba(26, 138, 125, .7);
+}
+.holo__base::after {
+  content: "";
+  position: absolute;
+  inset-inline: -24%;
+  bottom: 4px;
+  height: 70px;
+  background: linear-gradient(0deg, rgba(54, 201, 186, .16), rgba(54, 201, 186, 0));
+  clip-path: polygon(20% 100%, 80% 100%, 100% 0, 0 0);
+}
+.holo:hover, .holo:focus-within { box-shadow: inset 0 0 0 1px rgba(54, 201, 186, .7); }
+.holo { transition: box-shadow .25s var(--ease-out), transform .3s var(--ease-snap); }
+
+/* ============================================================
+   CLOSING: hazard bulkhead
+   ============================================================ */
+.closing { padding: 0 var(--pad) clamp(72px, 10vw, 120px); max-width: 1280px; margin: 0 auto; }
+.bulkhead {
+  --c: 34px;
+  padding: 14px;
+  background: repeating-linear-gradient(-45deg, var(--green-500) 0 22px, var(--ink) 22px 44px);
+  background-size: 62px 62px;
+}
+.bulkhead.is-live { animation: tape-b 4s linear infinite; }
+@keyframes tape-b { to { background-position: -62px 0; } }
+.bulkhead__in {
+  --c: 26px;
+  display: grid;
+  justify-items: start;
+  gap: 32px;
+  padding: clamp(36px, 7vw, 88px) clamp(24px, 6vw, 80px);
+  background:
+    radial-gradient(80% 120% at 100% 0%, rgba(26, 138, 125, .16), rgba(26, 138, 125, 0) 60%),
+    var(--steel);
+}
+.closing__title {
+  font-family: var(--font-display);
+  font-weight: 900;
+  font-size: clamp(40px, 8vw, 92px);
+  line-height: 1.15;
+  color: var(--green-50);
+  text-wrap: balance;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  --c: 40px;
+  display: grid;
+  justify-items: center;
+  gap: 8px;
+  text-align: center;
+  padding: 56px var(--pad) 110px;
+  background: linear-gradient(180deg, var(--green-950), #030807);
+  clip-path: polygon(0 0, calc(100% - var(--c)) 0, 100% var(--c), 100% 100%, 0 100%);
+  border-top: 1px solid var(--green-800);
+}
+.footer__logo {
+  font-size: 46px;
+  line-height: 1.2;
+  color: var(--green-400);
+  text-shadow: 0 0 8px rgba(54, 201, 186, .5), 0 0 26px rgba(26, 138, 125, .5);
+}
+.footer__line { color: var(--gray); font-size: 17px; }
+.footer__mail {
+  color: var(--green-400);
+  font-weight: 700;
+  text-decoration: none;
+  border-bottom: 1px solid var(--green-700);
+  padding-bottom: 2px;
+  transition: border-color .2s ease, color .2s ease;
+}
+.footer__mail:hover, .footer__mail:focus-visible { color: var(--green-200); border-color: var(--green-400); }
+.footer__copy { color: #9AA3A0; font-size: 14px; margin-top: 8px; }
+
+/* ============================================================
+   Panels power on as they enter
+   ============================================================ */
+.js [data-on] {
+  opacity: 0;
+  transform: translateY(18px);
+  filter: brightness(.4);
+  transition:
+    opacity .5s var(--ease-out) var(--d, 0s),
+    transform .7s var(--ease-snap) var(--d, 0s),
+    filter .9s var(--ease-out) var(--d, 0s);
+}
+.js [data-on].is-in { opacity: 1; transform: none; filter: none; }
+@media print { .js [data-on] { opacity: 1 !important; transform: none !important; filter: none !important; } }
+
+/* ============================================================
+   Layout: tablet and desktop
+   ============================================================ */
+@media (min-width: 720px) {
+  .hero { --fs: clamp(150px, 21vw, 230px); padding-top: 140px; }
+  .pillars { grid-template-columns: repeat(3, 1fr); gap: 24px; }
+  .holo:nth-child(2) { margin-top: 40px; }
+  .holo:nth-child(3) { margin-top: 80px; }
+  .about { grid-template-columns: 1fr 1fr; align-items: end; gap: 48px; }
+}
+@media (min-width: 720px) and (max-width: 1019px) {
+  .pillars { grid-template-columns: 1fr; max-width: 640px; }
+  .holo:nth-child(n) { margin-top: 0; }
+}
+@media (min-width: 1020px) {
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(380px, 520px) 1fr;
+    grid-template-rows: 1fr auto;
+    align-items: center;
+    padding: 120px var(--pad) 56px;
+    gap: 0 40px;
+  }
+  .stage { grid-column: 2; grid-row: 1 / span 2; align-self: center; margin-top: -40px; }
+  .hero__panel { grid-column: 1; grid-row: 2; margin-top: 0; }
+  .about { grid-template-columns: 5fr 6fr; gap: 72px; }
+  .holo { padding: 40px 34px 64px; min-height: 300px; }
+}
+
+/* In the gallery iframe, everything is static. */
+.in-frame .is-live .reflect__word, .in-frame .is-live .holo__fx,
+.in-frame .tape__band.is-live, .in-frame .bulkhead.is-live { animation: none; }
+
+/* ============================================================
+   Reduced motion: a steady glow and simple fades
+   ============================================================ */
+@media (prefers-reduced-motion: reduce) {
+  .is-live .reflect__word, .is-live .holo__fx, .tape__band.is-live, .bulkhead.is-live { animation: none !important; }
+  .glitch::before, .glitch::after { display: none; }
+  .glitch.is-glitching { animation: none; }
+  .js [data-on] { transform: none; filter: none; transition: opacity .6s ease var(--d, 0s); }
+  .btn, .btn::before, .holo { transition: background-color .2s ease, opacity .2s ease !important; }
+  .btn:hover, .btn:focus-visible, .btn:active { transform: none; }
+  .btn::before { transform: none; opacity: 0; transition: opacity .2s ease !important; }
+  .btn:hover::before, .btn:focus-visible::before { opacity: 1; }
+}

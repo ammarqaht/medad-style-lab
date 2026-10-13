@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<!-- Shared SVG defs: the water ripple and the soft shadow blur -->
+<svg class="defs" width="0" height="0" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="ripple" x="-5%" y="-20%" width="110%" height="140%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.003 0.045" numOctaves="1" seed="7" result="noise">
+        <animate attributeName="baseFrequency" dur="16s" values="0.003 0.045;0.0036 0.058;0.003 0.045" repeatCount="indefinite"/>
+      </feTurbulence>
+      <feDisplacementMap in="SourceGraphic" in2="noise" scale="4" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="soft" x="-40%" y="-80%" width="180%" height="260%">
+      <feGaussianBlur stdDeviation="6"/>
+    </filter>
+    <filter id="softer" x="-40%" y="-80%" width="180%" height="260%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+    <radialGradient id="dropFill" cx=".62" cy=".3" r=".8">
+      <stop offset="0" style="stop-color:var(--green-600)"/>
+      <stop offset=".45" style="stop-color:var(--green-800)"/>
+      <stop offset="1" style="stop-color:var(--green-950)"/>
+    </radialGradient>
+    <linearGradient id="vaneFill" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color:var(--white)"/>
+      <stop offset=".5" style="stop-color:var(--green-100)"/>
+      <stop offset="1" style="stop-color:var(--green-300)"/>
+    </linearGradient>
+    <radialGradient id="stoneFill" cx=".6" cy=".28" r=".85">
+      <stop offset="0" style="stop-color:var(--green-500)"/>
+      <stop offset=".5" style="stop-color:var(--green-700)"/>
+      <stop offset="1" style="stop-color:var(--green-900)"/>
+    </radialGradient>
+    <radialGradient id="orbFill" cx=".65" cy=".3" r=".8">
+      <stop offset="0" style="stop-color:var(--white)"/>
+      <stop offset=".5" style="stop-color:var(--green-200)"/>
+      <stop offset="1" style="stop-color:var(--green-500)"/>
+    </radialGradient>
+    <linearGradient id="winSky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color:var(--paper)"/>
+      <stop offset=".62" style="stop-color:var(--green-100)"/>
+      <stop offset=".62" style="stop-color:var(--green-200)"/>
+      <stop offset="1" style="stop-color:var(--green-300)"/>
+    </linearGradient>
+    <linearGradient id="shadowFade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" style="stop-color:var(--green-900);stop-opacity:.55"/>
+      <stop offset="1" style="stop-color:var(--green-900);stop-opacity:0"/>
+    </linearGradient>
+    <path id="dropShape" d="M50 2 C 56 22, 92 66, 92 102 C 92 128, 73 148, 50 148 C 27 148, 8 128, 8 102 C 8 66, 44 22, 50 2 Z"/>
+    <clipPath id="vaneClip"><path d="M66 6 C 104 70, 112 214, 88 360 C 80 404, 70 432, 62 452 C 40 404, 20 304, 22 204 C 24 112, 42 52, 66 6 Z"/></clipPath>
+    <path id="quillVane" d="M66 6 C 104 70, 112 214, 88 360 C 80 404, 70 432, 62 452 C 40 404, 20 304, 22 204 C 24 112, 42 52, 66 6 Z"/>
+  </defs>
+</svg>
+
+<header class="top">
+  <a class="top__brand" href="#top" data-copy="meta.title"></a>
+  <a class="top__link" href="#contact" data-copy="nav.cta"></a>
+</header>
+
+<main>
+
+  <!-- SCENE I: the drop that falls upward ------------------------------ -->
+  <section class="scene hero" id="top">
+    <div class="sky hero__sky">
+      <div class="sun" data-speed="-.12" aria-hidden="true"></div>
+      <div class="cloud cloud--hero" data-speed="-.2" aria-hidden="true"><i></i><i></i><i></i></div>
+
+      <div class="drop" data-speed=".42" aria-hidden="true">
+        <div class="drop__float">
+          <svg class="drop__svg" viewBox="0 0 100 230">
+            <use href="#dropShape" class="drop__body"/>
+            <ellipse class="drop__glint" cx="68" cy="92" rx="8" ry="14" transform="rotate(-24 68 92)"/>
+            <path class="drop__rim" d="M16 116 C 22 132, 34 142, 50 144"/>
+            <circle class="drop__bead" cx="50" cy="178" r="6"/>
+            <circle class="drop__bead drop__bead--2" cx="51" cy="208" r="3"/>
+          </svg>
+        </div>
+      </div>
+
+      <div class="motes" aria-hidden="true">
+        <i style="--x:4%;--s:.5;--t:38s;--o:-4s"></i>
+        <i style="--x:95%;--s:.34;--t:46s;--o:-20s"></i>
+        <i style="--x:89%;--s:.42;--t:52s;--o:-33s"></i>
+        <i style="--x:10%;--s:.28;--t:44s;--o:-12s"></i>
+      </div>
+
+      <div class="hero__head">
+        <h1 class="t-hero" data-copy="hero.headline"></h1>
+      </div>
+    </div>
+
+    <div class="plane hero__plane" id="heroPlane">
+      <div class="glowpath" aria-hidden="true"></div>
+      <svg class="plane__fx" viewBox="0 0 1000 400" preserveAspectRatio="none" aria-hidden="true">
+        <path class="castshadow" d="M266 12 C 270 11, 276 11, 280 12 L 250 400 L 60 400 Z" />
+      </svg>
+      <div class="rings" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="mirror" aria-hidden="true">
+        <p class="t-hero mirror__text" data-copy="hero.headline"></p>
+      </div>
+      <div class="hero__below">
+        <p class="hero__line" data-copy="hero.line" data-rise></p>
+        <div data-rise style="--d:.25s">
+          <a class="btn" href="#contact"><span data-copy="hero.cta"></span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCENE II: the quill and its long shadow -------------------------- -->
+  <section class="scene about">
+    <div class="sky about__sky">
+      <div class="cloud cloud--about" data-speed="-.16" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="quill" data-speed=".22" aria-hidden="true">
+        <div class="quill__float">
+          <svg class="quill__svg" viewBox="0 0 130 600">
+            <use href="#quillVane" class="quill__vane"/>
+            <g class="quill__barbs" id="barbs" clip-path="url(#vaneClip)"></g>
+            <path class="quill__notch" clip-path="url(#vaneClip)" d="M66 150 l 34 -30 M66 262 l -40 -34 M66 330 l 30 -26"/>
+            <path class="quill__shaft" d="M66 6 C 66 160, 64 330, 60 520"/>
+            <path class="quill__nib" d="M54 500 L 66 500 L 64 560 L 60 596 L 56 560 Z"/>
+            <path class="quill__slit" d="M60 540 L 60 594"/>
+          </svg>
+        </div>
+      </div>
+      <div class="about__text-wrap">
+        <h2 class="about__title" data-copy="about.title" data-rise></h2>
+        <p class="about__text" data-copy="about.text" data-rise style="--d:.3s"></p>
+      </div>
+    </div>
+    <div class="plane about__plane">
+      <svg class="quill-shadow" viewBox="0 0 1000 300" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M120 40 C 300 46, 620 70, 980 150 C 640 120, 300 84, 110 58 Z" class="quill-shadow__path"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- SCENE III: three objects that refuse to fall --------------------- -->
+  <section class="scene pillars">
+    <article class="pillar" style="--bob:13s;--phase:0s">
+      <div class="pillar__stage" aria-hidden="true">
+        <div class="obj">
+          <svg class="obj__svg" viewBox="0 0 160 200">
+            <rect class="win__glass" x="12" y="10" width="136" height="180" rx="2"/>
+            <use href="#dropShape" class="win__drop" transform="translate(93 30) scale(.2)"/>
+            <rect class="win__frame" x="12" y="10" width="136" height="180" rx="2"/>
+            <path class="win__bar" d="M80 10 V 190 M12 100 H 148"/>
+          </svg>
+        </div>
+        <div class="obj__shadow"></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.0.title" data-rise></h3>
+      <p class="pillar__text" data-copy="pillars.0.text" data-rise style="--d:.2s"></p>
+    </article>
+
+    <article class="pillar" style="--bob:15s;--phase:-5s">
+      <div class="pillar__stage" aria-hidden="true">
+        <div class="obj">
+          <svg class="obj__svg" viewBox="0 0 200 180">
+            <path class="stone" d="M20 100 C 14 74, 34 46, 66 38 C 96 30, 140 26, 168 46 C 190 62, 190 98, 172 122 C 150 150, 104 162, 68 152 C 40 144, 24 124, 20 100 Z"/>
+            <path class="stone__strata" d="M34 84 C 80 74, 132 72, 182 80 M40 118 C 84 110, 134 108, 176 112"/>
+            <ellipse class="stone__lit" cx="132" cy="54" rx="30" ry="10" transform="rotate(-12 132 54)"/>
+          </svg>
+        </div>
+        <div class="obj__shadow"></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.1.title" data-rise></h3>
+      <p class="pillar__text" data-copy="pillars.1.text" data-rise style="--d:.2s"></p>
+    </article>
+
+    <article class="pillar" style="--bob:17s;--phase:-9s">
+      <div class="pillar__stage" aria-hidden="true">
+        <div class="obj">
+          <svg class="obj__svg obj__svg--orbs" viewBox="0 0 200 200">
+            <g class="orbs">
+              <circle cx="100" cy="34" r="17"/>
+              <circle cx="163" cy="80" r="14"/>
+              <circle cx="139" cy="156" r="19"/>
+              <circle cx="59" cy="158" r="15"/>
+              <circle cx="35" cy="82" r="18"/>
+            </g>
+            <circle class="orbs__core" cx="100" cy="100" r="9"/>
+          </svg>
+        </div>
+        <div class="obj__shadow"></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.2.title" data-rise></h3>
+      <p class="pillar__text" data-copy="pillars.2.text" data-rise style="--d:.2s"></p>
+    </article>
+  </section>
+
+  <!-- SCENE IV: day sky over a night plane ----------------------------- -->
+  <section class="scene closing" id="contact">
+    <div class="sky closing__sky">
+      <div class="cloud cloud--close" data-speed="-.18" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="cloud cloud--close2" data-speed="-.08" aria-hidden="true"><i></i><i></i><i></i></div>
+      <div class="closing__head">
+        <h2 class="t-close" data-copy="closing.headlineKashida" data-rise></h2>
+      </div>
+    </div>
+    <div class="plane closing__plane">
+      <div class="lamp" aria-hidden="true"></div>
+      <div class="mirror mirror--night" aria-hidden="true">
+        <p class="t-close mirror__text" data-copy="closing.headlineKashida"></p>
+      </div>
+      <div class="closing__cta" data-rise>
+        <a class="btn btn--night" id="mailBtn" href="#"><span data-copy="closing.cta"></span></a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img class="footer__logo" src="../../shared/logo/medad-mark-paper.png" alt="مداد" width="808" height="267">
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

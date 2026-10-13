@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<main class="bento" id="top">
+
+  <!-- Headline -->
+  <section class="tile t-head" data-tile>
+    <h1 class="head__title"><span data-copy="hero.headline"></span></h1>
+    <div class="head__foot">
+      <p class="head__line" data-copy="hero.line"></p>
+      <a class="btn btn--ink" href="#contact"><span data-copy="hero.cta"></span><span class="btn__arrow" aria-hidden="true">←</span></a>
+    </div>
+  </section>
+
+  <!-- Logo -->
+  <div class="tile t-logo" data-tile>
+    <p class="logo__word" id="logoWord"><span class="brand-word" role="img" aria-label="مداد">مـــــداد</span></p>
+  </div>
+
+  <!-- Live ink -->
+  <div class="tile t-ink" data-tile aria-hidden="true">
+    <canvas class="ink__cv" id="inkCanvas"></canvas>
+  </div>
+
+  <!-- Pillar: websites -->
+  <article class="tile t-p1 pillar" data-tile>
+    <div class="viz viz-web" aria-hidden="true">
+      <div class="web__win">
+        <div class="web__bar"><i></i></div>
+        <div class="web__hero"><b></b><b></b></div>
+        <div class="web__cards"><s></s><s></s><s></s></div>
+        <div class="web__lines"><u></u><u></u></div>
+      </div>
+    </div>
+    <div class="pillar__copy">
+      <h2 class="pillar__title" data-copy="pillars.0.title"></h2>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </div>
+  </article>
+
+  <!-- Pillar: systems -->
+  <article class="tile t-p2 pillar" data-tile>
+    <div class="viz viz-sys" aria-hidden="true">
+      <div class="sys__chart"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+      <div class="sys__rows">
+        <div class="sys__row"><u></u><b></b></div>
+        <div class="sys__row"><u></u><b></b></div>
+        <div class="sys__row"><u></u><b></b></div>
+      </div>
+    </div>
+    <div class="pillar__copy">
+      <h2 class="pillar__title" data-copy="pillars.1.title"></h2>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </div>
+  </article>
+
+  <!-- Pillar: live experiences -->
+  <article class="tile t-p3 pillar" data-tile>
+    <div class="viz viz-live" aria-hidden="true">
+      <div class="live__stage">
+        <i class="live__pulse"></i><i class="live__pulse"></i>
+        <svg class="live__ring" viewBox="0 0 100 100">
+          <circle class="live__track" cx="50" cy="50" r="44"/>
+          <circle class="live__arc" cx="50" cy="50" r="44" pathLength="100"/>
+        </svg>
+        <span class="live__num" id="liveNum"></span>
+      </div>
+    </div>
+    <div class="pillar__copy">
+      <h2 class="pillar__title" data-copy="pillars.2.title"></h2>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </div>
+  </article>
+
+  <!-- About -->
+  <section class="tile t-about" data-tile>
+    <div class="viz viz-drop" aria-hidden="true">
+      <svg viewBox="0 0 120 120">
+        <ellipse class="drop__ripple" cx="60" cy="100" rx="40" ry="9"/>
+        <ellipse class="drop__ripple drop__ripple--b" cx="60" cy="100" rx="40" ry="9"/>
+        <path class="drop__body" d="M60 14 C 60 14, 82 44, 82 60 A 22 22 0 0 1 38 60 C 38 44, 60 14, 60 14 Z"/>
+      </svg>
+    </div>
+    <div class="about__copy">
+      <h2 class="about__title" data-copy="about.title"></h2>
+      <p class="about__text" data-copy="about.text"></p>
+    </div>
+  </section>
+
+  <!-- Closing CTA -->
+  <section class="tile t-cta" id="contact" data-tile>
+    <div class="cta__mark">
+      <h2 class="cta__title" data-copy="closing.headlineKashida"></h2>
+      <svg class="cta__stroke" viewBox="0 0 400 30" preserveAspectRatio="none" aria-hidden="true">
+        <path d="M396 14 C 320 30, 250 2, 180 16 S 60 26, 4 10" pathLength="100"/>
+      </svg>
+    </div>
+    <a class="btn btn--paper" id="mailBtn" href="#"><span data-copy="closing.cta"></span><span class="btn__arrow" aria-hidden="true">←</span></a>
+  </section>
+
+  <!-- Footer -->
+  <footer class="tile t-foot" data-tile>
+    <img class="foot__logo" src="../../shared/logo/medad-mark-paper.png" alt="مداد" width="808" height="267">
+    <p class="foot__line" data-copy="footer.line"></p>
+    <a class="foot__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="foot__copy" data-copy="footer.copyright"></p>
+  </footer>
+
+</main>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__pill clay">
+    <a class="topbar__logo" href="#top" aria-label="مداد">
+      <img src="../../shared/logo/medad-mark-green.png" alt="" width="808" height="267">
+    </a>
+    <a class="btn btn--sm" href="#contact" data-copy="nav.cta"></a>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO ------------------------------------------------------------ -->
+  <section class="hero">
+    <div class="hero__text">
+      <h1 class="hero__title" data-copy="hero.headline" data-pop></h1>
+      <p class="hero__line" data-copy="hero.line" data-pop style="--d:.08s"></p>
+      <div data-pop style="--d:.16s">
+        <a class="btn btn--lg" href="#contact" data-copy="hero.cta"></a>
+      </div>
+    </div>
+
+    <!-- Signature: the sculpted clay inkwell -->
+    <div class="scene" id="scene" aria-hidden="true" tabindex="-1">
+      <div class="layer" data-depth="-0.4"><div class="floor"></div></div>
+
+      <div class="layer" data-depth="1">
+        <div class="bob bob--well">
+          <div class="squash" id="well">
+            <div class="jar"></div>
+            <div class="neck"></div>
+            <div class="label"><img src="../../shared/logo/medad-mark-green.png" alt=""></div>
+            <div class="rim"></div>
+            <svg class="quill" viewBox="0 0 100 300" preserveAspectRatio="none" aria-hidden="true">
+              <defs>
+                <linearGradient id="qFill" x1="1" y1="0" x2="0" y2="1">
+                  <stop offset="0" style="stop-color:var(--green-50)"/>
+                  <stop offset=".55" style="stop-color:var(--green-200)"/>
+                  <stop offset="1" style="stop-color:var(--green-300)"/>
+                </linearGradient>
+                <filter id="qSoft" x="-30%" y="-30%" width="160%" height="160%">
+                  <feGaussianBlur stdDeviation="5"/>
+                </filter>
+                <clipPath id="qClip"><path d="M60 4 C 96 52, 90 152, 52 226 C 18 160, 20 70, 60 4 Z"/></clipPath>
+              </defs>
+              <path d="M60 4 C 96 52, 90 152, 52 226 C 18 160, 20 70, 60 4 Z" fill="url(#qFill)"/>
+              <g clip-path="url(#qClip)">
+                <path d="M30 210 C 18 150, 26 70, 50 22" stroke="#126E64" stroke-opacity=".22" stroke-width="22" fill="none" filter="url(#qSoft)"/>
+                <path d="M84 70 C 88 110, 80 150, 66 186" stroke="#FFFFFF" stroke-opacity=".85" stroke-width="12" fill="none" stroke-linecap="round" filter="url(#qSoft)"/>
+                <path d="M57 70 C 70 66, 78 60, 84 52 M55 110 C 70 106, 80 98, 87 88 M53 150 C 66 147, 74 140, 80 131 M57 92 C 44 90, 36 84, 30 76 M55 132 C 42 130, 34 124, 27 115" stroke="#85D6CD" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+              </g>
+              <path d="M60 10 C 62 90, 58 170, 50 298" stroke="#126E64" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+            </svg>
+            <div class="ripple"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="layer" data-depth="2.4">
+        <div class="bob bob--drop">
+          <div class="squash" id="drop"><div class="drop"></div></div>
+        </div>
+      </div>
+
+      <div class="layer" data-depth="3"><div class="bob bob--a"><div class="ball ball--a"></div></div></div>
+      <div class="layer" data-depth="-2"><div class="bob bob--b"><div class="ball ball--b"></div></div></div>
+      <div class="layer" data-depth="1.6"><div class="bob bob--c"><div class="ball ball--c"></div></div></div>
+    </div>
+  </section>
+
+  <!-- ABOUT ----------------------------------------------------------- -->
+  <section class="about">
+    <div class="about__card clay" data-pop>
+      <div class="about__blob" aria-hidden="true"></div>
+      <h2 class="about__title" data-copy="about.title"></h2>
+      <p class="about__text" data-copy="about.text"></p>
+    </div>
+  </section>
+
+  <!-- PILLARS --------------------------------------------------------- -->
+  <section class="pillars">
+    <article class="pillar clay" data-pop style="--d:0s">
+      <div class="ico ico--web" aria-hidden="true">
+        <div class="ico-web__win"><i></i><i></i><i></i><b></b><b></b></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+      <p class="pillar__text" data-copy="pillars.0.text"></p>
+    </article>
+    <article class="pillar clay" data-pop style="--d:.1s">
+      <div class="ico ico--sys" aria-hidden="true">
+        <div class="ico-sys__base"><i></i><i></i><i></i></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+      <p class="pillar__text" data-copy="pillars.1.text"></p>
+    </article>
+    <article class="pillar clay" data-pop style="--d:.2s">
+      <div class="ico ico--live" aria-hidden="true">
+        <div class="ico-live__base"></div>
+        <div class="ico-live__dome"></div>
+      </div>
+      <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+      <p class="pillar__text" data-copy="pillars.2.text"></p>
+    </article>
+  </section>
+
+  <!-- CLOSING --------------------------------------------------------- -->
+  <section class="closing" id="contact">
+    <div class="closing__slab clay" data-pop>
+      <h2 class="closing__title" data-copy="closing.headlineKashida"></h2>
+      <a class="btn btn--lg" id="mailBtn" href="#" data-copy="closing.cta"></a>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__pill clay">
+    <img class="footer__logo" src="../../shared/logo/medad-mark-green.png" alt="مداد" width="808" height="267">
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+/* ============================================================
+   04 · Scrapbook
+   A handmade collage: torn paper, washi tape, rubber stamps, ink.
+   Torn edges are inline SVG clip paths (objectBoundingBox), so the
+   page works from file:// without any image masks.
+   ============================================================ */
+
+:root {
+  --shadow-ink: 12 23 21;          /* --ink as rgb channels */
+  --mint: 133 214 205;              /* --green-300 */
+  --deep: 18 110 100;               /* --green-600 */
+
+  /* Generated paper grain (fine speckle) and fibres (long streaks) */
+  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05  0 0 0 0 .09  0 0 0 0 .08  0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  --mottle: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1200' height='1200'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.004' numOctaves='3' seed='8' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .05  0 0 0 0 .09  0 0 0 0 .08  0 0 0 .22 -.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+
+  --lift-1: drop-shadow(0 1px 1px rgb(var(--shadow-ink) / .2)) drop-shadow(0 6px 10px rgb(var(--shadow-ink) / .1));
+  --lift-2: drop-shadow(0 2px 2px rgb(var(--shadow-ink) / .16)) drop-shadow(0 22px 26px rgb(var(--shadow-ink) / .18));
+
+  --settle: cubic-bezier(.3, 1.45, .55, 1);
+  --gutter: clamp(18px, 5vw, 72px);
+}
+
+html { background: var(--gray); }
+body {
+  color: var(--ink);
+  background-color: var(--paper);
+  background-image: var(--grain);
+  background-size: 240px 240px;
+  font-size: 17px;
+  overflow-x: clip;
+}
+body::before { /* aged paper mottling, one untiled sheet behind everything */
+  content: ""; position: fixed; inset: 0; z-index: -1; pointer-events: none;
+  background-image: var(--mottle); background-size: cover;
+}
+main, .bar, .footer { overflow-x: clip; }
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+/* ---------- Paper ---------- */
+.paper {
+  position: relative;
+  background-color: var(--white);
+  background-image: var(--grain);
+  background-size: 240px 240px;
+}
+.paper--lined {
+  background-image:
+    var(--grain),
+    linear-gradient(to left, transparent 30px, rgb(var(--deep) / .38) 30px 31.5px, transparent 31.5px),
+    repeating-linear-gradient(to bottom, transparent 0 calc(1.85em - 1px), var(--green-200) calc(1.85em - 1px) 1.85em);
+  background-size: 240px 240px, 100% 100%, 100% 100%;
+  background-position: 0 0, 0 0, 0 .9em;
+}
+.paper--grid {
+  background-color: var(--green-50);
+  background-image:
+    var(--grain),
+    linear-gradient(to right, var(--green-200) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--green-200) 1px, transparent 1px);
+  background-size: 240px 240px, 16px 16px, 16px 16px;
+}
+/* A coloured sheet torn so its white core shows along the tear */
+.paper--fiber { background-color: var(--white); }
+.paper--fiber .paper__in {
+  position: absolute; inset: 0;
+  background-color: var(--green-700);
+  background-image: var(--grain);
+  background-size: 240px 240px;
+  clip-path: url(#torn-b-in);
+}
+
+.place {
+  --rot: 0deg;
+  position: relative;
+  transform: rotate(var(--rot));
+}
+.piece, .note, .card, .sheet, .board, .footer__strip, .cta-wrap, .bar__tag { filter: var(--lift-1); }
+
+/* ---------- Washi tape ---------- */
+.tape {
+  --tr: 0deg;
+  position: absolute;
+  z-index: 3;
+  width: clamp(78px, 9vw, 118px);
+  height: 28px;
+  transform: rotate(var(--tr));
+  transform-origin: 0% 50%;
+  filter: drop-shadow(0 1px .5px rgb(var(--shadow-ink) / .14));
+  transition: transform .45s var(--settle), filter .45s ease;
+  pointer-events: none;
+}
+.tape i {
+  position: absolute; inset: 0;
+  clip-path: polygon(1.5% 0, 98.5% 0, 100% 14%, 97.5% 28%, 100% 43%, 97% 57%, 100% 71%, 97.5% 86%, 99% 100%, 1% 100%, 0 86%, 2.5% 71%, 0 57%, 3% 43%, 0 28%, 2.5% 14%);
+  background-color: rgb(var(--mint) / .72);
+  background-image:
+    linear-gradient(to bottom, rgb(255 255 255 / .28), transparent 40%, rgb(var(--shadow-ink) / .05)),
+    repeating-linear-gradient(-55deg, transparent 0 7px, rgb(255 255 255 / .22) 7px 11px);
+}
+.tape::after { /* the lifted end shows the tape's lighter underside */
+  content: ""; position: absolute; inset-block: 0; inset-inline-start: 0; width: 34%;
+  background: linear-gradient(to left, rgb(255 255 255 / 0), rgb(255 255 255 / .55));
+  opacity: 0; transition: opacity .35s ease;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.tape--gray i {
+  background-color: rgb(231 230 225 / .86);
+  background-image:
+    linear-gradient(to bottom, rgb(255 255 255 / .4), transparent 50%, rgb(var(--shadow-ink) / .05)),
+    repeating-linear-gradient(90deg, transparent 0 3px, rgb(var(--shadow-ink) / .025) 3px 4px);
+}
+.tape--deep i {
+  background-color: rgb(var(--deep) / .8);
+  background-image:
+    radial-gradient(circle at 50% 50%, rgb(246 244 239 / .55) 1.6px, transparent 2.2px),
+    linear-gradient(to bottom, rgb(255 255 255 / .2), transparent 45%);
+  background-size: 10px 10px, 100% 100%;
+}
+
+/* Peel: the free end lifts toward the viewer */
+:is(.place, .lift):hover > .tape,
+:is(.place, .lift):focus-within > .tape {
+  transform: rotate(calc(var(--tr) - 4deg)) perspective(220px) rotateY(-26deg) translateZ(4px);
+  filter: drop-shadow(-3px 5px 3px rgb(var(--shadow-ink) / .2));
+}
+:is(.place, .lift):hover > .tape::after, :is(.place, .lift):focus-within > .tape::after { opacity: 1; }
+
+/* ---------- Cut-out words: each word on its own paper strip ---------- */
+.cut {
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 1;
+  margin: 0;
+}
+.cut .w {
+  --wr: 0deg; --wy: 0px;
+  display: inline-block;
+  margin-inline-end: .12em;
+  margin-block-end: .16em;
+  transform: translateY(var(--wy)) rotate(var(--wr));
+  filter: var(--lift-1);
+  vertical-align: top;
+}
+.cut .w__in {
+  display: block;
+  padding: .2em .3em .32em;
+  background-color: var(--white);
+  background-image: var(--grain);
+  background-size: 240px 240px;
+  color: var(--ink);
+  clip-path: polygon(var(--cp, 0 3%, 100% 0, 99% 100%, 1% 96%));
+}
+.cut .w:nth-child(4n+1) { --wr: -2.2deg; --wy: 4px;  --cp: 0 4%, 99% 0, 100% 95%, 2% 100%; }
+.cut .w:nth-child(4n+2) { --wr: 1.6deg;  --wy: -3px; --cp: 1% 0, 100% 6%, 98% 100%, 0 93%; }
+.cut .w:nth-child(4n+3) { --wr: -.8deg;  --wy: 6px;  --cp: 0 0, 98% 5%, 100% 100%, 1% 97%; }
+.cut .w:nth-child(4n+4) { --wr: 2.6deg;  --wy: -1px; --cp: 2% 6%, 100% 0, 99% 94%, 0 100%; }
+
+.cut--hero { font-size: clamp(46px, 13.4vw, 112px); }
+.cut--hero .w:nth-child(1) .w__in { background-color: var(--ink); color: var(--paper); }
+.cut--hero .w:nth-child(2) .w__in { background-color: var(--white); color: var(--ink); }
+.cut--hero .w:nth-child(3) .w__in { background-color: var(--green-700); color: var(--paper); }
+.cut--hero .w:nth-child(4) .w__in { background-color: var(--gray); color: var(--green-800); }
+.cut--hero .w:nth-child(1), .cut--hero .w:nth-child(3) { background-blend-mode: normal; }
+
+.cut--title { font-size: clamp(30px, 7.6vw, 54px); font-weight: 700; margin-block-end: 26px; }
+.cut--title .w:nth-child(odd) .w__in { background-color: var(--gray); }
+.cut--title .w:nth-child(3n) .w__in { background-color: var(--green-100); color: var(--green-800); }
+.cut--title .w:nth-child(2) .w__in { background-color: var(--ink); color: var(--paper); }
+
+.cut--closing { font-size: clamp(38px, 9.4vw, 88px); }
+.cut--closing .w__in { background-color: var(--paper); color: var(--green-800); }
+.cut--closing .w:nth-child(3) .w__in { background-color: var(--green-200); color: var(--green-900); }
+.cut--closing .w:nth-child(2) .w__in { background-color: var(--ink); color: var(--green-100); }
+
+/* ---------- Top bar ---------- */
+.bar {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px var(--gutter) 0;
+}
+.bar__logo { display: block; width: clamp(92px, 11vw, 124px); }
+.bar__logo img { width: 100%; height: auto; opacity: .92; }
+.bar__tag { display: inline-block; }
+.bar__cta {
+  display: block;
+  padding: 10px 18px 12px;
+  background-color: var(--white);
+  background-image: var(--grain);
+  clip-path: polygon(0 4%, 100% 0, 99% 100%, 1% 94%);
+  font-weight: 700;
+  font-size: 16px;
+  text-decoration: none;
+  color: var(--ink);
+  transition: color .2s ease;
+}
+.bar__cta:hover { color: var(--green-700); }
+.bar__tag:focus-within { outline: 2px solid var(--green-600); outline-offset: 4px; }
+.bar__cta:focus-visible { outline: none; }
+
+/* ---------- Hero ---------- */
+.hero {
+  position: relative;
+  display: grid;
+  gap: 18px;
+  padding: 26px var(--gutter) 60px;
+  overflow: clip;
+}
+.hero__copy { position: relative; z-index: 2; order: 2; }
+.cut--hero { margin-block-end: 22px; }
+
+.note { max-width: 520px; margin-block-end: 34px; margin-inline-start: 6px; }
+.note__paper { clip-path: url(#torn-c); padding-block: 26px 34px; padding-inline: 50px 22px; font-size: 18px; }
+.note__text { line-height: 1.85em; color: var(--ink); font-weight: 500; }
+
+/* Ticket call to action */
+.cta-wrap { display: inline-block; margin-inline-start: 4px; }
+.cta-wrap:focus-within { outline: 2px solid var(--green-600); outline-offset: 6px; border-radius: 4px; }
+.ticket {
+  position: relative;
+  display: inline-block;
+  padding: 18px 46px 20px;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.3;
+  text-decoration: none;
+  color: var(--paper);
+  background-color: var(--green-600);
+  background-image: var(--grain);
+  -webkit-mask:
+    radial-gradient(circle 10px at left center, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 10px at right center, transparent 96%, #000) right / 51% 100% no-repeat;
+          mask:
+    radial-gradient(circle 10px at left center, transparent 96%, #000) left / 51% 100% no-repeat,
+    radial-gradient(circle 10px at right center, transparent 96%, #000) right / 51% 100% no-repeat;
+  transition: transform .4s var(--settle), background-color .2s ease;
+}
+.ticket::before {
+  content: ""; position: absolute; inset: 7px 20px;
+  border: 1.5px dashed rgb(246 244 239 / .55);
+  pointer-events: none;
+}
+.ticket:focus-visible { outline: none; }
+.cta-wrap { transition: filter .35s ease; }
+.cta-wrap:hover { filter: var(--lift-2); }
+.cta-wrap:hover .ticket { transform: translateY(-4px) rotate(-1.6deg); background-color: var(--green-700); }
+.cta-wrap:active .ticket { transform: translateY(1px) scale(.98); transition-duration: .1s; }
+.ticket--light { color: var(--green-800); background-color: var(--paper); font-size: 21px; }
+.ticket--light::before { border-color: rgb(var(--deep) / .45); }
+.cta-wrap--light:hover .ticket { background-color: var(--white); }
+
+/* The collage */
+.collage {
+  position: relative;
+  order: 1;
+  width: min(100%, 680px);
+  aspect-ratio: 1 / .86;
+  margin-inline: auto;
+}
+.collage .piece { position: absolute; }
+.piece .lift, .piece .paper { width: 100%; height: 100%; }
+.lift { position: relative; transition: transform .7s var(--settle), filter .4s ease; }
+.lift.is-lifted { transition: none; filter: var(--lift-2); }
+
+.piece--green { inset-block-start: 1%; inset-inline-start: 26%; width: 58%; height: 50%; z-index: 1; }
+.piece--green .paper { clip-path: url(#torn-b); }
+
+.piece--grid { inset-block-start: 50%; inset-inline-start: 0; width: 50%; height: 44%; z-index: 2; }
+.piece--grid .paper { clip-path: url(#torn-a); }
+.postmark { position: absolute; inset-block-start: 26%; inset-inline-start: 14%; width: 76%; opacity: .9; pointer-events: none; }
+
+.piece--blot { inset-block-start: 66%; inset-inline-start: 62%; width: 30%; z-index: 2; filter: none; }
+.blot { width: 100%; opacity: .92; }
+
+.piece--card { inset-block-start: 18%; inset-inline-start: 6%; width: 82%; height: 46%; z-index: 3; }
+.piece--card .paper { clip-path: url(#torn-d); display: grid; place-items: center; padding: 6% 8%; }
+.stamp {
+  all: unset;
+  display: block;
+  width: 100%;
+  cursor: pointer;
+  border-radius: 10px;
+}
+.stamp svg { width: 100%; height: auto; overflow: visible; transform: rotate(-1.6deg); }
+.stamp:focus-visible { outline: 2px solid var(--green-600); outline-offset: 6px; }
+.clip { position: absolute; inset-block-start: -12%; inset-inline-end: 12%; width: 6.5%; z-index: 4; transform: rotate(8deg); }
+
+[data-drag] { touch-action: auto; }
+.has-drag [data-drag] { -webkit-user-select: none; user-select: none; -webkit-user-drag: none; }
+.has-drag [data-drag] { cursor: grab; }
+.has-drag [data-drag].is-lifted { cursor: grabbing; }
+
+/* ---------- About ---------- */
+.about {
+  position: relative;
+  padding: 40px var(--gutter) 70px;
+  display: grid;
+}
+.about__under { position: absolute; inset-block-start: 14px; inset-inline-end: 6%; width: min(58%, 420px); height: 220px; }
+.about__under .paper { height: 100%; clip-path: url(#torn-b); }
+.about__stamp { position: absolute; inset-block-start: 22%; inset-inline-end: 9%; width: 46%; transform: rotate(9deg); opacity: .85; }
+.sheet { width: min(100%, 820px); justify-self: start; }
+.sheet__paper { clip-path: url(#torn-a); padding: clamp(34px, 6vw, 64px) clamp(24px, 6vw, 72px) clamp(40px, 6vw, 72px); }
+.sheet__text { font-size: clamp(18px, 2.2vw, 21px); line-height: 1.95; color: var(--ink); max-width: 36em; }
+.sheet__text .brand-word { font-size: 1.12em; color: var(--green-700); }
+
+/* ---------- Pillars ---------- */
+.pillars {
+  display: grid;
+  gap: 46px;
+  padding: 30px var(--gutter) 90px;
+}
+.card { max-width: 420px; }
+.card:nth-child(2) { justify-self: end; }
+.card__paper { padding: 34px 28px 36px; height: 100%; }
+.card--lined .card__paper { clip-path: url(#torn-c); }
+.card--lined .card__paper {
+  background-image:
+    var(--grain),
+    repeating-linear-gradient(to bottom, transparent 0 31px, var(--green-100) 31px 32px);
+  background-size: 240px 240px, 100% 100%;
+}
+.card--grid .card__paper {
+  clip-path: url(#torn-e);
+  background-color: var(--green-50);
+  background-image: var(--grain), linear-gradient(to right, var(--green-200) 1px, transparent 1px), linear-gradient(to bottom, var(--green-200) 1px, transparent 1px);
+  background-size: 240px 240px, 18px 18px, 18px 18px;
+}
+.card--index .card__paper {
+  clip-path: polygon(0 1%, 100% 0, 99.4% 100%, .6% 99%);
+  background-color: var(--gray);
+  background-image: var(--grain), linear-gradient(to bottom, transparent 92px, rgb(var(--deep) / .4) 92px 94px, transparent 94px);
+  background-size: 240px 240px, 100% 100%;
+}
+.icon { width: 64px; height: 64px; margin-block-end: 18px; }
+.card__title { font-family: var(--font-display); font-weight: 700; font-size: clamp(26px, 3vw, 32px); line-height: 1.3; margin-block-end: 10px; }
+.card__text { color: var(--ink-muted); font-size: 17px; line-height: 1.85; }
+.card { transition: filter .4s ease; }
+.card .card__paper { transition: transform .55s var(--settle); }
+.card:hover { filter: var(--lift-2); }
+.card:hover .card__paper { transform: translateY(-6px) rotate(calc(var(--rot) * -.6)); }
+
+/* ---------- Closing ---------- */
+.closing { padding: 40px max(10px, calc(var(--gutter) - 14px)) 90px; }
+.board { max-width: 1180px; margin-inline: auto; }
+.board__paper { clip-path: url(#torn-wide); background-color: var(--white); }
+.board__paper .paper__in { clip-path: url(#torn-wide-in); background-color: var(--green-800); }
+.board__body { position: relative; z-index: 1; padding: clamp(60px, 9vw, 110px) clamp(26px, 7vw, 96px) clamp(64px, 9vw, 110px); }
+.cut--closing { margin-block-end: 30px; }
+.board__postmark { position: absolute; inset-block-end: 12%; inset-inline-end: 6%; width: clamp(90px, 14vw, 170px); opacity: .55; transform: rotate(-14deg); }
+
+/* ---------- Footer ---------- */
+.footer { padding: 0 var(--gutter) 104px; }
+.footer__strip { max-width: 1100px; margin-inline: auto; }
+.footer__paper {
+  clip-path: url(#torn-b);
+  background-color: var(--gray);
+  display: grid;
+  justify-items: start;
+  gap: 8px;
+  padding: 34px 28px 36px;
+  color: var(--ink);
+}
+.footer__stamp { width: 132px; height: auto; margin-block-end: 6px; }
+.footer__line { font-weight: 500; }
+.footer__mail { font-weight: 700; color: var(--green-700); text-decoration-thickness: 1px; text-underline-offset: 4px; }
+.footer__mail:hover { color: var(--ink); }
+.footer__copy { color: var(--ink-muted); font-size: 15px; }
+
+/* ---------- Tablet and up ---------- */
+@media (min-width: 720px) {
+  .pillars { grid-template-columns: repeat(2, 1fr); column-gap: 40px; }
+  .card:nth-child(2) { justify-self: stretch; margin-block-start: 60px; }
+  .card:nth-child(3) { grid-column: 1 / -1; justify-self: center; margin-block-start: -10px; width: min(100%, 460px); }
+  .footer__paper { grid-template-columns: auto 1fr auto; align-items: center; column-gap: 28px; padding: 30px 40px; }
+  .footer__stamp { grid-row: span 2; margin: 0; }
+  .footer__copy { grid-column: 3; grid-row: 2; justify-self: end; }
+  .footer__mail { grid-column: 3; grid-row: 1; justify-self: end; }
+}
+
+/* ---------- Desktop: copy and collage side by side ---------- */
+@media (min-width: 1040px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+    align-items: center;
+    min-height: calc(100svh - 70px);
+    padding-block: 10px 70px;
+    gap: 40px;
+  }
+  .hero__copy, .collage { order: 0; }
+  .cut--hero { font-size: clamp(70px, 6.2vw, 98px); }
+  .collage { width: 100%; max-width: 680px; }
+  .about { padding-block: 60px 90px; }
+  .cut--closing { font-size: clamp(64px, 5.6vw, 84px); }
+  .board__body { padding-block: 90px 96px; }
+  .sheet { margin-inline-start: 4%; }
+  .about__under { inset-block-start: 40px; inset-inline-end: 8%; height: 300px; }
+  .pillars { grid-template-columns: repeat(3, 1fr); column-gap: 44px; padding-block: 40px 120px; }
+  .card:nth-child(2) { margin-block-start: 70px; }
+  .card:nth-child(3) { grid-column: auto; justify-self: stretch; width: auto; margin-block-start: 18px; }
+  .card { max-width: none; }
+}
+
+/* ---------- Drop in and settle, like placed by hand ---------- */
+.js [data-drop] { opacity: 0; }
+.js [data-drop].is-in { animation: place .95s var(--d, 0s) both; }
+@keyframes place {
+  0%   { opacity: 0; transform: translate(var(--fx, 10px), -54px) rotate(calc(var(--rot) + var(--spin, 9deg))) scale(1.07); }
+  35%  { opacity: 1; }
+  58%  { transform: translate(0, 2px) rotate(calc(var(--rot) - var(--spin, 9deg) * .22)) scale(.995); }
+  80%  { transform: translate(0, 0) rotate(calc(var(--rot) + var(--spin, 9deg) * .07)) scale(1); }
+  100% { opacity: 1; transform: rotate(var(--rot)); }
+}
+/* Words of a cut headline settle one after another */
+.js .cut[data-cut] .w { opacity: 0; }
+.js .cut.is-in .w { animation: word .8s calc(var(--d, 0s) + var(--i, 0) * 90ms) both; }
+@keyframes word {
+  0%   { opacity: 0; transform: translateY(calc(var(--wy) - 40px)) rotate(calc(var(--wr) + 10deg)) scale(1.1); }
+  40%  { opacity: 1; }
+  62%  { transform: translateY(calc(var(--wy) + 2px)) rotate(calc(var(--wr) - 2.4deg)) scale(.99); }
+  84%  { transform: translateY(var(--wy)) rotate(calc(var(--wr) + .8deg)); }
+  100% { opacity: 1; transform: translateY(var(--wy)) rotate(var(--wr)); }
+}
+/* The stamp impression lands after its card */
+.stamp__ink { transform-box: fill-box; transform-origin: center; }
+.js .piece--card.is-in .stamp__ink { animation: thump .55s calc(var(--d, 0s) + .7s) both; }
+.stamp.is-pressing .stamp__ink { animation: thump .5s both !important; }
+@keyframes thump {
+  0%   { opacity: 0; transform: scale(1.18); }
+  45%  { opacity: 0; transform: scale(1.06); }
+  60%  { opacity: 1; transform: scale(.97); }
+  100% { opacity: 1; transform: scale(1); }
+}
+.piece--card .paper.is-thud { animation: thud .35s ease-out; }
+@keyframes thud { 40% { transform: translateY(3px) scale(.992); } }
+@media print { .js [data-drop], .js .cut .w { opacity: 1 !important; animation: none !important; } }
+
+/* ---------- Reduced motion: placements become fades ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-drop].is-in, .js .cut.is-in .w, .js .piece--card.is-in .stamp__ink, .stamp.is-pressing .stamp__ink { animation: fade .6s var(--d, 0s) both !important; }
+  .piece--card .paper.is-thud { animation: none; }
+  @keyframes fade { from { opacity: 0; } to { opacity: 1; } }
+  .tape, .lift, .ticket, .card .card__paper { transition: none !important; }
+  :is(.place, .lift):hover > .tape, :is(.place, .lift):focus-within > .tape { transform: rotate(var(--tr)) !important; }
+  .cta-wrap:hover .ticket, .cta-wrap:active .ticket, .card:hover .card__paper { transform: none !important; }
+}

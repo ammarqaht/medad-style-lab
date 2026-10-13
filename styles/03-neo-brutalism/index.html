@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<header class="topbar">
+  <a class="topbar__logo" href="#top" aria-label="مداد">
+    <img src="../../shared/logo/medad-mark-ink.png" alt="" width="808" height="267">
+  </a>
+  <a class="btn btn--sm" href="#contact" data-copy="nav.cta"></a>
+</header>
+
+<main id="top">
+
+  <!-- HERO ------------------------------------------------------------ -->
+  <section class="hero">
+    <div class="hero__text">
+      <h1 class="hero__title" id="heroTitle" data-copy="hero.headline"></h1>
+      <p class="hero__line box" data-copy="hero.line" data-pop style="--d:.06s"></p>
+      <div class="hero__cta" data-pop style="--d:.14s">
+        <a class="btn btn--lg" href="#contact" data-copy="hero.cta"></a>
+      </div>
+    </div>
+
+    <div class="poster box" id="poster" data-pop style="--d:.1s">
+      <p class="poster__word" data-copy="meta.title"></p>
+      <div class="drip" aria-hidden="true">
+        <svg class="drip__drop" viewBox="0 0 60 84">
+          <path d="M30 3 C 30 3, 56 38, 56 56 A 26 26 0 0 1 4 56 C 4 38, 30 3, 30 3 Z"/>
+          <path class="shine" d="M17 52 C 17 44, 21 37, 25 32"/>
+        </svg>
+        <div class="drip__pool"></div>
+      </div>
+      <svg class="sticker sticker--star" viewBox="0 0 100 100" aria-hidden="true">
+        <path d="M50 2 L58 30 L84 16 L70 42 L98 50 L70 58 L84 84 L58 70 L50 98 L42 70 L16 84 L30 58 L2 50 L30 42 L16 16 L42 30 Z"/>
+      </svg>
+      <span class="sticker sticker--block" aria-hidden="true"></span>
+    </div>
+  </section>
+
+  <!-- SIGNATURE: crossing marquee bands -------------------------------- -->
+  <section class="bands" aria-hidden="true">
+    <div class="band band--green" data-dir="1">
+      <div class="band__track">
+        <div class="band__unit">
+          <span data-copy="hero.headline"></span><i class="sep"></i>
+          <span data-copy="meta.title"></span><i class="sep"></i>
+        </div>
+      </div>
+    </div>
+    <div class="band band--ink" data-dir="-1">
+      <div class="band__track">
+        <div class="band__unit">
+          <span data-copy="pillars.0.title"></span><i class="sep"></i>
+          <span data-copy="pillars.1.title"></span><i class="sep"></i>
+          <span data-copy="pillars.2.title"></span><i class="sep"></i>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT ----------------------------------------------------------- -->
+  <section class="about">
+    <h2 class="about__title box" data-copy="about.title" data-pop></h2>
+    <p class="about__text box" data-copy="about.text" data-pop style="--d:.08s"></p>
+  </section>
+
+  <!-- PILLARS --------------------------------------------------------- -->
+  <section class="pillars">
+    <article class="pillar pillar--a box" data-pop>
+      <span class="pillar__num" aria-hidden="true">١</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.0.title"></h3>
+        <p class="pillar__text" data-copy="pillars.0.text"></p>
+      </div>
+    </article>
+    <article class="pillar pillar--b box" data-pop style="--d:.08s">
+      <span class="pillar__num" aria-hidden="true">٢</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.1.title"></h3>
+        <p class="pillar__text" data-copy="pillars.1.text"></p>
+      </div>
+    </article>
+    <article class="pillar pillar--c box" data-pop style="--d:.16s">
+      <span class="pillar__num" aria-hidden="true">٣</span>
+      <div class="pillar__body">
+        <h3 class="pillar__title" data-copy="pillars.2.title"></h3>
+        <p class="pillar__text" data-copy="pillars.2.text"></p>
+      </div>
+    </article>
+  </section>
+
+  <!-- CLOSING --------------------------------------------------------- -->
+  <section class="closing" id="contact">
+    <div class="closing__slab box" data-pop>
+      <h2 class="closing__title" data-copy="closing.headlineKashida"></h2>
+      <a class="btn btn--lg btn--paper" id="mailBtn" href="#" data-copy="closing.cta"></a>
+      <svg class="sticker sticker--ring" viewBox="0 0 100 100" aria-hidden="true">
+        <circle cx="50" cy="50" r="46"/><circle cx="50" cy="50" r="18"/>
+      </svg>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <img class="footer__logo" src="../../shared/logo/medad-mark-paper.png" alt="مداد" width="808" height="267">
+  <p class="footer__line" data-copy="footer.line"></p>
+  <a class="footer__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="footer__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

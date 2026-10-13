@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<header class="hud">
+  <a class="pbtn pbtn--sm" href="#contact" data-copy="nav.cta"></a>
+</header>
+
+<main id="top">
+
+  <!-- TITLE SCREEN ---------------------------------------------------- -->
+  <section class="title" id="title" data-zone>
+    <div class="sky" aria-hidden="true">
+      <i class="moon"></i>
+      <div class="clouds clouds--far"></div>
+      <div class="clouds clouds--near"></div>
+    </div>
+
+    <div class="title__inner">
+      <img class="title__logo" data-rv="drop" src="../../shared/logo/medad-mark-pixel.png" alt="مداد" width="64" height="21">
+      <h1 class="title__head" data-copy="hero.headline" data-rv style="--d:.35s"></h1>
+      <p class="title__line" data-copy="hero.line" data-rv style="--d:.55s"></p>
+      <div class="title__cta" data-rv style="--d:.75s">
+        <a class="pbtn pbtn--start" href="#contact"><i class="cur" aria-hidden="true"></i><span class="pbtn__label" data-copy="hero.cta"></span></a>
+      </div>
+    </div>
+
+    <canvas class="land" id="land" aria-hidden="true"></canvas>
+    <div class="sprite sprite--hero" id="heroSprite" aria-hidden="true"></div>
+  </section>
+
+  <!-- ABOUT: the RPG dialog -------------------------------------------- -->
+  <section class="about" id="about" data-zone>
+    <h2 class="about__title" data-copy="about.title" data-rv></h2>
+    <div class="talk" data-rv style="--d:.12s">
+      <div class="portrait" aria-hidden="true">
+        <div class="sprite sprite--portrait" id="portraitSprite"></div>
+      </div>
+      <div class="dialog" id="dialog" tabindex="0">
+        <div class="dialog__name" data-copy="meta.title"></div>
+        <p class="dialog__text" id="dialogText" data-copy="about.text"></p>
+        <i class="dialog__more" aria-hidden="true"></i>
+      </div>
+    </div>
+  </section>
+
+  <div class="dither dither--a" aria-hidden="true"></div>
+
+  <!-- PILLARS: inventory ---------------------------------------------- -->
+  <section class="inv" data-zone>
+    <ul class="inv__grid">
+      <li class="item" data-rv style="--d:0s">
+        <div class="item__slot"><i class="item__ico" style="background-image:var(--ico-0)"></i><i class="item__cur" aria-hidden="true"></i></div>
+        <div class="item__body">
+          <h3 class="item__title" data-copy="pillars.0.title"></h3>
+          <p class="item__text" data-copy="pillars.0.text"></p>
+        </div>
+      </li>
+      <li class="item" data-rv style="--d:.15s">
+        <div class="item__slot"><i class="item__ico" style="background-image:var(--ico-1)"></i><i class="item__cur" aria-hidden="true"></i></div>
+        <div class="item__body">
+          <h3 class="item__title" data-copy="pillars.1.title"></h3>
+          <p class="item__text" data-copy="pillars.1.text"></p>
+        </div>
+      </li>
+      <li class="item" data-rv style="--d:.3s">
+        <div class="item__slot"><i class="item__ico" style="background-image:var(--ico-2)"></i><i class="item__cur" aria-hidden="true"></i></div>
+        <div class="item__body">
+          <h3 class="item__title" data-copy="pillars.2.title"></h3>
+          <p class="item__text" data-copy="pillars.2.text"></p>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- CLOSING: the handheld screen ------------------------------------- -->
+  <section class="closing" id="contact" data-zone>
+    <div class="gb" data-rv>
+      <div class="gb__screen">
+        <h2 class="gb__title" data-copy="closing.headlineKashida"></h2>
+        <a class="pbtn pbtn--lcd" id="mailBtn" href="#"><i class="cur cur--lcd" aria-hidden="true"></i><span data-copy="closing.cta"></span></a>
+      </div>
+    </div>
+  </section>
+
+  <div class="dither dither--b" aria-hidden="true"></div>
+</main>
+
+<footer class="foot">
+  <img class="foot__logo" src="../../shared/logo/medad-mark-pixel.png" alt="مداد" width="64" height="21">
+  <p class="foot__line" data-copy="footer.line"></p>
+  <a class="foot__mail" id="mailLink" href="#" dir="ltr"></a>
+  <p class="foot__copy" data-copy="footer.copyright"></p>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="ar" dir="rtl" class="no-js">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مـــــداد</title>
+<link rel="stylesheet" href="../../shared/tokens.css">
+<link rel="stylesheet" href="../../shared/switcher.css">
+<link rel="stylesheet" href="style.css">
+<script>document.documentElement.className = "js";</script>
+</head>
+<body>
+
+<canvas class="trail" id="trail" aria-hidden="true"></canvas>
+
+<header class="topbar wrap">
+  <a class="topbar__logo" href="#top" aria-label="مداد" data-sketch="under" data-sk-hover>
+    <img src="../../shared/logo/medad-mark-green.png" alt="" width="808" height="267">
+  </a>
+  <a class="btn btn--ghost" href="#contact" data-copy="nav.cta" data-sketch="box" data-sk-hover></a>
+</header>
+
+<main id="top" class="wrap">
+  <svg class="links" id="links" aria-hidden="true" focusable="false"></svg>
+
+  <!-- HERO: a wireframe that draws itself -->
+  <section class="hero">
+    <div class="frame hero__card" id="heroCard" data-sketch="box" data-sk-marks data-sk-hover>
+      <div class="frame__body">
+        <h1 class="hero__title" id="heroTitle"></h1>
+        <p class="hero__line" data-copy="hero.line"></p>
+        <a class="btn btn--marker" href="#contact" data-copy="hero.cta" data-sketch="box" data-sk-hover></a>
+      </div>
+    </div>
+
+    <div class="hero__sketch" id="heroSketch" aria-hidden="true">
+      <svg class="draw" data-draw="browser" viewBox="0 0 560 470" preserveAspectRatio="xMidYMid meet"></svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="about">
+    <div class="frame about__card" id="aboutCard" data-sketch="box" data-sk-hover>
+      <div class="frame__body">
+        <h2 class="title title--under" data-copy="about.title" data-sketch="under2"></h2>
+        <p class="about__text" data-copy="about.text"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILLARS -->
+  <section class="pillars">
+    <article class="frame pillar" data-sketch="box" data-sk-hover>
+      <div class="frame__body">
+        <svg class="pillar__ico draw" data-draw="web" viewBox="0 0 140 100" aria-hidden="true" focusable="false"></svg>
+        <h3 class="pillar__title" data-copy="pillars.0.title" data-sketch="under"></h3>
+        <p class="pillar__text" data-copy="pillars.0.text"></p>
+      </div>
+    </article>
+    <article class="frame pillar" data-sketch="box" data-sk-hover>
+      <div class="frame__body">
+        <svg class="pillar__ico draw" data-draw="system" viewBox="0 0 140 100" aria-hidden="true" focusable="false"></svg>
+        <h3 class="pillar__title" data-copy="pillars.1.title" data-sketch="under"></h3>
+        <p class="pillar__text" data-copy="pillars.1.text"></p>
+      </div>
+    </article>
+    <article class="frame pillar" data-sketch="box" data-sk-hover>
+      <div class="frame__body">
+        <svg class="pillar__ico draw" data-draw="live" viewBox="0 0 140 100" aria-hidden="true" focusable="false"></svg>
+        <h3 class="pillar__title" data-copy="pillars.2.title" data-sketch="under"></h3>
+        <p class="pillar__text" data-copy="pillars.2.text"></p>
+      </div>
+    </article>
+  </section>
+
+  <!-- CLOSING -->
+  <section class="closing" id="contact">
+    <div class="frame closing__card" id="closingCard" data-sketch="box" data-sk-marks data-sk-hover>
+      <div class="frame__body closing__body">
+        <div class="closing__text">
+          <h2 class="closing__title" data-copy="closing.headline" data-sketch="loop"></h2>
+          <a class="btn btn--marker" id="mailBtn" href="#" data-copy="closing.cta" data-sketch="box" data-sk-hover></a>
+        </div>
+        <svg class="closing__well draw" data-draw="well" viewBox="0 0 240 240" aria-hidden="true" focusable="false"></svg>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer wrap">
+  <svg class="footer__rule draw" data-draw="rule" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
+  <div class="footer__row">
+    <img class="footer__logo" src="../../shared/logo/medad-mark-green.png" alt="مداد" width="808" height="267">
+    <p class="footer__line" data-copy="footer.line"></p>
+    <a class="footer__mail" id="mailLink" href="#" dir="ltr" data-sketch="under" data-sk-hover></a>
+    <p class="footer__copy" data-copy="footer.copyright"></p>
+  </div>
+</footer>
+
+<script src="../../shared/content.js"></script>
+<script src="../../shared/styles-list.js"></script>
+<script src="../../shared/switcher.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
